@@ -1,0 +1,42 @@
+.floating0 {
+    margin-left: -5rem;
+    margin-top: -25rem;
+}
+.floating1 {
+    margin-top: 15rem;
+    margin-left: -15rem;
+}
+.floating {
+    margin-top: -10rem;
+    margin-left: 22.5rem;
+}
+
+@media screen and (max-width: 1366px) {
+  .floating {
+    margin-top: -8rem;
+    margin-left: 14rem;
+}
+
+}
+
+@media screen and (max-width: 500px) {
+    .floating {
+      visibility: hidden;
+      clear: both;
+      /* float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%; */
+      display: none;
+    }
+    .floating0 {
+      visibility: hidden;
+      clear: both;
+      display: none;
+    }
+    .floating1 {
+      visibility: hidden;
+      clear: both;
+      display: none;
+    }
+   
+}

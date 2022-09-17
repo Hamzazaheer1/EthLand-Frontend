@@ -1,0 +1,35 @@
+.Top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-btn {
+    font-size: 2.4rem;
+    width: 6rem;
+    height: 6rem;
+    color: var(--dark);
+    background-color: var(--dark);
+    box-shadow: var(--yellow);
+    border-radius: 50%;
+    position: fixed;
+    bottom: 2rem;
+    right: 5rem;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 13rem;
+}
+
+
+
+@media (min-width: 400px) {
+  .top-btn {
+    right: 0;
+    left: 80%;
+    top: 85%;
+  }
+}
+

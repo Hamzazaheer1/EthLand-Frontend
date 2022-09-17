@@ -1,0 +1,8 @@
+.itemClickable {
+    cursor: pointer;
+    background-color: white;
+}
+.itemClickable:hover
+{
+    scale: 105%;
+}
