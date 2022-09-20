@@ -43,7 +43,7 @@ const ChangeCO = () => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <Container>
         <Row>
           <Col sm={3}></Col>

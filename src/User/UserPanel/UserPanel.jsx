@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import NavigationBar from "../../Shared/NavigationBar/NavigationBar";
-import Footer from "../../Shared/Footer/Footer";
+// import NavigationBar from "../../Shared/NavigationBar/NavigationBar";
+// import Footer from "../../Shared/Footer/Footer";
 import Nav from "react-bootstrap/Nav";
-import { Row, Col, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
 import UWelcome from "./Pages/UWelcome";
@@ -18,7 +18,7 @@ const UserPanel = () => {
 
   return (
     <div>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Container>
         <Nav
           variant="tabs"
@@ -72,7 +72,7 @@ const UserPanel = () => {
               onClick={() => {
                 setSelectedTab(3);
               }}
-              eventKey="link-3"
+              eventKey="link-4"
               href=""
               style={{
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
@@ -86,7 +86,7 @@ const UserPanel = () => {
               onClick={() => {
                 setSelectedTab(4);
               }}
-              eventKey="link-3"
+              eventKey="link-5"
               href=""
               style={{
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
@@ -103,7 +103,7 @@ const UserPanel = () => {
         {selectedTab === 3 && <SendRequests />}
         {selectedTab === 4 && <ReceiveRequests />}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

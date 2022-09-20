@@ -1,20 +1,29 @@
 .floating0 {
-    margin-left: -5rem;
+    margin-left: -10rem;
     margin-top: -25rem;
 }
 .floating1 {
     margin-top: 15rem;
-    margin-left: -15rem;
+    margin-left: -22rem;
 }
 .floating {
     margin-top: -10rem;
-    margin-left: 22.5rem;
+    margin-left: 16rem;
+    
 }
 
 @media screen and (max-width: 1366px) {
+  .floating0 {
+    margin-left: -15rem;
+    margin-top: -25rem;
+}
+  .floating1 {
+    margin-top: 15rem;
+    margin-left: -20rem;
+}
   .floating {
     margin-top: -8rem;
-    margin-left: 14rem;
+    margin-left: 6rem;
 }
 
 }
@@ -23,9 +32,6 @@
     .floating {
       visibility: hidden;
       clear: both;
-      /* float: left;
-      margin: 10px auto 5px 20px;
-      width: 28%; */
       display: none;
     }
     .floating0 {

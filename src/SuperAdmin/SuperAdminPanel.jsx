@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import NavigationBar from "../Shared/NavigationBar/NavigationBar";
-import Footer from "../Shared/Footer/Footer";
 import Nav from "react-bootstrap/Nav";
-import { Row, Col, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useContext } from "react";
 import { themeContext } from "../Context";
 import SAWelcome from "./Pages/SAWelcome";
@@ -18,7 +16,6 @@ const SuperAdminPanel = () => {
 
   return (
     <div>
-      <NavigationBar />
       <Container>
         <Nav
           variant="tabs"
@@ -103,7 +100,6 @@ const SuperAdminPanel = () => {
         {selectedTab === 3 && <ViewAdmins />}
         {selectedTab === 4 && <PhysicalVerification />}
       </Container>
-      <Footer />
     </div>
   );
 };

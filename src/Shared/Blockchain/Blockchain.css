@@ -1,8 +1,18 @@
 .itemClickable {
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.01)
 }
 .itemClickable:hover
 {
     scale: 105%;
+}
+
+.truncate {
+    max-width: max-content;
+}
+
+@media screen and (max-width: 450px) {
+    .truncate {
+        max-width: 240px;
+    }
 }

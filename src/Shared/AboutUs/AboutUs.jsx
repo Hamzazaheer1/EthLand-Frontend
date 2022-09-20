@@ -14,7 +14,7 @@ const AboutUs = () => {
 
   return (
     <div>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Container className="mt-5">
         <h2 style={{ color: "var(--yellow)" }}>About EthLand</h2>
         <hr
@@ -73,7 +73,7 @@ const AboutUs = () => {
           </p>
         </Row>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

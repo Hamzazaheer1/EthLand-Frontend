@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import NavigationBar from "../NavigationBar/NavigationBar";
-import Footer from "../Footer/Footer";
 import { Container, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
@@ -18,12 +16,12 @@ let setOwnerC = 0;
 
 const Login = () => {
   const [secrectPhrase, setSecrectPhrase] = useState(0);
-  const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const init = () => {
+    setIsLoading(false);
     let provider = window.ethereum;
-    setIsConnected(true);
     if (typeof provider !== "undefined") {
       //metamask is installed
 
@@ -37,10 +35,11 @@ const Login = () => {
             CONTACT_ADDRESS
           );
           superAdminChecker();
+          setIsLoading(true);
         })
         .catch((err) => {
-          setIsConnected(false);
           console.log(err);
+          setIsLoading(false);
           return;
         });
     }
@@ -62,7 +61,7 @@ const Login = () => {
             .changeSuperAdmin(PHYSICAL_VERIFICATION)
             .send({ from: selectedAccount });
           alert("System is down");
-          setIsConnected(false);
+          setIsLoading(false);
         } else if (setOwnerC == 4) {
           navigate("/adminpanel", { replace: "true" });
         } else if (setOwnerC == 5) {
@@ -71,14 +70,14 @@ const Login = () => {
             .removeAdminAuthFailed(selectedAccount)
             .send({ from: selectedAccount });
           alert("System is down!!!");
-          setIsConnected(false);
+          setIsLoading(false);
         } else if (setOwnerC == 6) {
           alert("You are not yet verified");
         } else if (setOwnerC == 7) {
           navigate("/userpanel", { replace: "true" });
         } else {
           alert("Wrong secrect key or Wallet");
-          setIsConnected(false);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -88,8 +87,9 @@ const Login = () => {
 
   return (
     <div>
-      <NavigationBar />
-      <Container>
+      <Container
+        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
         <Row>
           <Col sm={3}></Col>
           <Col sm={6}>
@@ -114,21 +114,23 @@ const Login = () => {
               <br />
               <button
                 className="y-btn"
+                style={{ padding: "11px 26px 4px 26px" }}
                 onClick={(event) => {
                   event.preventDefault();
-                  {
-                    init();
-                  }
+                  init();
                 }}
               >
-                Login
+                {isLoading ? (
+                  <div class="spinner-border text-dark" role="status"></div>
+                ) : (
+                  <p>Login</p>
+                )}
               </button>
             </Form>
           </Col>
           <Col sm={3}></Col>
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 };

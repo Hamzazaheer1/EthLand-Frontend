@@ -1,8 +1,5 @@
 .w-right {
     position: relative;
-    /* margin-left: -20rem; */
-    /* margin-left: 28rem; */
-    /* margin-bottom: 10rem; */
 }
 
 .w-mainCircle {
@@ -14,7 +11,6 @@
     box-shadow: var(--smboxShadow);
     top: 2rem;
     background: white;
-    /* darkMode */
     z-index: 2;
 }
 
@@ -46,3 +42,9 @@
     left: 6rem;
     top: 13rem;
 }
+
+@media screen and (max-width: 375px) {
+    .card {
+      margin-top: -10rem;
+    }
+  }

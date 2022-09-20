@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import Form from "react-bootstrap/Form";
 import { Container, Row, Col } from "react-bootstrap";
@@ -9,7 +8,6 @@ const PhysicalVerification = () => {
   let selectedAccount;
   let ContractInstance;
   const [physicalVerification, setPhysicalVerification] = useState("null");
-  const navigate = useNavigate();
 
   const init = () => {
     let provider = window.ethereum;
@@ -47,7 +45,7 @@ const PhysicalVerification = () => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <Container>
         <Row>
           <Col sm={3}></Col>
@@ -73,9 +71,7 @@ const PhysicalVerification = () => {
                 className="y-btn"
                 onClick={(event) => {
                   event.preventDefault();
-                  {
-                    init();
-                  }
+                  init();
                 }}
                 type="submit"
               >

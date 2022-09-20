@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Footer from "../Footer/Footer";
-import NavigationBar from "../NavigationBar/NavigationBar";
 import Nav from "react-bootstrap/Nav";
-import { Row, Col, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
 import GettingStarted from "./Pages/GettingStarted";
@@ -16,7 +14,6 @@ const HelpNav = () => {
 
   return (
     <div>
-      <NavigationBar />
       <Container>
         <Nav
           variant="tabs"
@@ -71,8 +68,6 @@ const HelpNav = () => {
         {selectedTab === 1 && <RegisterHelp />}
         {selectedTab === 2 && <LoginHelp />}
       </Container>
-
-      <Footer />
     </div>
   );
 };

@@ -17,7 +17,7 @@ const AdminPanel = () => {
 
   return (
     <div>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Container>
         <Nav
           variant="tabs"
@@ -71,7 +71,7 @@ const AdminPanel = () => {
               onClick={() => {
                 setSelectedTab(3);
               }}
-              eventKey="link-3"
+              eventKey="link-4"
               href=""
               style={{
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
@@ -87,7 +87,7 @@ const AdminPanel = () => {
         {selectedTab === 2 && <VerifyLand />}
         {selectedTab === 3 && <TransferOwnership />}
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

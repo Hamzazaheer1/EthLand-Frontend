@@ -1,7 +1,7 @@
 import React from "react";
 
 const TransferOwnership = () => {
-  return <div>TransferOwnership</div>;
+  return <div style={{ minHeight: "100vh" }}>TransferOwnership</div>;
 };
 
 export default TransferOwnership;

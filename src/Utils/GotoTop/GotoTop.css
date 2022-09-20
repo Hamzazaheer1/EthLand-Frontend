@@ -25,10 +25,10 @@
 
 
 
-@media (min-width: 400px) {
+@media screen and (max-width: 450px) {
   .top-btn {
     right: 0;
-    left: 80%;
+    left: 28%;
     top: 85%;
   }
 }

@@ -1,7 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Footer from "../Footer/Footer";
-import NavigationBar from "../NavigationBar/NavigationBar";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
 import "./ContactUs.css";
@@ -11,8 +9,7 @@ const ContactUs = () => {
   const darkMode = theme.state.darkMode;
 
   return (
-    <div>
-      <NavigationBar />
+    <div style={{ minHeight: "100vh" }}>
       <Container className="mt-5">
         <h2 style={{ color: "var(--yellow)", display: "flex" }}>
           Contact Us{" "}
@@ -84,7 +81,6 @@ const ContactUs = () => {
           <Col sm={7}></Col>
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 };

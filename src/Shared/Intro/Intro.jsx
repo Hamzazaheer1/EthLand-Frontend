@@ -13,7 +13,8 @@ import thumbup from "../img/thumbup.png";
 import crown from "../img/crown.png";
 
 import FloatinDiv from "../../Utils/FloatingDiv/FloatingDiv";
-import { motion } from "../../../node_modules/framer-motion/dist/es/index";
+// import { motion } from "../../../node_modules/framer-motion/dist/es/index";
+import { motion } from "framer-motion";
 
 import { useContext } from "react";
 import { themeContext } from "../../Context";
@@ -95,12 +96,8 @@ const Intro = () => {
             <img className="img-fluid" style={{ height: "30rem" }} src={Map} />
             {/* animations */}
             <motion.div
-              // initial={{ left: "-36%" }}
-              // whileInView={{ left: "-30%" }}
-              // transition={transition}
-              // src={item1}
-              // alt=""
-              // width={"400rem"}
+              animate={{ x: 100 }}
+              transition={{ ease: "easeOut", duration: 2 }}
               className="floating0"
             >
               <FloatinDiv
@@ -111,10 +108,8 @@ const Intro = () => {
             </motion.div>
 
             <motion.div
-              // initial={{ top: "-4%", left: "74%" }}
-              // whileInView={{ left: "68%" }}
-              // transition={transition}
-              // style={{ marginLeft: "-2rem" }}
+              animate={{ x: 100 }}
+              transition={{ ease: "easeOut", duration: 2 }}
               className="floating1"
             >
               <FloatinDiv
@@ -125,10 +120,8 @@ const Intro = () => {
             </motion.div>
 
             <motion.div
-              // initial={{ left: "9rem", top: "18rem" }}
-              // whileInView={{ left: "0rem" }}
-              // transition={transition}
-              // style={{ marginTop: "-15rem" }}
+              animate={{ x: 100 }}
+              transition={{ ease: "easeOut", duration: 2 }}
               className="floating"
             >
               {/* floatinDiv mein change hy dark mode ka  */}

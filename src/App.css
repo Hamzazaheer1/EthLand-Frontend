@@ -11,8 +11,21 @@
     --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
 }
 
+
+html {
+    height: 100%;
+}
+
 .App {
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sticky-footer {
+    position: sticky;
+    top: 100%;
 }
 
 .y-btn {

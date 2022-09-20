@@ -7,10 +7,10 @@ import Footer from "../Footer/Footer";
 const Homepage = () => {
   return (
     <>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Intro />
       <About />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useContext } from "react";
@@ -10,18 +10,15 @@ const ViewAdmins = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
-  let selectedAccount;
   let ContractInstance;
   const [adminCount, setAdminCount] = useState();
 
-  //metamask integration
   const init = () => {
     let provider = window.ethereum;
     if (typeof provider !== "undefined") {
       provider
         .request({ method: "eth_requestAccounts" })
         .then((accounts) => {
-          selectedAccount = accounts[0];
           const web3 = new Web3(provider);
           ContractInstance = new web3.eth.Contract(
             CONTACT_ABI,
@@ -49,10 +46,8 @@ const ViewAdmins = () => {
       });
   };
 
-  console.log(adminCount);
-
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       {init()}
       <Container>
         <Row>

@@ -39,10 +39,11 @@ const GettingStarted = () => {
         Chrome, Firefox, Brave and edge.
       </p>
       <img
+        className="img-fluid"
         src={meta1}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>2. Install MetaMask</h3>
@@ -51,10 +52,11 @@ const GettingStarted = () => {
         metamask wallet to your browser.
       </p>
       <img
+        className="img-fluid"
         src={meta2}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>3. Open MetaMask Wallet</h3>
@@ -63,10 +65,11 @@ const GettingStarted = () => {
         use the wallet.
       </p>
       <img
+        className="img-fluid"
         src={meta3}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>4. First Time Signup</h3>
@@ -76,10 +79,11 @@ const GettingStarted = () => {
       </p>
       <p>1 - Click on Get Started.</p>
       <img
+        className="img-fluid"
         src={meta4}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>5. New to MetaMask</h3>
@@ -89,19 +93,21 @@ const GettingStarted = () => {
       </p>
       <p>or you can create a new wallet by clicking on create a wallet.</p>
       <img
+        className="img-fluid"
         src={meta5}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>6. Quality of service</h3>
       <p style={{ marginBottom: "1rem" }}>Click on IAgree.</p>
       <img
+        className="img-fluid"
         src={meta6}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>7. Create a Password</h3>
@@ -113,10 +119,11 @@ const GettingStarted = () => {
         After Entering Password Accept the terms and condition and click Create.
       </p>
       <img
+        className="img-fluid"
         src={meta7}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>8. How to secure your Wallet</h3>
@@ -125,10 +132,11 @@ const GettingStarted = () => {
       </p>
       <p>Click Next.</p>
       <img
+        className="img-fluid"
         src={meta8}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>9. Secrect Recovery Phrase</h3>
@@ -146,10 +154,11 @@ const GettingStarted = () => {
         secret phrase somewhere safe and then click Next.
       </p>
       <img
+        className="img-fluid"
         src={meta9}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>10. Confirm Your Secrect Phrase</h3>
@@ -158,10 +167,11 @@ const GettingStarted = () => {
         earlier.
       </p>
       <img
+        className="img-fluid"
         src={meta10}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>
@@ -171,19 +181,21 @@ const GettingStarted = () => {
         Click on (All Done) to view your Wallet.
       </p>
       <img
+        className="img-fluid"
         src={meta11}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>12. Wallet HomePage</h3>
       <p style={{ marginBottom: "1rem" }}>click got it.</p>
       <img
+        className="img-fluid"
         src={meta12}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
 
       <h3 style={{ marginBottom: "1rem" }}>13. Import Account </h3>
@@ -192,10 +204,11 @@ const GettingStarted = () => {
         new account.
       </p>
       <img
+        className="img-fluid"
         src={meta13}
         alt="meta1 img missing"
         width={"1000"}
-        style={{ marginBottom: "3rem" }}
+        style={{ marginBottom: "3rem", border: "solid" }}
       />
     </div>
   );

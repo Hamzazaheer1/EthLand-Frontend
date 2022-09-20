@@ -15,6 +15,8 @@ import Signup from "./User/Signup/Signup";
 
 import "./App.css";
 import TxData from "./Shared/Blockchain/Pages/TxData";
+import NavigationBar from "./Shared/NavigationBar/NavigationBar";
+import Footer from "./Shared/Footer/Footer";
 
 function App() {
   const theme = useContext(themeContext);
@@ -28,6 +30,7 @@ function App() {
         color: darkMode ? "white" : "",
       }}
     >
+      <NavigationBar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<AboutUs />} />
@@ -41,6 +44,7 @@ function App() {
         <Route path="/userpanel" element={<UserPanel />} />
         <Route path="/txdata/:blockid" element={<TxData />} />
       </Routes>
+      <Footer className="sticky-footer" />
       <GotoTop />
     </div>
   );

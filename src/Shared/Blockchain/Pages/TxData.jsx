@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Footer from "../../Footer/Footer";
-import NavigationBar from "../../NavigationBar/NavigationBar";
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { FaBackward } from "react-icons/fa";
@@ -26,7 +24,6 @@ const TxData = () => {
 
   return (
     <div>
-      <NavigationBar />
       <Container>
         <Row>
           <h2
@@ -55,7 +52,6 @@ const TxData = () => {
           )}
         </Row>
       </Container>
-      <Footer />
     </div>
   );
 };
