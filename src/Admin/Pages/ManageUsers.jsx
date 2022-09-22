@@ -6,20 +6,16 @@ import Web3 from "web3";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
 
-const VerifyUsers = () => {
+const ManageUsers = () => {
   let selectedAccount;
   let ContractInstance;
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
-  const [adminCount, setAdminCount] = useState();
+  const [adminCount, setAdminCount] = useState([]);
 
-  //metamask integration
   const init = () => {
     let provider = window.ethereum;
-    // setIsConnected(true);
     if (typeof provider !== "undefined") {
-      //metamask is installed
-
       provider
         .request({ method: "eth_requestAccounts" })
         .then((accounts) => {
@@ -29,7 +25,7 @@ const VerifyUsers = () => {
             CONTACT_ABI,
             CONTACT_ADDRESS
           );
-          returnAllAdmins();
+          returnAllUsers();
         })
         .catch((err) => {
           console.log(err);
@@ -38,10 +34,10 @@ const VerifyUsers = () => {
     }
   };
 
-  //to return Admins
-  const returnAllAdmins = async () => {
+  //to return Users
+  const returnAllUsers = async () => {
     await ContractInstance.methods
-      .ReturnAllUrverifiedUsers()
+      .ReturnAllUserList()
       .call()
       .then((tx) => {
         setAdminCount(tx);
@@ -51,9 +47,10 @@ const VerifyUsers = () => {
       });
   };
 
-  const VerifyUser = async (R_address) => {
+  //to remove a user
+  const removeUser = async (R_address) => {
     await ContractInstance.methods
-      .verifyUser(R_address)
+      .removeUser(R_address)
       .send({ from: selectedAccount });
     alert("User Verified Sucessfully");
   };
@@ -66,7 +63,7 @@ const VerifyUsers = () => {
           <Col sm={3}></Col>
           <Col sm={6}>
             <br />
-            <h2>Verify Users</h2>
+            <h2>Manage Users</h2>
             <br />
             <Table striped bordered hover>
               <thead>
@@ -76,11 +73,16 @@ const VerifyUsers = () => {
                   <th>Operation</th>
                 </tr>
               </thead>
-              {adminCount &&
+
+              {adminCount.length == 0 ? (
+                <h2>No data to be found</h2>
+              ) : (
                 adminCount.map((item, index) => (
                   <tbody>
                     <tr
-                      style={{ backgroundColor: darkMode ? "white" : "white" }}
+                      style={{
+                        backgroundColor: darkMode ? "white" : "white",
+                      }}
                     >
                       <td>{index + 1}</td>
                       <td>{item}</td>
@@ -90,17 +92,16 @@ const VerifyUsers = () => {
                           style={{ padding: "0px 20px 5px 20px" }}
                           onClick={(event) => {
                             event.preventDefault();
-                            {
-                              VerifyUser(item);
-                            }
+                            removeUser(item);
                           }}
                         >
-                          Verify
+                          Remove
                         </button>
                       </td>
                     </tr>
                   </tbody>
-                ))}
+                ))
+              )}
             </Table>
           </Col>
           <Col sm={3}></Col>
@@ -110,4 +111,4 @@ const VerifyUsers = () => {
   );
 };
 
-export default VerifyUsers;
+export default ManageUsers;

@@ -11,4 +11,7 @@ npm start
 
 ## Project is also deployed on aws
 
-Deployed EthLand[https://main.d2mop7uj0nlbxo.amplifyapp.com/](https://main.d2mop7uj0nlbxo.amplifyapp.com/)
+Deployed EthLand on => [https://main.d2mop7uj0nlbxo.amplifyapp.com/](https://main.d2mop7uj0nlbxo.amplifyapp.com/)
+
+
+## The App is compatible to on all devices [Desktop, Laptops, Tabs and mobile devices]

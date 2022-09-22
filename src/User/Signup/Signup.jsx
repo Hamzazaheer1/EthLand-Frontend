@@ -144,7 +144,6 @@ const Signup = () => {
           <Col sm={3}></Col>
         </Row>
       </Container>
-      {/* <Footer /> */}
     </div>
   );
 };

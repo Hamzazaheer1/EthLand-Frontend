@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import NavigationBar from "../Shared/NavigationBar/NavigationBar";
-import Footer from "../Shared/Footer/Footer";
 import Nav from "react-bootstrap/Nav";
-import { Row, Col, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useContext } from "react";
 import { themeContext } from "../Context";
 import AWelcome from "./Pages/AWelcome";
 import VerifyUsers from "./Pages/VerifyUsers";
 import VerifyLand from "./Pages/VerifyLand";
 import TransferOwnership from "./Pages/TransferOwnership";
+import ManageUsers from "./Pages/ManageUsers";
 
 const AdminPanel = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
   const [selectedTab, setSelectedTab] = useState(0);
-
   return (
     <div>
       {/* <NavigationBar /> */}
@@ -80,12 +78,26 @@ const AdminPanel = () => {
               Transfer Ownership
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                setSelectedTab(4);
+              }}
+              eventKey="link-5"
+              style={{
+                color: darkMode ? "var(--yellow)" : "var(--dark)",
+              }}
+            >
+              Manage Users
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
 
         {selectedTab === 0 && <AWelcome />}
         {selectedTab === 1 && <VerifyUsers />}
         {selectedTab === 2 && <VerifyLand />}
         {selectedTab === 3 && <TransferOwnership />}
+        {selectedTab === 4 && <ManageUsers />}
       </Container>
       {/* <Footer /> */}
     </div>
