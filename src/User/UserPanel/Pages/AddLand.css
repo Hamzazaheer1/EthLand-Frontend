@@ -1,0 +1,8 @@
+.linkEffect {
+    text-decoration: underline;
+}
+
+.linkEffect:hover {
+    color: var(--yellow);
+    font-size: large;
+}

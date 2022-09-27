@@ -40,7 +40,6 @@ const Signup = () => {
             CONTACT_ABI,
             CONTACT_ADDRESS
           );
-
           RegisterUser();
         })
         .catch((err) => {

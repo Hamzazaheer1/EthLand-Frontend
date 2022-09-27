@@ -13,5 +13,4 @@ npm start
 
 Deployed EthLand on => [https://main.d2mop7uj0nlbxo.amplifyapp.com/](https://main.d2mop7uj0nlbxo.amplifyapp.com/)
 
-
-## The App is compatible to on all devices [Desktop, Laptops, Tabs and mobile devices]
+### The App is compatible on all devices [Desktop, Laptops, Tabs and mobile devices]

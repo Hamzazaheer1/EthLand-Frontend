@@ -1,4 +1,4 @@
-export const CONTACT_ADDRESS = "0x121F42caB3E6899cFEF76E78374858Bd907c1022";
+export const CONTACT_ADDRESS = "0xf1013a394a56C256e0EDD1b170c9d3C3c97dDC41";
 
 export const CONTACT_ABI = [
   {
@@ -52,6 +52,110 @@ export const CONTACT_ABI = [
     constant: true,
   },
   {
+    inputs: [],
+    name: "KhatuniCultivatorNo",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "LandOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "LandR",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "khaiwatNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "KhatuniCultivatorNo",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "fatherName",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "natureOfProperty",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "specificShareinJointAccount",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "specificAreainaccordancewiththeShare",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "khasraNo",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "landPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "isforSell",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "isLandVerified",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -95,6 +199,34 @@ export const CONTACT_ABI = [
         internalType: "bool",
         name: "isUserVerified",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: "khaiwatNumber",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [],
+    name: "landsCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -386,6 +518,116 @@ export const CONTACT_ABI = [
         internalType: "address[]",
         name: "",
         type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_fathername",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_natureofproperty",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_specificShareinJointAccount",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "_specificAreainaccordancewiththeShare",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_khasranumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_landPrice",
+        type: "uint256",
+      },
+    ],
+    name: "addLand",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ReturnAllLandList",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "verifyLand",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+    ],
+    name: "isLandVerified",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "id",
+        type: "address",
+      },
+    ],
+    name: "myAllLands",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
       },
     ],
     stateMutability: "view",

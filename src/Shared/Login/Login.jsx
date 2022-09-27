@@ -51,9 +51,9 @@ const Login = () => {
       .call()
       .then((tx) => {
         setOwnerC = tx;
-        console.log(setOwnerC);
-        console.log(selectedAccount);
-        console.log(secrectPhrase);
+        // console.log(setOwnerC);
+        // console.log(selectedAccount);
+        // console.log(secrectPhrase);
         if (setOwnerC == 1) {
           navigate("/superadminpanel", { replace: "true" });
         } else if (setOwnerC == 2) {

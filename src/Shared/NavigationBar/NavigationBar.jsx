@@ -5,6 +5,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Toggle from "../Toggle/Toggle";
 import TopBar from "../TopBar/TopBar";
+import Logo from "../img/logo1.png"
 
 const NavigationBar = () => {
   const [isDarkMode, setDarkMode] = React.useState(false);
@@ -22,6 +23,7 @@ const NavigationBar = () => {
               color: "var(--yellow)",
             }}
           >
+            <img className="img-fluid" src={Logo} width="50px"/>
             EthLand
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
