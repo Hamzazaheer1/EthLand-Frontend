@@ -1,7 +1,140 @@
-import React from "react";
+import React, { useState } from "react";
+import Web3 from "web3";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
+import Table from "react-bootstrap/Table";
+import { useContext } from "react";
+import { themeContext } from "../../../Context";
 
 const MyLand = () => {
-  return <div>MyLand</div>;
+  const [landlist, setLandlist] = useState();
+  const [landData, setLandData] = useState([]);
+  let selectedAccount;
+  let ContractInstance;
+
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
+
+  const init = () => {
+    let provider = window.ethereum;
+    if (typeof provider !== "undefined") {
+      provider
+        .request({ method: "eth_requestAccounts" })
+        .then((accounts) => {
+          selectedAccount = accounts[0];
+          const web3 = new Web3(provider);
+          ContractInstance = new web3.eth.Contract(
+            CONTACT_ABI,
+            CONTACT_ADDRESS
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+          return;
+        });
+    }
+  };
+
+  const getLandsId = async () => {
+    await ContractInstance.methods
+      .myAllLands(selectedAccount)
+      .call()
+      .then((data) => {
+        setLandlist(data);
+      });
+
+    getLandsData();
+  };
+
+  const getLandsData = async () => {
+    for (let i = 0; i < landlist.length; i++) {
+      await ContractInstance.methods
+        .LandR(landlist[i])
+        .call()
+        .then((data) => {
+          setLandData((prevlandData) => [...prevlandData, data]);
+          console.log(data);
+        });
+    }
+  };
+
+  return (
+    <Container>
+      {init()}
+      <br />
+      <Row>
+        <Col sm={8} className="mt-3">
+          <h2>My Lands</h2>
+        </Col>
+        <Col sm={4} className="mt-2">
+          <button
+            className="y-btn"
+            onClick={() => {
+              getLandsId();
+            }}
+          >
+            Reveal My Lands
+          </button>
+        </Col>
+      </Row>
+      <br />
+      <Table
+        responsive="sm"
+        bordered
+        style={{
+          color: darkMode ? "white" : "black",
+        }}
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Khaiwat No</th>
+            <th>Khatuni No</th>
+            <th>Location</th>
+            <th>KhasraNumber</th>
+            <th>Area</th>
+            <th>Price</th>
+            <th>IsVerified</th>
+            <th>IsForSale</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {landData.length > 0 ? (
+            landData.map((item, index) => (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{item.khaiwatNumber}</td>
+                <td>{item.KhatuniCultivatorNo}</td>
+                <td>{item.fatherName}</td>
+                <td>{item.khasraNo}</td>
+                <td>{item.specificAreainaccordancewiththeShare}</td>
+                <td>{item.landPrice}</td>
+                {item.isLandVerified ? (
+                  <td>Verified</td>
+                ) : (
+                  <td>Not Verified</td>
+                )}
+                {item.isforSell ? <td>True</td> : <td>False</td>}
+                <td>
+                  <button
+                    className="y-btn"
+                    style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
+                  >
+                    Detailed Info
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <p>No data to be found....</p>
+          )}
+        </tbody>
+      </Table>
+    </Container>
+  );
 };
 
 export default MyLand;
