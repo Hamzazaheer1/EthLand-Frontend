@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
+import { useContext } from "react";
+import { themeContext } from "../../../Context";
 import Web3 from "web3";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import Table from "react-bootstrap/Table";
-import { useContext } from "react";
-import { themeContext } from "../../../Context";
+import { useNavigate } from "react-router-dom";
 
 const MyLand = () => {
+  const Navigate = useNavigate();
   const [landlist, setLandlist] = useState();
   const [landData, setLandData] = useState([]);
   let selectedAccount;
@@ -91,7 +93,7 @@ const MyLand = () => {
           <tr>
             <th>#</th>
             <th>Khaiwat No</th>
-            <th>Khatuni No</th>
+            {/* <th>Khatuni No</th> */}
             <th>Location</th>
             <th>KhasraNumber</th>
             <th>Area</th>
@@ -107,7 +109,7 @@ const MyLand = () => {
               <tr>
                 <td>{index + 1}</td>
                 <td>{item.khaiwatNumber}</td>
-                <td>{item.KhatuniCultivatorNo}</td>
+                {/* <td>{item.KhatuniCultivatorNo}</td> */}
                 <td>{item.fatherName}</td>
                 <td>{item.khasraNo}</td>
                 <td>{item.specificAreainaccordancewiththeShare}</td>
@@ -122,6 +124,9 @@ const MyLand = () => {
                   <button
                     className="y-btn"
                     style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
+                    onClick={() => {
+                      Navigate(`/detailed-info/${item.khaiwatNumber}`);
+                    }}
                   >
                     Detailed Info
                   </button>

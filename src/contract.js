@@ -1,4 +1,4 @@
-export const CONTACT_ADDRESS = "0xf1013a394a56C256e0EDD1b170c9d3C3c97dDC41";
+export const CONTACT_ADDRESS = "0xa668cdd49F53b8C5D11C337982B99f7cA5097F9b";
 
 export const CONTACT_ABI = [
   {
@@ -101,9 +101,9 @@ export const CONTACT_ABI = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "KhatuniCultivatorNo",
-        type: "uint256",
+        internalType: "string",
+        name: "CoShares",
+        type: "string",
       },
       {
         internalType: "string",
@@ -112,7 +112,7 @@ export const CONTACT_ABI = [
       },
       {
         internalType: "string",
-        name: "fatherName",
+        name: "location",
         type: "string",
       },
       {
@@ -126,14 +126,14 @@ export const CONTACT_ABI = [
         type: "string",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "specificAreainaccordancewiththeShare",
-        type: "uint256",
+        type: "string",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "khasraNo",
-        type: "uint256",
+        type: "string",
       },
       {
         internalType: "uint256",
@@ -533,7 +533,12 @@ export const CONTACT_ABI = [
       },
       {
         internalType: "string",
-        name: "_fathername",
+        name: "_coShare",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_location",
         type: "string",
       },
       {
@@ -547,14 +552,14 @@ export const CONTACT_ABI = [
         type: "string",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "_specificAreainaccordancewiththeShare",
-        type: "uint256",
+        type: "string",
       },
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "_khasranumber",
-        type: "uint256",
+        type: "string",
       },
       {
         internalType: "uint256",

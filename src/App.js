@@ -17,6 +17,7 @@ import "./App.css";
 import TxData from "./Shared/Blockchain/Pages/TxData";
 import NavigationBar from "./Shared/NavigationBar/NavigationBar";
 import Footer from "./Shared/Footer/Footer";
+import LandDetailedInfo from "./User/UserPanel/Pages/LandDetailedInfo/LandDetailedInfo";
 
 function App() {
   const theme = useContext(themeContext);
@@ -43,6 +44,7 @@ function App() {
         <Route path="/adminpanel" element={<AdminPanel />} />
         <Route path="/userpanel" element={<UserPanel />} />
         <Route path="/txdata/:blockid" element={<TxData />} />
+        <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
       </Routes>
       <Footer className="sticky-footer" />
       <GotoTop />

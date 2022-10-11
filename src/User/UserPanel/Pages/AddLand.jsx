@@ -16,13 +16,20 @@ const AddLand = () => {
   const [selectedDistrict, setSeletedDistrict] = useState("");
   const [selectedTehsil, setSeletedTehsil] = useState("");
   const [name, setName] = useState("");
+  const [coShares, setCoShares] = useState("");
   const [location, setlocation] = useState("");
   const [shareinJoint, setShareinJoint] = useState("");
-  const [specificArea, setSpecificArea] = useState(0);
-  const [khasraNumber, setKhasraNumber] = useState(0);
+  const [specificArea, setSpecificArea] = useState("");
+  const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
   const [nature, setNature] = useState("");
 
+  let result = selectedDivision.concat(
+    " ",
+    selectedDistrict,
+    " ",
+    selectedTehsil
+  );
   let selectedAccount;
   let ContractInstance;
 
@@ -48,6 +55,7 @@ const AddLand = () => {
 
   const registerLand = async (
     _name,
+    _coShare,
     _location,
     _nature,
     _specificJoint,
@@ -58,6 +66,7 @@ const AddLand = () => {
     await ContractInstance.methods
       .addLand(
         _name,
+        _coShare,
         _location,
         _nature,
         _specificJoint,
@@ -167,6 +176,7 @@ const AddLand = () => {
           </Row>
         </Container>
       ) : stateCount == 3 ? (
+        // selectedTehsil
         <Container>
           <h2>Select Tehsil</h2>
           <Row>
@@ -187,6 +197,7 @@ const AddLand = () => {
           </Row>
         </Container>
       ) : stateCount == 4 ? (
+        // Form
         <Container>
           {init()}
           <h2>Fill the following form below</h2>
@@ -205,15 +216,7 @@ const AddLand = () => {
                     " " +
                     selectedTehsil
                   }
-                  onChange={(e) =>
-                    setlocation(
-                      selectedDivision +
-                        " " +
-                        selectedDistrict +
-                        " " +
-                        selectedTehsil
-                    )
-                  }
+                  onChange={(e) => setlocation(result)}
                   disabled
                 />
               </Col>
@@ -225,8 +228,20 @@ const AddLand = () => {
               <Col sm={6}>
                 <Form.Control
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder="Enter your full name + fathername"
                   onChange={(e) => setName(e.target.value)}
+                />
+              </Col>
+              <Col sm={3}></Col>
+            </Row>
+            <br />
+            <Row>
+              <Col sm={3}></Col>
+              <Col sm={6}>
+                <Form.Control
+                  type="text"
+                  placeholder="Specific Share in Joint Account"
+                  onChange={(e) => setCoShares(e.target.value)}
                 />
               </Col>
               <Col sm={3}></Col>
@@ -248,7 +263,7 @@ const AddLand = () => {
               <Col sm={3}></Col>
               <Col sm={6}>
                 <Form.Control
-                  type="number"
+                  type="text"
                   placeholder="specific Area in accordance with the Share"
                   onChange={(e) => setSpecificArea(e.target.value)}
                 />
@@ -260,7 +275,7 @@ const AddLand = () => {
               <Col sm={3}></Col>
               <Col sm={6}>
                 <Form.Control
-                  type="number"
+                  type="text"
                   placeholder="khasra No"
                   onChange={(e) => setKhasraNumber(e.target.value)}
                 />
@@ -306,6 +321,7 @@ const AddLand = () => {
                 onClick={() => {
                   registerLand(
                     name,
+                    coShares,
                     location,
                     nature,
                     shareinJoint,
