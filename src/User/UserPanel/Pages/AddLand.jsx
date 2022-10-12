@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { DivisionList, DistrictList, TehsilList } from "./LandData";
+import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import Web3 from "web3";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-import { DivisionList, DistrictList, TehsilList } from "./LandData";
-import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
+import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import "./AddLand.css";
 
 const AddLand = () => {
@@ -17,19 +18,20 @@ const AddLand = () => {
   const [selectedTehsil, setSeletedTehsil] = useState("");
   const [name, setName] = useState("");
   const [coShares, setCoShares] = useState("");
-  const [location, setlocation] = useState("");
   const [shareinJoint, setShareinJoint] = useState("");
   const [specificArea, setSpecificArea] = useState("");
   const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
   const [nature, setNature] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   let result = selectedDivision.concat(
-    " ",
+    " / ",
     selectedDistrict,
-    " ",
+    " / ",
     selectedTehsil
   );
+
   let selectedAccount;
   let ContractInstance;
 
@@ -63,6 +65,7 @@ const AddLand = () => {
     _khasraNo,
     _price
   ) => {
+    setIsLoading(true);
     await ContractInstance.methods
       .addLand(
         _name,
@@ -75,6 +78,7 @@ const AddLand = () => {
         _price
       )
       .send({ from: selectedAccount });
+    setIsLoading(false);
   };
 
   return (
@@ -135,6 +139,7 @@ const AddLand = () => {
           </Row>
         </Container>
       ) : stateCount == 1 ? (
+        // select Division
         <Container>
           <h2>Select Division</h2>
           <Row>
@@ -156,6 +161,7 @@ const AddLand = () => {
           </Row>
         </Container>
       ) : stateCount == 2 ? (
+        // Select District
         <Container>
           <h2>Select District</h2>
           <Row>
@@ -176,7 +182,7 @@ const AddLand = () => {
           </Row>
         </Container>
       ) : stateCount == 3 ? (
-        // selectedTehsil
+        // select Tehsil
         <Container>
           <h2>Select Tehsil</h2>
           <Row>
@@ -204,114 +210,119 @@ const AddLand = () => {
           <br />
           <br />
           <Form>
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder={
-                    selectedDivision +
-                    " " +
-                    selectedDistrict +
-                    " " +
-                    selectedTehsil
-                  }
-                  onChange={(e) => setlocation(result)}
-                  disabled
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your full name + fathername"
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="Specific Share in Joint Account"
-                  onChange={(e) => setCoShares(e.target.value)}
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="Specific Share in Joint Account"
-                  onChange={(e) => setShareinJoint(e.target.value)}
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="specific Area in accordance with the Share"
-                  onChange={(e) => setSpecificArea(e.target.value)}
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="text"
-                  placeholder="khasra No"
-                  onChange={(e) => setKhasraNumber(e.target.value)}
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Control
-                  type="number"
-                  placeholder="Land Price"
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sm={3}></Col>
-              <Col sm={6}>
-                <Form.Select
-                  size="sm"
-                  required
-                  onChange={(e) => setNature(e.target.value)}
-                >
-                  <option>Select Nature of a Land</option>
-                  <option>Owner</option>
-                  <option>Lease</option>
-                  <option>Mortage etc</option>
-                </Form.Select>
-              </Col>
-              <Col sm={3}></Col>
-            </Row>
-            <br />
+            {isLoading ? (
+              <LoadingSpinner asOverlay />
+            ) : (
+              <>
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder={
+                        selectedDivision +
+                        " " +
+                        selectedDistrict +
+                        " " +
+                        selectedTehsil
+                      }
+                      disabled
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter your full name + fathername"
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="Co shares names"
+                      onChange={(e) => setCoShares(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="Specific Share in Joint Account"
+                      onChange={(e) => setShareinJoint(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="specific Area in accordance with the Share"
+                      onChange={(e) => setSpecificArea(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="khasra No"
+                      onChange={(e) => setKhasraNumber(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="number"
+                      placeholder="Land Price"
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Select
+                      size="sm"
+                      required
+                      onChange={(e) => setNature(e.target.value)}
+                    >
+                      <option>Select Nature of a Land</option>
+                      <option>Owner</option>
+                      <option>Lease</option>
+                      <option>Mortage etc</option>
+                    </Form.Select>
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+              </>
+            )}
           </Form>
           <Row>
             <Col sm={3}></Col>
@@ -322,7 +333,7 @@ const AddLand = () => {
                   registerLand(
                     name,
                     coShares,
-                    location,
+                    result,
                     nature,
                     shareinJoint,
                     specificArea,

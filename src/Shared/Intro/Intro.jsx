@@ -91,8 +91,8 @@ const Intro = () => {
               </Carousel>
             </div>
           </Col>
-          <Col sm={4}></Col>
-          <Col sm={4}>
+          <Col sm={3}></Col>
+          <Col sm={5}>
             <img className="img-fluid" style={{ height: "30rem" }} src={Map} />
             {/* animations */}
             <motion.div

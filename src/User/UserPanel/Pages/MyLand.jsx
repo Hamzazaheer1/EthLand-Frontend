@@ -8,11 +8,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 
 const MyLand = () => {
   const Navigate = useNavigate();
   const [landlist, setLandlist] = useState();
   const [landData, setLandData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   let selectedAccount;
   let ContractInstance;
 
@@ -40,14 +43,15 @@ const MyLand = () => {
   };
 
   const getLandsId = async () => {
+    setIsLoading(true);
     await ContractInstance.methods
       .myAllLands(selectedAccount)
       .call()
       .then((data) => {
         setLandlist(data);
       });
-
     getLandsData();
+    setIsLoading(false);
   };
 
   const getLandsData = async () => {
@@ -103,40 +107,44 @@ const MyLand = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          {landData.length > 0 ? (
-            landData.map((item, index) => (
-              <tr>
-                <td>{index + 1}</td>
-                <td>{item.khaiwatNumber}</td>
-                {/* <td>{item.KhatuniCultivatorNo}</td> */}
-                <td>{item.fatherName}</td>
-                <td>{item.khasraNo}</td>
-                <td>{item.specificAreainaccordancewiththeShare}</td>
-                <td>{item.landPrice}</td>
-                {item.isLandVerified ? (
-                  <td>Verified</td>
-                ) : (
-                  <td>Not Verified</td>
-                )}
-                {item.isforSell ? <td>True</td> : <td>False</td>}
-                <td>
-                  <button
-                    className="y-btn"
-                    style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
-                    onClick={() => {
-                      Navigate(`/detailed-info/${item.khaiwatNumber}`);
-                    }}
-                  >
-                    Detailed Info
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <p>No data to be found....</p>
-          )}
-        </tbody>
+        {isLoading ? (
+          <LoadingSpinner asOverlay />
+        ) : (
+          <tbody>
+            {landData.length > 0 ? (
+              landData.map((item, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item.khaiwatNumber}</td>
+                  {/* <td>{item.KhatuniCultivatorNo}</td> */}
+                  <td>{item.location}</td>
+                  <td>{item.khasraNo}</td>
+                  <td>{item.specificAreainaccordancewiththeShare}</td>
+                  <td>{item.landPrice}</td>
+                  {item.isLandVerified ? (
+                    <td>Verified</td>
+                  ) : (
+                    <td>Not Verified</td>
+                  )}
+                  {item.isforSell ? <td>True</td> : <td>False</td>}
+                  <td>
+                    <button
+                      className="y-btn"
+                      style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
+                      onClick={() => {
+                        Navigate(`/detailed-info/${item.khaiwatNumber}`);
+                      }}
+                    >
+                      Detailed Info
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <p>No data to be found....</p>
+            )}
+          </tbody>
+        )}
       </Table>
     </Container>
   );
