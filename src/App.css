@@ -58,6 +58,10 @@ html {
     filter: blur(72px);
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 500px) {
     .blur {

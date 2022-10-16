@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
-import Table from "react-bootstrap/Table";
-import Web3 from "web3";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
+import Table from "react-bootstrap/Table";
+import Web3 from "web3";
 
 const VerifyUsers = () => {
   let selectedAccount;
@@ -16,10 +16,7 @@ const VerifyUsers = () => {
   //metamask integration
   const init = () => {
     let provider = window.ethereum;
-    // setIsConnected(true);
     if (typeof provider !== "undefined") {
-      //metamask is installed
-
       provider
         .request({ method: "eth_requestAccounts" })
         .then((accounts) => {
@@ -76,7 +73,7 @@ const VerifyUsers = () => {
                   <th>Operation</th>
                 </tr>
               </thead>
-              {adminCount &&
+              {adminCount ? (
                 adminCount.map((item, index) => (
                   <tbody>
                     <tr
@@ -100,7 +97,10 @@ const VerifyUsers = () => {
                       </td>
                     </tr>
                   </tbody>
-                ))}
+                ))
+              ) : (
+                <h1>No user to be verified yet</h1>
+              )}
             </Table>
           </Col>
           <Col sm={3}></Col>

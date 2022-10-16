@@ -134,7 +134,6 @@ const Intro = () => {
           </Col>
         </Row>
       </div>
-      {/* background: "rgb(238 210 255)" */}
       <div
         className="blur"
         style={{

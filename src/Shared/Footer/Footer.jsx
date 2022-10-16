@@ -1,8 +1,6 @@
 import React from "react";
-import "./Footer.css";
 import Wave from "../img/wave.png";
-import Insta from "@iconscout/react-unicons/icons/uil-instagram";
-import Facebook from "@iconscout/react-unicons/icons/uil-facebook";
+import "./Footer.css";
 
 const Footer = () => {
   return (
@@ -11,10 +9,27 @@ const Footer = () => {
         <div className="footer">
           <img src={Wave} alt="" style={{ width: "100%" }} />
           <div className="f-content">
-            <span>&copy; 2022 EthLand - All rights reserved</span>
+            <span>
+              <b>
+                <i className="bi bi-c-circle"></i> 2022 EthLand - All rights
+                reserved
+              </b>
+            </span>
             <div className="f-icons">
-              <Insta color="white" size={"3rem"} />
-              <Facebook color="white" size={"3rem"} />
+              <i
+                style={{ fontSize: "2.5rem" }}
+                class="bi bi-facebook cursor-pointer"
+                onClick={() => {
+                  window.open("https://www.facebook.com/", "_blank");
+                }}
+              ></i>
+              <i
+                style={{ fontSize: "2.5rem" }}
+                class="bi bi-instagram cursor-pointer"
+                onClick={() => {
+                  window.open("https://www.instagram.com/", "_blank");
+                }}
+              ></i>
             </div>
           </div>
         </div>

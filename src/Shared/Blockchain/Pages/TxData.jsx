@@ -25,13 +25,13 @@ const TxData = () => {
   return (
     <div>
       <Container>
-        <Row>
+        <Row className="mt-4">
           <h2
             onClick={() => {
               Navigate("/blockchain");
             }}
           >
-            <FaBackward />
+            <i className="bi bi-arrow-left-circle-fill cursor-pointer"></i>
           </h2>
           <h2>Block {blockid}</h2>
         </Row>

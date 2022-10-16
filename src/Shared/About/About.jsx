@@ -44,14 +44,11 @@ const About = () => {
               color: darkMode ? "white" : "var(--gray)",
             }}
           >
-            Lorem ispum is simpley dummy text of printing of printing Lorem
+            Government of the Pakistan started computerization of Land Records
+            with overall objectives to improve service delivery and to enhance
+            the perceived level of tenure security.
             <br />
-            ispum is simpley dummy text of printingLorem ispum is simpley dummy
-            text
-            <br />
-            y dummy text of printingLorem
-            <br />
-            ispum is simpley dummy text of printing
+            <b>EthLand is an Ethereum Blockchain based Land Record System</b>
           </span>
           <br />
           <br />

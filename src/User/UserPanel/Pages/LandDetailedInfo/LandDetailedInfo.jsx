@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../../contract";
 import { useContext } from "react";
 import { themeContext } from "../../../../Context";
-import Web3 from "web3";
-import Container from "react-bootstrap/Container";
 import { useParams } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
+import Web3 from "web3";
+import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
+import { useNavigate } from "react-router-dom";
 
 const LandDetailedInfo = () => {
   let selectedAccount;
@@ -14,6 +15,8 @@ const LandDetailedInfo = () => {
   let { landid } = useParams();
   const [landlist, setLandlist] = useState();
   const [landData, setLandData] = useState([]);
+
+  const Navigate = useNavigate();
 
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
@@ -65,7 +68,15 @@ const LandDetailedInfo = () => {
     <Container>
       {init()}
       <Row className="mt-5">
-        <Col sm={4}></Col>
+        <Col sm={4}>
+          <i
+            style={{ fontSize: "2rem" }}
+            class="bi bi-arrow-left-circle-fill cursor-pointer"
+            onClick={() => {
+              Navigate("/userpanel");
+            }}
+          ></i>
+        </Col>
         <Col sm={4}>
           <h2 style={{ fontWeight: "bold" }}>Land Detailed Info</h2>
         </Col>
