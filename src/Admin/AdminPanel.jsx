@@ -5,9 +5,9 @@ import { useContext } from "react";
 import { themeContext } from "../Context";
 import AWelcome from "./Pages/AWelcome";
 import VerifyUsers from "./Pages/VerifyUsers";
-import VerifyLand from "./Pages/VerifyLand";
 import TransferOwnership from "./Pages/TransferOwnership";
 import ManageUsers from "./Pages/ManageUsers";
+import AllLandList from "./Pages/AllLandList";
 
 const AdminPanel = () => {
   const theme = useContext(themeContext);
@@ -61,7 +61,7 @@ const AdminPanel = () => {
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
               }}
             >
-              Verify Land
+              Manage Users
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -70,12 +70,11 @@ const AdminPanel = () => {
                 setSelectedTab(3);
               }}
               eventKey="link-4"
-              href=""
               style={{
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
               }}
             >
-              Transfer Ownership
+              Manage Lands
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -88,18 +87,17 @@ const AdminPanel = () => {
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
               }}
             >
-              Manage Users
+              Transfer Ownership
             </Nav.Link>
           </Nav.Item>
         </Nav>
 
         {selectedTab === 0 && <AWelcome />}
         {selectedTab === 1 && <VerifyUsers />}
-        {selectedTab === 2 && <VerifyLand />}
-        {selectedTab === 3 && <TransferOwnership />}
-        {selectedTab === 4 && <ManageUsers />}
+        {selectedTab === 2 && <ManageUsers />}
+        {selectedTab === 3 && <AllLandList />}
+        {selectedTab === 4 && <TransferOwnership />}
       </Container>
-      {/* <Footer /> */}
     </div>
   );
 };

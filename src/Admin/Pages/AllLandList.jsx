@@ -1,26 +1,23 @@
 import React, { useState } from "react";
-import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
+import { Col, Container, Row } from "react-bootstrap";
+import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
 import { useContext } from "react";
-import { themeContext } from "../../../Context";
-import Web3 from "web3";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { themeContext } from "../../Context";
 import Table from "react-bootstrap/Table";
+import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../Utils/LoadingSpinner/LoadingSpinner";
 
-const MyLand = () => {
-  const Navigate = useNavigate();
-  const [landlist, setLandlist] = useState();
-  const [landData, setLandData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+const AllLandList = () => {
   let selectedAccount;
   let ContractInstance;
+  const Navigate = useNavigate();
 
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
+  const [landIds, setLandIds] = useState();
+  const [landData, setLandData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const init = () => {
     let provider = window.ethereum;
@@ -34,6 +31,7 @@ const MyLand = () => {
             CONTACT_ABI,
             CONTACT_ADDRESS
           );
+          returnAllLandsList();
         })
         .catch((err) => {
           console.log(err);
@@ -42,28 +40,41 @@ const MyLand = () => {
     }
   };
 
-  const getLandsId = async () => {
-    setIsLoading(true);
+  //to return landlist
+  const returnAllLandsList = async () => {
     await ContractInstance.methods
-      .myAllLands(selectedAccount)
+      .ReturnAllLandList()
       .call()
-      .then((data) => {
-        setLandlist(data);
+      .then((tx) => {
+        setLandIds(tx);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    getLandsData();
-    setIsLoading(false);
   };
 
+  //to returnlandsData
   const getLandsData = async () => {
-    for (let i = 0; i < landlist.length; i++) {
+    console.log(ContractInstance);
+    setIsLoading(true);
+    for (let i = 0; i < landIds.length; i++) {
       await ContractInstance.methods
-        .LandR(landlist[i])
+        .LandR(landIds[i])
         .call()
         .then((data) => {
           setLandData((prevlandData) => [...prevlandData, data]);
           console.log(data);
         });
     }
+    setIsLoading(false);
+  };
+
+  //to verify a land
+  const verifyALand = async (land_id) => {
+    await ContractInstance.methods
+      .verifyLand(land_id)
+      .send({ from: selectedAccount });
+    alert("Land Verified Sucessfully");
   };
 
   return (
@@ -72,13 +83,13 @@ const MyLand = () => {
       <br />
       <Row>
         <Col sm={8} className="mt-3">
-          <h2>My Lands</h2>
+          <h2>List of all the registered Lands</h2>
         </Col>
         <Col sm={4} className="mt-2">
           <button
             className="y-btn"
             onClick={() => {
-              getLandsId();
+              getLandsData();
             }}
           >
             Reveal My Lands
@@ -95,12 +106,14 @@ const MyLand = () => {
       >
         <thead>
           <tr>
-            <th>#</th>
             <th>Khaiwat No</th>
-            {/* <th>Khatuni No</th> */}
+            <th>Name</th>
             <th>Location</th>
             <th>KhasraNumber</th>
+            <th>CoShares</th>
             <th>Area</th>
+            <th>SpecificShare</th>
+            <th>NatureOfProperty</th>
             <th>Price</th>
             <th>IsVerified</th>
             <th>IsForSale</th>
@@ -113,13 +126,15 @@ const MyLand = () => {
           <tbody>
             {landData.length > 0 ? (
               landData.map((item, index) => (
-                <tr>
-                  <td>{index + 1}</td>
+                <tr key={index + 1}>
                   <td>{item.khaiwatNumber}</td>
-                  {/* <td>{item.KhatuniCultivatorNo}</td> */}
+                  <td>{item.name}</td>
                   <td>{item.fatherName}</td>
                   <td>{item.khasraNo}</td>
+                  <td>{item.CoShares}</td>
                   <td>{item.specificAreainaccordancewiththeShare}</td>
+                  <td>{item.specificShareinJointAccount}</td>
+                  <td>{item.natureOfProperty}</td>
                   <td>{item.landPrice}</td>
                   {item.isLandVerified ? (
                     <td>Verified</td>
@@ -132,16 +147,18 @@ const MyLand = () => {
                       className="y-btn"
                       style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
                       onClick={() => {
-                        Navigate(`/detailed-info/${item.khaiwatNumber}`);
+                        verifyALand(item.khaiwatNumber);
                       }}
                     >
-                      Detailed Info
+                      Verify
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
-              <p>No data to be found....</p>
+              <tr>
+                <td>No data to be found....</td>
+              </tr>
             )}
           </tbody>
         )}
@@ -150,4 +167,4 @@ const MyLand = () => {
   );
 };
 
-export default MyLand;
+export default AllLandList;

@@ -132,7 +132,7 @@ const LandDetailedInfo = () => {
                 <td>{landData[0].khaiwatNumber}</td>
                 <td>{landData[0].name}</td>
                 <td>{landData[0].CoShares}</td>
-                <td>{landData[0].location}</td>
+                <td>{landData[0].fatherName}</td>
                 <td>{landData[0].specificShareinJointAccount}</td>
                 <td>{landData[0].specificAreainaccordancewiththeShare}</td>
                 <td>{landData[0].khasraNo}</td>

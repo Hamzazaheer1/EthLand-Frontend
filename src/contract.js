@@ -1,4 +1,4 @@
-export const CONTACT_ADDRESS = "0xa668cdd49F53b8C5D11C337982B99f7cA5097F9b";
+export const CONTACT_ADDRESS = "0x8c66Ab6d5349526E68A4Bb8BF5b09f81Ae784988";
 
 export const CONTACT_ABI = [
   {
@@ -112,7 +112,7 @@ export const CONTACT_ABI = [
       },
       {
         internalType: "string",
-        name: "location",
+        name: "fatherName",
         type: "string",
       },
       {
@@ -538,7 +538,7 @@ export const CONTACT_ABI = [
       },
       {
         internalType: "string",
-        name: "_location",
+        name: "_fathername",
         type: "string",
       },
       {
@@ -628,6 +628,26 @@ export const CONTACT_ABI = [
       },
     ],
     name: "myAllLands",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+    ],
+    name: "allUnverifiedLands",
     outputs: [
       {
         internalType: "uint256[]",
