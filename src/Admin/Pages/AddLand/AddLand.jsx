@@ -23,6 +23,7 @@ const AddLand = () => {
   const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
   const [nature, setNature] = useState("");
+  const [ownerPK, setOwnerPK] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   let result = selectedDivision.concat(
@@ -31,6 +32,8 @@ const AddLand = () => {
     " / ",
     selectedTehsil
   );
+
+  console.log(result);
 
   let selectedAccount;
   let ContractInstance;
@@ -63,7 +66,8 @@ const AddLand = () => {
     _specificJoint,
     _area,
     _khasraNo,
-    _price
+    _price,
+    _ownerPk
   ) => {
     setIsLoading(true);
     await ContractInstance.methods
@@ -75,7 +79,8 @@ const AddLand = () => {
         _specificJoint,
         _area,
         _khasraNo,
-        _price
+        _price,
+        _ownerPk
       )
       .send({ from: selectedAccount });
     setIsLoading(false);
@@ -321,6 +326,18 @@ const AddLand = () => {
                   <Col sm={3}></Col>
                 </Row>
                 <br />
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="Owner Public Address"
+                      onChange={(e) => setOwnerPK(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
               </>
             )}
           </Form>
@@ -338,7 +355,8 @@ const AddLand = () => {
                     shareinJoint,
                     specificArea,
                     khasraNumber,
-                    price
+                    price,
+                    ownerPK
                   );
                 }}
               >

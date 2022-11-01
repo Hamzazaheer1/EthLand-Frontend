@@ -12,9 +12,11 @@ import { useNavigate } from "react-router-dom";
 const LandDetailedInfo = () => {
   let selectedAccount;
   let ContractInstance;
+  let landids;
   let { landid } = useParams();
   const [landlist, setLandlist] = useState();
   const [landData, setLandData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const Navigate = useNavigate();
 
@@ -42,27 +44,25 @@ const LandDetailedInfo = () => {
   };
 
   const getLandsId = async () => {
+    setIsLoading(true);
     await ContractInstance.methods
       .myAllLands(selectedAccount)
       .call()
       .then((data) => {
-        setLandlist(data);
+        landids = data;
       });
 
-    getLandsData();
-  };
+    for (let i = 0; i < landids.length; i++) {
+      ContractInstance.methods
+        .LandR(landids[i])
+        .call()
+        .then((data) => {
+          setLandData((prevlandData) => [...prevlandData, data]);
+        });
+    }
 
-  const getLandsData = async () => {
-    await ContractInstance.methods
-      .LandR(landlist[landid - 1])
-      .call()
-      .then((data) => {
-        setLandData((prevlandData) => [...prevlandData, data]);
-        console.log(data);
-      });
+    setIsLoading(false);
   };
-
-  console.log(landData);
 
   return (
     <Container>
@@ -132,7 +132,7 @@ const LandDetailedInfo = () => {
                 <td>{landData[0].khaiwatNumber}</td>
                 <td>{landData[0].name}</td>
                 <td>{landData[0].CoShares}</td>
-                <td>{landData[0].fatherName}</td>
+                <td>{landData[0].location}</td>
                 <td>{landData[0].specificShareinJointAccount}</td>
                 <td>{landData[0].specificAreainaccordancewiththeShare}</td>
                 <td>{landData[0].khasraNo}</td>

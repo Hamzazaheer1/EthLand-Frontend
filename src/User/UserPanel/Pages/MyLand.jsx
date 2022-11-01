@@ -12,12 +12,12 @@ import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 
 const MyLand = () => {
   const Navigate = useNavigate();
-  const [landlist, setLandlist] = useState();
   const [landData, setLandData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   let selectedAccount;
   let ContractInstance;
+  let landids;
 
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
@@ -48,22 +48,19 @@ const MyLand = () => {
       .myAllLands(selectedAccount)
       .call()
       .then((data) => {
-        setLandlist(data);
+        landids = data;
       });
-    getLandsData();
-    setIsLoading(false);
-  };
 
-  const getLandsData = async () => {
-    for (let i = 0; i < landlist.length; i++) {
-      await ContractInstance.methods
-        .LandR(landlist[i])
+    for (let i = 0; i < landids.length; i++) {
+      ContractInstance.methods
+        .LandR(landids[i])
         .call()
         .then((data) => {
           setLandData((prevlandData) => [...prevlandData, data]);
-          console.log(data);
         });
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -75,12 +72,7 @@ const MyLand = () => {
           <h2>My Lands</h2>
         </Col>
         <Col sm={4} className="mt-2">
-          <button
-            className="y-btn"
-            onClick={() => {
-              getLandsId();
-            }}
-          >
+          <button className="y-btn" onClick={getLandsId}>
             Reveal My Lands
           </button>
         </Col>
@@ -117,7 +109,7 @@ const MyLand = () => {
                   <td>{index + 1}</td>
                   <td>{item.khaiwatNumber}</td>
                   {/* <td>{item.KhatuniCultivatorNo}</td> */}
-                  <td>{item.fatherName}</td>
+                  <td>{item.location}</td>
                   <td>{item.khasraNo}</td>
                   <td>{item.specificAreainaccordancewiththeShare}</td>
                   <td>{item.landPrice}</td>

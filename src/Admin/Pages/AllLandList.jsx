@@ -31,6 +31,7 @@ const AllLandList = () => {
             CONTACT_ABI,
             CONTACT_ADDRESS
           );
+
           returnAllLandsList();
         })
         .catch((err) => {
@@ -55,18 +56,34 @@ const AllLandList = () => {
 
   //to returnlandsData
   const getLandsData = async () => {
-    console.log(ContractInstance);
     setIsLoading(true);
-    for (let i = 0; i < landIds.length; i++) {
-      await ContractInstance.methods
-        .LandR(landIds[i])
-        .call()
-        .then((data) => {
-          setLandData((prevlandData) => [...prevlandData, data]);
-          console.log(data);
+    let provider = window.ethereum;
+    if (typeof provider !== "undefined") {
+      provider
+        .request({ method: "eth_requestAccounts" })
+        .then((accounts) => {
+          selectedAccount = accounts[0];
+          const web3 = new Web3(provider);
+          ContractInstance = new web3.eth.Contract(
+            CONTACT_ABI,
+            CONTACT_ADDRESS
+          );
+
+          for (let i = 0; i < landIds.length; i++) {
+            ContractInstance.methods
+              .LandR(landIds[i])
+              .call()
+              .then((data) => {
+                setLandData((prevlandData) => [...prevlandData, data]);
+              });
+          }
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          return;
         });
     }
-    setIsLoading(false);
   };
 
   //to verify a land
@@ -129,7 +146,7 @@ const AllLandList = () => {
                 <tr key={index + 1}>
                   <td>{item.khaiwatNumber}</td>
                   <td>{item.name}</td>
-                  <td>{item.fatherName}</td>
+                  <td>{item.location}</td>
                   <td>{item.khasraNo}</td>
                   <td>{item.CoShares}</td>
                   <td>{item.specificAreainaccordancewiththeShare}</td>

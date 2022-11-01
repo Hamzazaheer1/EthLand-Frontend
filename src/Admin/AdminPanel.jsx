@@ -8,6 +8,7 @@ import VerifyUsers from "./Pages/VerifyUsers";
 import TransferOwnership from "./Pages/TransferOwnership";
 import ManageUsers from "./Pages/ManageUsers";
 import AllLandList from "./Pages/AllLandList";
+import AddLand from "./Pages/AddLand/AddLand";
 
 const AdminPanel = () => {
   const theme = useContext(themeContext);
@@ -74,7 +75,7 @@ const AdminPanel = () => {
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
               }}
             >
-              Manage Lands
+              Add Land
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -87,6 +88,19 @@ const AdminPanel = () => {
                 color: darkMode ? "var(--yellow)" : "var(--dark)",
               }}
             >
+              Manage Lands
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                setSelectedTab(5);
+              }}
+              eventKey="link-6"
+              style={{
+                color: darkMode ? "var(--yellow)" : "var(--dark)",
+              }}
+            >
               Transfer Ownership
             </Nav.Link>
           </Nav.Item>
@@ -95,8 +109,9 @@ const AdminPanel = () => {
         {selectedTab === 0 && <AWelcome />}
         {selectedTab === 1 && <VerifyUsers />}
         {selectedTab === 2 && <ManageUsers />}
-        {selectedTab === 3 && <AllLandList />}
-        {selectedTab === 4 && <TransferOwnership />}
+        {selectedTab === 3 && <AddLand />}
+        {selectedTab === 4 && <AllLandList />}
+        {selectedTab === 5 && <TransferOwnership />}
       </Container>
     </div>
   );

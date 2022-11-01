@@ -16,21 +16,3 @@
   font-size: 16px;
   /* yahan ye color add kia hy bad mein dark mode k waqt */
 }
-
-/* 
-@media all and (max-width: 1366px) {
-  .floatingDiv {
-    width: 15rem;
-    margin-top: 10rem;
-  }
-  .floatingDiv > img {
-    transform: scale(0.3.5);
-  }
-
-  .floatingDiv > span {
-    font-size: 14px;
-
-  }
-  
-} */
-

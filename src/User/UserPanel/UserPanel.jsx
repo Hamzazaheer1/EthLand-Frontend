@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
 import UWelcome from "./Pages/UWelcome";
-import AddLand from "./Pages/AddLand";
+// import AddLand from "./Pages/AddLand";
 import MyLand from "./Pages/MyLand";
 import SendRequests from "./Pages/SendRequests";
 import ReceiveRequests from "./Pages/ReceiveRequests";
@@ -39,7 +39,7 @@ const UserPanel = () => {
               Welcome
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          {/* <Nav.Item>
             <Nav.Link
               onClick={() => {
                 setSelectedTab(1);
@@ -52,11 +52,11 @@ const UserPanel = () => {
             >
               Add Land
             </Nav.Link>
-          </Nav.Item>
+          </Nav.Item> */}
           <Nav.Item>
             <Nav.Link
               onClick={() => {
-                setSelectedTab(2);
+                setSelectedTab(1);
               }}
               eventKey="link-3"
               href=""
@@ -70,7 +70,7 @@ const UserPanel = () => {
           <Nav.Item>
             <Nav.Link
               onClick={() => {
-                setSelectedTab(3);
+                setSelectedTab(2);
               }}
               eventKey="link-4"
               href=""
@@ -84,7 +84,7 @@ const UserPanel = () => {
           <Nav.Item>
             <Nav.Link
               onClick={() => {
-                setSelectedTab(4);
+                setSelectedTab(3);
               }}
               eventKey="link-5"
               href=""
@@ -98,10 +98,9 @@ const UserPanel = () => {
         </Nav>
 
         {selectedTab === 0 && <UWelcome />}
-        {selectedTab === 1 && <AddLand />}
-        {selectedTab === 2 && <MyLand />}
-        {selectedTab === 3 && <SendRequests />}
-        {selectedTab === 4 && <ReceiveRequests />}
+        {selectedTab === 1 && <MyLand />}
+        {selectedTab === 2 && <SendRequests />}
+        {selectedTab === 3 && <ReceiveRequests />}
       </Container>
       {/* <Footer /> */}
     </div>
