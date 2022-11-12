@@ -51,10 +51,8 @@ const Login = () => {
       .call()
       .then((tx) => {
         setOwnerC = tx;
-        // console.log(setOwnerC);
-        // console.log(selectedAccount);
-        // console.log(secrectPhrase);
         if (setOwnerC == 1) {
+          localStorage.setItem("superadmin", "superadmin");
           navigate("/superadminpanel", { replace: "true" });
         } else if (setOwnerC == 2) {
           ContractInstance.methods
@@ -63,6 +61,7 @@ const Login = () => {
           alert("System is down");
           setIsLoading(false);
         } else if (setOwnerC == 4) {
+          localStorage.setItem("admin", "admin");
           navigate("/adminpanel", { replace: "true" });
         } else if (setOwnerC == 5) {
           console.log("i am 5");
@@ -74,6 +73,7 @@ const Login = () => {
         } else if (setOwnerC == 6) {
           alert("You are not yet verified");
         } else if (setOwnerC == 7) {
+          localStorage.setItem("user", "user");
           navigate("/userpanel", { replace: "true" });
         } else {
           alert("Wrong secrect key or Wallet");

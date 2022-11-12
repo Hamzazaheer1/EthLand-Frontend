@@ -11,20 +11,138 @@ import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import "./AddLand.css";
 
 const AddLand = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [stateCount, setStateCount] = useState(0);
   const [homepage, setHomepage] = useState("Homepage");
   const [selectedDivision, setSeletedDivision] = useState("");
   const [selectedDistrict, setSeletedDistrict] = useState("");
   const [selectedTehsil, setSeletedTehsil] = useState("");
-  const [name, setName] = useState("");
-  const [coShares, setCoShares] = useState("");
-  const [shareinJoint, setShareinJoint] = useState("");
-  const [specificArea, setSpecificArea] = useState("");
+  const [khaiwatNo, setKhaiwatNo] = useState(0);
+  const [totalArea, setTotalArea] = useState("");
   const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
-  const [nature, setNature] = useState("");
-  const [ownerPK, setOwnerPK] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [image, setImage] = useState("");
+
+  // const [name, setName] = useState("");
+  // const [coShares, setCoShares] = useState("");
+  // const [shareinJoint, setShareinJoint] = useState("");
+  // const [specificArea, setSpecificArea] = useState("");
+  // const [nature, setNature] = useState("");
+  // const [ownerPK, setOwnerPK] = useState("");
+
+  // owner state
+  const [ownersInput, setOwnersInput] = useState([
+    {
+      ownerName: "",
+      fatherName: "",
+      cast: "",
+      natureOfRights: "",
+      specificShareInJointAccount: "",
+      specificAreaAccordingWithShare: "",
+      publicAddress: "",
+    },
+  ]);
+
+  const handleOwnersInput = () => {
+    setOwnersInput([
+      ...ownersInput,
+      {
+        ownerName: "",
+        fatherName: "",
+        cast: "",
+        natureOfRights: "",
+        specificShareInJointAccount: "",
+        specificAreaAccordingWithShare: "",
+        publicAddress: "",
+      },
+    ]);
+  };
+
+  const handleOwnersInputRemove = (index) => {
+    const list = [...ownersInput];
+    list.splice(index, 1);
+    setOwnersInput(list);
+  };
+
+  const handleOwnersInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...ownersInput];
+    list[index][name] = value;
+    setOwnersInput(list);
+  };
+
+  // jamabandi state
+  // const [jamabandiInput, setJamabandiInput] = useState([
+  //   {
+  //     oldOwnerName: "",
+  //     saleDate: "",
+  //     NumberDarName: "",
+  //     IntiqaalNumber: "",
+  //     OldOwnerPK: "",
+  //   },
+  // ]);
+
+  // const handleJamabandiInput = () => {
+  //   setJamabandiInput([
+  //     ...jamabandiInput,
+  //     {
+  //       oldOwnerName: "",
+  //       saleDate: "",
+  //       NumberDarName: "",
+  //       IntiqaalNumber: "",
+  //       OldOwnerPK: "",
+  //     },
+  //   ]);
+  // };
+
+  // const handleJamabandiInputRemove = (index) => {
+  //   const list = [...jamabandiInput];
+  //   list.splice(index, 1);
+  //   setJamabandiInput(list);
+  // };
+
+  // const handleJamabandiInputChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const list = [...jamabandiInput];
+  //   list[index][name] = value;
+  //   setJamabandiInput(list);
+  // };
+
+  const [jamabandiInput, setJamabandiInput] = useState([
+    {
+      oldOwnerName: "",
+      saleDate: "",
+      NumberDarName: "",
+      IntiqaalNumber: "",
+      OldOwnerPK: "",
+    },
+  ]);
+
+  const handleJamabandiInput = () => {
+    setJamabandiInput([
+      ...ownersInput,
+      {
+        oldOwnerName: "",
+        saleDate: "",
+        NumberDarName: "",
+        IntiqaalNumber: "",
+        OldOwnerPK: "",
+      },
+    ]);
+  };
+
+  const handleJamabandiInputRemove = (index) => {
+    const list = [...jamabandiInput];
+    list.splice(index, 1);
+    setJamabandiInput(list);
+  };
+
+  const handleJamabandiInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...jamabandiInput];
+    list[index][name] = value;
+    setJamabandiInput(list);
+  };
 
   let result = selectedDivision.concat(
     " / ",
@@ -33,57 +151,40 @@ const AddLand = () => {
     selectedTehsil
   );
 
-  console.log(result);
+  // console.log("Locaion", result);
+  // console.log("khaiwatNo", khaiwatNo);
+  console.log("Owner's Input ", ownersInput);
+  //  console.log("khasraNumber", khasraNumber);
+  console.log(jamabandiInput);
+  //console.log("totalArea ", totalArea);
+  //console.log("price ", price);
+  // console.log("photo ", image);
 
-  let selectedAccount;
-  let ContractInstance;
+  const registerLandHandler = async () => {
+    const formData = new FormData();
+    formData.append("location", result);
+    formData.append("khaiwatNo", khaiwatNo);
+    formData.append("OwnerData", ownersInput);
+    formData.append("khasraNumber", khasraNumber);
+    formData.append("area", totalArea);
+    formData.append("jamabandi", jamabandiInput);
+    formData.append("price", price);
+    formData.append("photo", image);
 
-  const init = () => {
-    let provider = window.ethereum;
-    if (typeof provider !== "undefined") {
-      provider
-        .request({ method: "eth_requestAccounts" })
-        .then((accounts) => {
-          selectedAccount = accounts[0];
-          const web3 = new Web3(provider);
-          ContractInstance = new web3.eth.Contract(
-            CONTACT_ABI,
-            CONTACT_ADDRESS
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-          return;
-        });
+    try {
+      const response = await fetch(
+        "https://ethland-backend.herokuapp.com/api/v1/lands/create",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const responseData = await response.json();
+      alert("Land Registered Sucessfully!!!!");
+      console.log(responseData);
+    } catch (err) {
+      alert("Error occured during registration of a land");
     }
-  };
-
-  const registerLand = async (
-    _name,
-    _coShare,
-    _location,
-    _nature,
-    _specificJoint,
-    _area,
-    _khasraNo,
-    _price,
-    _ownerPk
-  ) => {
-    setIsLoading(true);
-    await ContractInstance.methods
-      .addLand(
-        _name,
-        _coShare,
-        _location,
-        _nature,
-        _specificJoint,
-        _area,
-        _khasraNo,
-        _price,
-        _ownerPk
-      )
-      .send({ from: selectedAccount });
-    setIsLoading(false);
   };
 
   return (
@@ -210,7 +311,7 @@ const AddLand = () => {
       ) : stateCount == 4 ? (
         // Form
         <Container>
-          {init()}
+          {/* {init()} */}
           <h2>Fill the following form below</h2>
           <br />
           <br />
@@ -219,6 +320,7 @@ const AddLand = () => {
               <LoadingSpinner asOverlay />
             ) : (
               <>
+                {/* location */}
                 <Row>
                   <Col sm={3}></Col>
                   <Col sm={6}>
@@ -237,54 +339,134 @@ const AddLand = () => {
                   <Col sm={3}></Col>
                 </Row>
                 <br />
+                {/* khaiwait No */}
                 <Row>
                   <Col sm={3}></Col>
                   <Col sm={6}>
                     <Form.Control
-                      type="text"
-                      placeholder="Enter your full name + fathername"
-                      onChange={(e) => setName(e.target.value)}
+                      type="number"
+                      placeholder="Enter Khaiwat No."
+                      onChange={(e) => setKhaiwatNo(e.target.value)}
                     />
                   </Col>
                   <Col sm={3}></Col>
                 </Row>
                 <br />
-                <Row>
-                  <Col sm={3}></Col>
-                  <Col sm={6}>
-                    <Form.Control
-                      type="text"
-                      placeholder="Co shares names"
-                      onChange={(e) => setCoShares(e.target.value)}
-                    />
-                  </Col>
-                  <Col sm={3}></Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col sm={3}></Col>
-                  <Col sm={6}>
-                    <Form.Control
-                      type="text"
-                      placeholder="Specific Share in Joint Account"
-                      onChange={(e) => setShareinJoint(e.target.value)}
-                    />
-                  </Col>
-                  <Col sm={3}></Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col sm={3}></Col>
-                  <Col sm={6}>
-                    <Form.Control
-                      type="text"
-                      placeholder="specific Area in accordance with the Share"
-                      onChange={(e) => setSpecificArea(e.target.value)}
-                    />
-                  </Col>
-                  <Col sm={3}></Col>
-                </Row>
-                <br />
+                {/* Owner's Data */}
+                {ownersInput.map((item, index) => (
+                  <div key={index}>
+                    <div className="mb-6">
+                      <Row>
+                        <Col sm={3}></Col>
+                        <Col sm={6}>
+                          <hr />
+                          <h4>Add Owner's Data</h4>
+                          <Form.Control
+                            name="ownerName"
+                            type="text"
+                            placeholder="Owner Name"
+                            id="ownerName"
+                            value={item.ownerName}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          />
+                          <br />
+                          <Form.Control
+                            name="fatherName"
+                            type="text"
+                            placeholder="Father Name"
+                            id="fatherName"
+                            value={item.fatherName}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          />
+                          <br />
+                          <Form.Control
+                            name="cast"
+                            type="text"
+                            placeholder="Cast"
+                            id="cast"
+                            value={item.cast}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          />
+                          <br />
+                          <Form.Select
+                            name="natureOfRights"
+                            size="sm"
+                            required
+                            id="natureOfRights"
+                            value={item.natureOfRights}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          >
+                            <option>Select Nature of a Land</option>
+                            <option>owner</option>
+                            <option>lease</option>
+                            <option>mortage</option>
+                          </Form.Select>
+                          <br />
+                          <Form.Control
+                            name="specificShareInJointAccount"
+                            type="text"
+                            placeholder="Specific Share in Joint Account"
+                            id="specificShareInJointAccount"
+                            value={item.specificShareInJointAccount}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          />
+                          <br />
+                          <Form.Control
+                            name="specificAreaAccordingWithShare"
+                            type="text"
+                            placeholder="specific Area in accordance with the Share"
+                            id="specificAreaAccordingWithShare"
+                            value={item.specificAreaAccordingWithShare}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          />
+                          <br />
+                          <Form.Control
+                            name="publicAddress"
+                            type="text"
+                            placeholder="Owner Public Address"
+                            id="publicAddress"
+                            value={item.publicAddress}
+                            onChange={(e) => handleOwnersInputChange(e, index)}
+                          />
+                          <br />
+                        </Col>
+                        <Col sm={1}>
+                          {ownersInput.length > 1 && (
+                            <button
+                              className="y-btn"
+                              style={{ height: "2.5rem", marginTop: "4rem" }}
+                              onClick={() => {
+                                handleOwnersInputRemove(index);
+                              }}
+                            >
+                              Remove
+                            </button>
+                          )}
+                        </Col>
+                        <Col sm={2}></Col>
+                      </Row>
+                      <Row>
+                        <br />
+                        <Col sm={3}></Col>
+                        <Col sm={3}>
+                          {ownersInput.length - 1 === index && (
+                            <button
+                              className="y-btn"
+                              style={{ height: "2.5rem" }}
+                              onClick={handleOwnersInput}
+                            >
+                              Add More Owners
+                            </button>
+                          )}
+                        </Col>
+                        <Col sm={3}></Col>
+                        <Col sm={3}></Col>
+                      </Row>
+                      <br />
+                    </div>
+                  </div>
+                ))}
+                {/* khasra No */}
                 <Row>
                   <Col sm={3}></Col>
                   <Col sm={6}>
@@ -297,6 +479,121 @@ const AddLand = () => {
                   <Col sm={3}></Col>
                 </Row>
                 <br />
+                {/* area */}
+                <Row>
+                  <Col sm={3}></Col>
+                  <Col sm={6}>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter total area"
+                      onChange={(e) => setTotalArea(e.target.value)}
+                    />
+                  </Col>
+                  <Col sm={3}></Col>
+                </Row>
+                <br />
+                {/* jamabandi */}
+                {jamabandiInput.map((item, index) => (
+                  <div key={index + 1}>
+                    <div className="mb-6">
+                      <Row>
+                        <Col sm={3}></Col>
+                        <Col sm={6}>
+                          <hr />
+                          <h4>Add Jamabandi</h4>
+                          <Form.Control
+                            type="text"
+                            placeholder="Old Owner Name"
+                            name="oldOwnerName"
+                            id="oldOwnerName"
+                            value={item.oldOwnerName}
+                            onChange={(e) =>
+                              handleJamabandiInputChange(e, index)
+                            }
+                          />
+                          <br />
+                          <Form.Control
+                            type="text"
+                            placeholder="Date of Sale"
+                            name="saleDate"
+                            id="saleDate"
+                            value={item.saleDate}
+                            onChange={(e) =>
+                              handleJamabandiInputChange(e, index)
+                            }
+                          />
+                          <br />
+                          <Form.Control
+                            type="text"
+                            placeholder="Numberdar name"
+                            name="NumberDarName"
+                            id="NumberDarName"
+                            value={item.NumberDarName}
+                            onChange={(e) =>
+                              handleJamabandiInputChange(e, index)
+                            }
+                          />
+                          <br />
+                          <Form.Control
+                            type="number"
+                            placeholder="Intiqaal Number"
+                            name="IntiqaalNumber"
+                            id="IntiqaalNumber"
+                            value={item.IntiqaalNumber}
+                            onChange={(e) =>
+                              handleJamabandiInputChange(e, index)
+                            }
+                          />
+                          <br />
+                          <Form.Control
+                            type="text"
+                            placeholder="Old Owner Public Address"
+                            name="OldOwnerPK"
+                            id="OldOwnerPK"
+                            value={item.OldOwnerPK}
+                            onChange={(e) =>
+                              handleJamabandiInputChange(e, index)
+                            }
+                          />
+                          <br />
+                        </Col>
+                        <Col sm={1}>
+                          {jamabandiInput.length > 1 && (
+                            <button
+                              className="y-btn"
+                              style={{ height: "2.5rem", marginTop: "4rem" }}
+                              onClick={() => {
+                                handleJamabandiInputRemove(index);
+                              }}
+                            >
+                              Remove
+                            </button>
+                          )}
+                        </Col>
+                        <Col sm={2}></Col>
+                      </Row>
+                      <Row>
+                        <br />
+                        <Col sm={3}></Col>
+                        <Col sm={3}>
+                          {jamabandiInput.length - 1 === index && (
+                            <button
+                              className="y-btn"
+                              style={{ height: "2.5rem" }}
+                              onClick={handleJamabandiInput}
+                            >
+                              Add Jamabandi
+                            </button>
+                          )}
+                        </Col>
+                        <Col sm={3}></Col>
+                        <Col sm={3}></Col>
+                      </Row>
+                      <br />
+                    </div>
+                  </div>
+                ))}
+                {/* price */}
                 <Row>
                   <Col sm={3}></Col>
                   <Col sm={6}>
@@ -309,30 +606,14 @@ const AddLand = () => {
                   <Col sm={3}></Col>
                 </Row>
                 <br />
-                <Row>
-                  <Col sm={3}></Col>
-                  <Col sm={6}>
-                    <Form.Select
-                      size="sm"
-                      required
-                      onChange={(e) => setNature(e.target.value)}
-                    >
-                      <option>Select Nature of a Land</option>
-                      <option>Owner</option>
-                      <option>Lease</option>
-                      <option>Mortage etc</option>
-                    </Form.Select>
-                  </Col>
-                  <Col sm={3}></Col>
-                </Row>
-                <br />
+                {/* Photo */}
                 <Row>
                   <Col sm={3}></Col>
                   <Col sm={6}>
                     <Form.Control
-                      type="text"
-                      placeholder="Owner Public Address"
-                      onChange={(e) => setOwnerPK(e.target.value)}
+                      type="file"
+                      // placeholder="Land Price"
+                      onChange={(e) => setImage(e.target.files[0])}
                     />
                   </Col>
                   <Col sm={3}></Col>
@@ -347,17 +628,7 @@ const AddLand = () => {
               <button
                 className="y-btn"
                 onClick={() => {
-                  registerLand(
-                    name,
-                    coShares,
-                    result,
-                    nature,
-                    shareinJoint,
-                    specificArea,
-                    khasraNumber,
-                    price,
-                    ownerPK
-                  );
+                  registerLandHandler();
                 }}
               >
                 Register a Land

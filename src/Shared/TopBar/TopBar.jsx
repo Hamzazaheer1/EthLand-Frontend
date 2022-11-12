@@ -8,7 +8,8 @@ const TopBar = () => {
         style={{
           backgroundColor: "var(--yellow)",
           paddingLeft: "1rem",
-          color: "var(--black)",
+          // color: "var(--black)",
+          color: "white",
         }}
       >
         <span style={{ fontWeight: "bold" }}>

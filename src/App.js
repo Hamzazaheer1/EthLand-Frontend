@@ -12,12 +12,13 @@ import SuperAdminPanel from "./SuperAdmin/SuperAdminPanel";
 import UserPanel from "./User/UserPanel/UserPanel";
 import Login from "./Shared/Login/Login";
 import Signup from "./User/Signup/Signup";
-
-import "./App.css";
 import TxData from "./Shared/Blockchain/Pages/TxData";
 import NavigationBar from "./Shared/NavigationBar/NavigationBar";
 import Footer from "./Shared/Footer/Footer";
 import LandDetailedInfo from "./User/UserPanel/Pages/LandDetailedInfo/LandDetailedInfo";
+import Protected from "./Utils/Protected";
+import Logout from "./Shared/Logout/Logout";
+import "./App.css";
 
 function App() {
   const theme = useContext(themeContext);
@@ -41,10 +42,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/superadminpanel" element={<SuperAdminPanel />} />
-        <Route path="/adminpanel" element={<AdminPanel />} />
+        <Route
+          path="/adminpanel"
+          element={<Protected Component={AdminPanel} />}
+        />
         <Route path="/userpanel" element={<UserPanel />} />
         <Route path="/txdata/:blockid" element={<TxData />} />
         <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer className="sticky-footer" />
       <GotoTop />

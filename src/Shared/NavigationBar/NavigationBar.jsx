@@ -5,11 +5,26 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Toggle from "../Toggle/Toggle";
 import TopBar from "../TopBar/TopBar";
-import Logo from "../img/logo1.png"
+import Logo from "../img/logo1.png";
+import "./NavigationBar.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const NavigationBar = () => {
   const [isDarkMode, setDarkMode] = React.useState(false);
+  const [userState, setUserState] = useState("");
 
+  useEffect(() => {
+    if (localStorage.getItem("superadmin")) {
+      setUserState("superadmin");
+    } else if (localStorage.getItem("admin")) {
+      setUserState("admin");
+    } else if (localStorage.getItem("user")) {
+      setUserState("user");
+    }
+  }, []);
+
+  console.log(userState);
   return (
     <>
       <TopBar />
@@ -23,7 +38,7 @@ const NavigationBar = () => {
               color: "var(--yellow)",
             }}
           >
-            <img className="img-fluid" src={Logo} width="50px"/>
+            <img className="img-fluid" src={Logo} width="50px" />
             EthLand
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -49,22 +64,37 @@ const NavigationBar = () => {
               <Nav.Link as={Link} to="/blockchain">
                 Blockchain
               </Nav.Link>
-              <Nav.Link as={Link} to="/superadminpanel">
-                SuperAdminPanel
-              </Nav.Link>
-              <Nav.Link as={Link} to="/adminpanel">
-                AdminPanel
-              </Nav.Link>
-              <Nav.Link as={Link} to="/userpanel">
-                UserPanel
-              </Nav.Link>
-              <Nav.Link as={Link} to="/login">
-                Login
-              </Nav.Link>
-              <Nav.Link as={Link} to="/register">
-                Register
-              </Nav.Link>
-              <Nav.Link as={Link} to="/login">
+              {userState === "superadmin" && (
+                <Nav.Link as={Link} to="/superadminpanel">
+                  SuperAdminPanel
+                </Nav.Link>
+              )}
+              {userState === "admin" && (
+                <Nav.Link as={Link} to="/adminpanel">
+                  AdminPanel
+                </Nav.Link>
+              )}
+              {userState === "user" && (
+                <Nav.Link as={Link} to="/userpanel">
+                  UserPanel
+                </Nav.Link>
+              )}
+              {!userState === "superadmin" &&
+                !userState === "admin" &&
+                !userState === "user" && (
+                  <Nav.Link as={Link} to="/login">
+                    Login
+                  </Nav.Link>
+                )}
+              {!userState === "superadmin" &&
+                !userState === "admin" &&
+                !userState === "user" && (
+                  <Nav.Link as={Link} to="/register">
+                    Register
+                  </Nav.Link>
+                )}
+
+              <Nav.Link as={Link} to="/logout">
                 Logout
               </Nav.Link>
             </Nav>

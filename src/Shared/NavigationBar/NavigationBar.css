@@ -14,3 +14,12 @@
     border: 1px solid var(--yellow);
     color: var(--yellow);
 }
+
+.navbarColor {
+  color: white;
+}
+
+.navbarColor:active {
+    color: red;
+
+}
