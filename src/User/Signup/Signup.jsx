@@ -130,7 +130,7 @@ const Signup = () => {
               </Row>
               <br />
               <button
-                className="y-btn"
+                className="g-btn"
                 onClick={(event) => {
                   event.preventDefault();
                   init();

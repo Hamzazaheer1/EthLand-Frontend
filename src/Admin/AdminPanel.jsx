@@ -9,6 +9,7 @@ import TransferOwnership from "./Pages/TransferOwnership";
 import ManageUsers from "./Pages/ManageUsers";
 import AllLandList from "./Pages/AllLandList";
 import AddLand from "./Pages/AddLand/AddLand";
+import AddFardPhoto from "./Pages/AddFardPhoto";
 
 const AdminPanel = () => {
   const theme = useContext(themeContext);
@@ -87,7 +88,7 @@ const AdminPanel = () => {
               color: darkMode ? "var(--yellow)" : "var(--dark)",
             }}
           >
-            Manage Lands
+            Add Fard Photo
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -96,6 +97,19 @@ const AdminPanel = () => {
               setSelectedTab(5);
             }}
             eventKey="link-6"
+            style={{
+              color: darkMode ? "var(--yellow)" : "var(--dark)",
+            }}
+          >
+            Manage Lands
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            onClick={() => {
+              setSelectedTab(6);
+            }}
+            eventKey="link-7"
             style={{
               color: darkMode ? "var(--yellow)" : "var(--dark)",
             }}
@@ -109,8 +123,9 @@ const AdminPanel = () => {
       {selectedTab === 1 && <VerifyUsers />}
       {selectedTab === 2 && <ManageUsers />}
       {selectedTab === 3 && <AddLand />}
-      {selectedTab === 4 && <AllLandList />}
-      {selectedTab === 5 && <TransferOwnership />}
+      {selectedTab === 4 && <AddFardPhoto />}
+      {selectedTab === 5 && <AllLandList />}
+      {selectedTab === 6 && <TransferOwnership />}
     </Container>
   );
 };

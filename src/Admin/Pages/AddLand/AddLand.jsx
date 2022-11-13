@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import "./AddLand.css";
+import axios from "axios";
 
 const AddLand = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,13 +23,6 @@ const AddLand = () => {
   const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-
-  // const [name, setName] = useState("");
-  // const [coShares, setCoShares] = useState("");
-  // const [shareinJoint, setShareinJoint] = useState("");
-  // const [specificArea, setSpecificArea] = useState("");
-  // const [nature, setNature] = useState("");
-  // const [ownerPK, setOwnerPK] = useState("");
 
   // owner state
   const [ownersInput, setOwnersInput] = useState([
@@ -71,43 +65,7 @@ const AddLand = () => {
     setOwnersInput(list);
   };
 
-  // jamabandi state
-  // const [jamabandiInput, setJamabandiInput] = useState([
-  //   {
-  //     oldOwnerName: "",
-  //     saleDate: "",
-  //     NumberDarName: "",
-  //     IntiqaalNumber: "",
-  //     OldOwnerPK: "",
-  //   },
-  // ]);
-
-  // const handleJamabandiInput = () => {
-  //   setJamabandiInput([
-  //     ...jamabandiInput,
-  //     {
-  //       oldOwnerName: "",
-  //       saleDate: "",
-  //       NumberDarName: "",
-  //       IntiqaalNumber: "",
-  //       OldOwnerPK: "",
-  //     },
-  //   ]);
-  // };
-
-  // const handleJamabandiInputRemove = (index) => {
-  //   const list = [...jamabandiInput];
-  //   list.splice(index, 1);
-  //   setJamabandiInput(list);
-  // };
-
-  // const handleJamabandiInputChange = (e, index) => {
-  //   const { name, value } = e.target;
-  //   const list = [...jamabandiInput];
-  //   list[index][name] = value;
-  //   setJamabandiInput(list);
-  // };
-
+  //jamabandi code
   const [jamabandiInput, setJamabandiInput] = useState([
     {
       oldOwnerName: "",
@@ -120,7 +78,7 @@ const AddLand = () => {
 
   const handleJamabandiInput = () => {
     setJamabandiInput([
-      ...ownersInput,
+      ...jamabandiInput,
       {
         oldOwnerName: "",
         saleDate: "",
@@ -153,39 +111,77 @@ const AddLand = () => {
 
   // console.log("Locaion", result);
   // console.log("khaiwatNo", khaiwatNo);
-  console.log("Owner's Input ", ownersInput);
+  // console.log("Owner's Input ", ownersInput);
   //  console.log("khasraNumber", khasraNumber);
-  console.log(jamabandiInput);
+  //console.log(JSON.stringify(jamabandiInput));
   //console.log("totalArea ", totalArea);
   //console.log("price ", price);
   // console.log("photo ", image);
+  // console.log("jamabandi old ", JSON.stringify(jamabandiInput));
+  // const jamabandiData = JSON.stringify(jamabandiInput);
+  // console.log("jamabandi new ", jamabandiData);
 
   const registerLandHandler = async () => {
-    const formData = new FormData();
-    formData.append("location", result);
-    formData.append("khaiwatNo", khaiwatNo);
-    formData.append("OwnerData", ownersInput);
-    formData.append("khasraNumber", khasraNumber);
-    formData.append("area", totalArea);
-    formData.append("jamabandi", jamabandiInput);
-    formData.append("price", price);
-    formData.append("photo", image);
+    // const formData = new FormData();
+    // formData.append("location", result);
+    // formData.append("khaiwatNo", khaiwatNo);
+    // formData.append("OwnerData", JSON.stringify(ownersInput));
+    // formData.append("khasraNumber", khasraNumber);
+    // formData.append("area", totalArea);
+    // formData.append("jamabandi", JSON.stringify(jamabandiInput));
+    // // jamabandiInput.forEach((item) => {
+    // //   formData.append(`jamabandi`, JSON.stringify(item));
+    // // });
+    // formData.append("price", price);
+    // formData.append("photo", image);
+
+    // console.log("formData ", [...formData]);
 
     try {
-      const response = await fetch(
+      const resp = await axios.post(
         "https://ethland-backend.herokuapp.com/api/v1/lands/create",
         {
-          method: "POST",
-          body: formData,
+          location: result,
+          khaiwatNo: khaiwatNo,
+          OwnerData: ownersInput,
+          khasraNumber: khasraNumber,
+          area: totalArea,
+          jamabandi: jamabandiInput,
+          price: price,
         }
       );
-      const responseData = await response.json();
-      alert("Land Registered Sucessfully!!!!");
-      console.log(responseData);
+      console.log(resp);
     } catch (err) {
-      alert("Error occured during registration of a land");
+      console.log("error", err);
     }
   };
+
+  // const registerLandHandler = async () => {
+  //   const formData = new FormData();
+  //   formData.append("location", result);
+  //   formData.append("khaiwatNo", khaiwatNo);
+  //   formData.append("OwnerData", JSON.stringify(ownersInput));
+  //   formData.append("khasraNumber", khasraNumber);
+  //   formData.append("area", totalArea);
+  //   formData.append("jamabandi", JSON.stringify(jamabandiInput));
+  //   formData.append("price", price);
+  //   formData.append("photo", image);
+
+  //   try {
+  //     const response = await fetch(
+  //       "https://ethland-backend.herokuapp.com/api/v1/lands/create",
+  //       {
+  //         method: "POST",
+  //         body: formData,
+  //       }
+  //     );
+  //     const responseData = await response.json();
+  //     alert("Land Registered Sucessfully!!!!");
+  //     console.log(responseData);
+  //   } catch (err) {
+  //     alert("Error occured during registration of a land");
+  //   }
+  // };
 
   return (
     <div>
@@ -235,7 +231,7 @@ const AddLand = () => {
             <Col sm={4}></Col>
             <Col sm={4}>
               <button
-                className="y-btn"
+                className="g-btn"
                 onClick={() => (setStateCount(1), setHomepage("Homepage"))}
               >
                 Register a Land Now
@@ -433,7 +429,7 @@ const AddLand = () => {
                         <Col sm={1}>
                           {ownersInput.length > 1 && (
                             <button
-                              className="y-btn"
+                              className="g-btn"
                               style={{ height: "2.5rem", marginTop: "4rem" }}
                               onClick={() => {
                                 handleOwnersInputRemove(index);
@@ -451,7 +447,7 @@ const AddLand = () => {
                         <Col sm={3}>
                           {ownersInput.length - 1 === index && (
                             <button
-                              className="y-btn"
+                              className="g-btn"
                               style={{ height: "2.5rem" }}
                               onClick={handleOwnersInput}
                             >
@@ -560,7 +556,7 @@ const AddLand = () => {
                         <Col sm={1}>
                           {jamabandiInput.length > 1 && (
                             <button
-                              className="y-btn"
+                              className="g-btn"
                               style={{ height: "2.5rem", marginTop: "4rem" }}
                               onClick={() => {
                                 handleJamabandiInputRemove(index);
@@ -578,7 +574,7 @@ const AddLand = () => {
                         <Col sm={3}>
                           {jamabandiInput.length - 1 === index && (
                             <button
-                              className="y-btn"
+                              className="g-btn"
                               style={{ height: "2.5rem" }}
                               onClick={handleJamabandiInput}
                             >
@@ -626,7 +622,7 @@ const AddLand = () => {
             <Col sm={3}></Col>
             <Col sm={6}>
               <button
-                className="y-btn"
+                className="g-btn"
                 onClick={() => {
                   registerLandHandler();
                 }}

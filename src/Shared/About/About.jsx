@@ -55,7 +55,7 @@ const About = () => {
           <br />
           <br />
           <button
-            className="y-btn"
+            className="g-btn"
             onClick={() =>
               window.open("https://en.wikipedia.org/wiki/Blockchain", "_blank")
             }
@@ -86,7 +86,7 @@ const About = () => {
                   on a single server.
                 </Card.Text>
                 <button
-                  className="y-btn"
+                  className="g-btn"
                   onClick={() =>
                     window.open(
                       "https://www.spiceworks.com/tech/tech-general/articles/web-2-vs-web-3/",
@@ -114,7 +114,7 @@ const About = () => {
                   A new way of keeping a shared transaction record(database).
                 </Card.Text>
                 <button
-                  className="y-btn"
+                  className="g-btn"
                   onClick={() =>
                     window.open(
                       "https://www.slideshare.net/JohnMirkovic/blockchain-for-land-records-and-real-estate",
@@ -138,7 +138,7 @@ const About = () => {
                   (decentralization).
                 </Card.Text>
                 <button
-                  className="y-btn"
+                  className="g-btn"
                   onClick={() =>
                     window.open(
                       "https://www.slideshare.net/JohnMirkovic/blockchain-for-land-records-and-real-estate",

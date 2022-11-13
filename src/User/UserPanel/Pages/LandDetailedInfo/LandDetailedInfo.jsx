@@ -82,7 +82,7 @@ const LandDetailedInfo = () => {
         </Col>
         <Col sm={4}>
           <button
-            className="y-btn"
+            className="g-btn"
             onClick={() => {
               getLandsId();
             }}
@@ -148,7 +148,7 @@ const LandDetailedInfo = () => {
         <Col sm={5}></Col>
         <Col sm={2}>
           <button
-            className="y-btn"
+            className="g-btn"
             onClick={() => {
               window.print();
             }}

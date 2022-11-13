@@ -1,13 +1,18 @@
 import React from "react";
 import Wave from "../img/wave.png";
+import GreenWave from "../img/greenwave.png";
 import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div>
+    <div style={{ marginTop: "5rem" }}>
       <div>
         <div className="footer">
-          <img src={Wave} alt="" style={{ width: "100%" }} />
+          <img
+            src={GreenWave}
+            alt=""
+            style={{ width: "100%", height: "20rem" }}
+          />
           <div className="f-content">
             <span>
               <b>

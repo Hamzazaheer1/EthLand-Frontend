@@ -68,7 +68,7 @@ const PhysicalVerification = () => {
                 </Form.Text>
               </Form.Group>
               <button
-                className="y-btn"
+                className="g-btn"
                 onClick={(event) => {
                   event.preventDefault();
                   init();

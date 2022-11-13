@@ -131,7 +131,7 @@ const AddAdmin = () => {
               </Row>
               <br />
               <button
-                className="y-btn"
+                className="g-btn"
                 onClick={(event) => {
                   event.preventDefault();
                   {

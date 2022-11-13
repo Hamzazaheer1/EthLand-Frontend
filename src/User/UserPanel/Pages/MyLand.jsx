@@ -72,7 +72,7 @@ const MyLand = () => {
           <h2>My Lands</h2>
         </Col>
         <Col sm={4} className="mt-2">
-          <button className="y-btn" onClick={getLandsId}>
+          <button className="g-btn" onClick={getLandsId}>
             Reveal My Lands
           </button>
         </Col>
@@ -121,7 +121,7 @@ const MyLand = () => {
                   {item.isforSell ? <td>True</td> : <td>False</td>}
                   <td>
                     <button
-                      className="y-btn"
+                      className="g-btn"
                       style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
                       onClick={() => {
                         Navigate(`/detailed-info/${item.khaiwatNumber}`);

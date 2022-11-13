@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-
+import { AuthContext } from "../../Utils/auth-context";
 import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import {
@@ -15,6 +16,7 @@ let ContractInstance;
 let setOwnerC = 0;
 
 const Login = () => {
+  const auth = useContext(AuthContext);
   const [secrectPhrase, setSecrectPhrase] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -53,6 +55,7 @@ const Login = () => {
         setOwnerC = tx;
         if (setOwnerC == 1) {
           localStorage.setItem("superadmin", "superadmin");
+          auth.login("superadmin");
           navigate("/superadminpanel", { replace: "true" });
         } else if (setOwnerC == 2) {
           ContractInstance.methods
@@ -62,6 +65,7 @@ const Login = () => {
           setIsLoading(false);
         } else if (setOwnerC == 4) {
           localStorage.setItem("admin", "admin");
+          auth.login("admin");
           navigate("/adminpanel", { replace: "true" });
         } else if (setOwnerC == 5) {
           console.log("i am 5");
@@ -74,6 +78,7 @@ const Login = () => {
           alert("You are not yet verified");
         } else if (setOwnerC == 7) {
           localStorage.setItem("user", "user");
+          auth.login("user");
           navigate("/userpanel", { replace: "true" });
         } else {
           alert("Wrong secrect key or Wallet");
@@ -113,7 +118,7 @@ const Login = () => {
               </Form.Group>
               <br />
               <button
-                className="y-btn"
+                className="g-btn"
                 style={{ padding: "11px 26px 4px 26px" }}
                 onClick={(event) => {
                   event.preventDefault();

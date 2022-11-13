@@ -83,7 +83,7 @@ const VerifyUsers = () => {
                       <td>{item}</td>
                       <td>
                         <button
-                          className="y-btn"
+                          className="g-btn"
                           style={{ padding: "0px 20px 5px 20px" }}
                           onClick={(event) => {
                             event.preventDefault();

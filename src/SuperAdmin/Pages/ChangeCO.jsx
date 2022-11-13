@@ -66,7 +66,7 @@ const ChangeCO = () => {
                 </Form.Text>
               </Form.Group>
               <button
-                className="y-btn"
+                className="g-btn"
                 onClick={(event) => {
                   event.preventDefault();
                   {

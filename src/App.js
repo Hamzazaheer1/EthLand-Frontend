@@ -18,11 +18,27 @@ import Footer from "./Shared/Footer/Footer";
 import LandDetailedInfo from "./User/UserPanel/Pages/LandDetailedInfo/LandDetailedInfo";
 import Protected from "./Utils/Protected";
 import Logout from "./Shared/Logout/Logout";
+import { AuthContext } from "./Utils/auth-context";
+import { useCallback, useState } from "react";
 import "./App.css";
+import LandDetailedInfoByAdmin from "./Admin/Pages/LandDetailedInfo/LandDetailedInfoByAdmin";
 
 function App() {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false);
+
+  const login = useCallback((uid) => {
+    setIsLoggedIn(true);
+    setUserId(uid);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setUserId(null);
+  }, []);
 
   return (
     <div
@@ -32,27 +48,37 @@ function App() {
         color: darkMode ? "white" : "",
       }}
     >
-      <NavigationBar />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/help-panel" element={<HelpNav />} />
-        <Route path="/blockchain" element={<Blockchain />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/superadminpanel" element={<SuperAdminPanel />} />
-        <Route
-          path="/adminpanel"
-          element={<Protected Component={AdminPanel} />}
-        />
-        <Route path="/userpanel" element={<UserPanel />} />
-        <Route path="/txdata/:blockid" element={<TxData />} />
-        <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
-        <Route path="/logout" element={<Logout />} />
-      </Routes>
-      <Footer className="sticky-footer" />
-      <GotoTop />
+      <AuthContext.Provider
+        value={{
+          isLoggedIn: isLoggedIn,
+          userId: userId,
+          login: login,
+          logout: logout,
+        }}
+      >
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/help-panel" element={<HelpNav />} />
+          <Route path="/blockchain" element={<Blockchain />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/superadminpanel" element={<SuperAdminPanel />} />
+          <Route path="/adminpanel" element={<AdminPanel />} />
+          <Route path="/userpanel" element={<UserPanel />} />
+          <Route path="/txdata/:blockid" element={<TxData />} />
+          <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
+          <Route
+            path="/detailedlandinfobyadmin/:landid"
+            element={<LandDetailedInfoByAdmin />}
+          />
+          <Route path="/logout" element={<Logout />} />
+        </Routes>
+        <Footer className="sticky-footer" />
+        <GotoTop />
+      </AuthContext.Provider>
     </div>
   );
 }
