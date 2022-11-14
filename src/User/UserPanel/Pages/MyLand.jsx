@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import { useContext } from "react";
 import { themeContext } from "../../../Context";
@@ -9,11 +9,13 @@ import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
+import axios from "axios";
 
 const MyLand = () => {
   const Navigate = useNavigate();
   const [landData, setLandData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [response, setResponse] = useState();
 
   let selectedAccount;
   let ContractInstance;
@@ -62,6 +64,24 @@ const MyLand = () => {
 
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    const apiHandler = async () => {
+      try {
+        const resp = await axios.get(
+          `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyPK/${selectedAccount}`
+        );
+        console.log(resp.data.data);
+        setResponse(resp.data.data);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    apiHandler();
+  }, [selectedAccount]);
 
   return (
     <Container>

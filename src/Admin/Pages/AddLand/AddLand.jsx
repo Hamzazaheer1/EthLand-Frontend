@@ -151,8 +151,10 @@ const AddLand = () => {
         }
       );
       console.log(resp);
+      alert("Land registered Sucessfully");
     } catch (err) {
       console.log("error", err);
+      alert(err);
     }
   };
 
