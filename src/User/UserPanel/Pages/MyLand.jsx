@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
-import { useContext } from "react";
 import { themeContext } from "../../../Context";
+import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
-import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
+import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 
 const MyLand = () => {
   const Navigate = useNavigate();
   const [landData, setLandData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState();
+  const [pkView, setPkView] = useState("");
 
   let selectedAccount;
   let ContractInstance;
@@ -30,12 +30,15 @@ const MyLand = () => {
       provider
         .request({ method: "eth_requestAccounts" })
         .then((accounts) => {
+          setPkView(accounts[0]);
           selectedAccount = accounts[0];
+          console.log("pk inside ", selectedAccount);
           const web3 = new Web3(provider);
           ContractInstance = new web3.eth.Contract(
             CONTACT_ABI,
             CONTACT_ADDRESS
           );
+          getLandsByPK(selectedAccount);
         })
         .catch((err) => {
           console.log(err);
@@ -65,38 +68,36 @@ const MyLand = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
+  const getLandsByPK = async (x) => {
+    console.log("key ", x);
     setIsLoading(true);
-    const apiHandler = async () => {
-      try {
-        const resp = await axios.get(
-          `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyPK/${selectedAccount}`
-        );
-        console.log(resp.data.data);
-        setResponse(resp.data.data);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    apiHandler();
-  }, [selectedAccount]);
+    try {
+      const resp = await axios.get(
+        `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyPK/${x}`
+      );
+      console.log(resp.data.data);
+      setResponse(resp.data.data);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container>
-      {init()}
       <br />
       <Row>
         <Col sm={8} className="mt-3">
           <h2>My Lands</h2>
+          <p>{pkView}</p>
         </Col>
         <Col sm={4} className="mt-2">
-          <button className="g-btn" onClick={getLandsId}>
+          <button className="g-btn" onClick={init}>
             Reveal My Lands
           </button>
         </Col>
       </Row>
+      {console.log("ssss ", pkView)}
       <br />
       <Table
         responsive="sm"
@@ -108,14 +109,11 @@ const MyLand = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Khaiwat No</th>
-            {/* <th>Khatuni No</th> */}
             <th>Location</th>
-            <th>KhasraNumber</th>
+            <th>Khaiwat No.</th>
+            <th>Khasra No.</th>
             <th>Area</th>
-            <th>Price</th>
-            <th>IsVerified</th>
-            <th>IsForSale</th>
+            <th>Is For Sale</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -123,38 +121,28 @@ const MyLand = () => {
           <LoadingSpinner asOverlay />
         ) : (
           <tbody>
-            {landData.length > 0 ? (
-              landData.map((item, index) => (
+            {response &&
+              response.map((item, index) => (
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{item.khaiwatNumber}</td>
-                  {/* <td>{item.KhatuniCultivatorNo}</td> */}
                   <td>{item.location}</td>
-                  <td>{item.khasraNo}</td>
-                  <td>{item.specificAreainaccordancewiththeShare}</td>
-                  <td>{item.landPrice}</td>
-                  {item.isLandVerified ? (
-                    <td>Verified</td>
-                  ) : (
-                    <td>Not Verified</td>
-                  )}
-                  {item.isforSell ? <td>True</td> : <td>False</td>}
+                  <td>{item.khaiwatNo}</td>
+                  <td>{item.khasraNumber}</td>
+                  <td>{item.area}</td>
+                  <td>{item.isForSale ? <td>True</td> : <td>False</td>}</td>
                   <td>
                     <button
                       className="g-btn"
                       style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
                       onClick={() => {
-                        Navigate(`/detailed-info/${item.khaiwatNumber}`);
+                        Navigate(`/detailed-info/${item._id}`);
                       }}
                     >
                       Detailed Info
                     </button>
                   </td>
                 </tr>
-              ))
-            ) : (
-              <p>No data to be found....</p>
-            )}
+              ))}
           </tbody>
         )}
       </Table>

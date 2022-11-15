@@ -9,7 +9,7 @@ const ContactUs = () => {
   const darkMode = theme.state.darkMode;
 
   return (
-    <div style={{ minHeight: "100vh" }}>
+    <div style={{ minHeight: "100vh", marginBottom: "-20rem" }}>
       <Container className="mt-5">
         <h2 style={{ color: "var(--yellow)", display: "flex" }}>
           Contact Us{" "}

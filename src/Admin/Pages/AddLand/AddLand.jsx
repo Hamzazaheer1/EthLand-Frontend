@@ -143,7 +143,7 @@ const AddLand = () => {
         {
           location: result,
           khaiwatNo: khaiwatNo,
-          OwnerData: ownersInput,
+          OwnersData: ownersInput,
           khasraNumber: khasraNumber,
           area: totalArea,
           jamabandi: jamabandiInput,
