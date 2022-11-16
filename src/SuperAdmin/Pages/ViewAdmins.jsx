@@ -11,6 +11,7 @@ const ViewAdmins = () => {
   const darkMode = theme.state.darkMode;
 
   let ContractInstance;
+  let selectedAccount;
   const [adminCount, setAdminCount] = useState();
 
   const init = () => {
@@ -19,6 +20,7 @@ const ViewAdmins = () => {
       provider
         .request({ method: "eth_requestAccounts" })
         .then((accounts) => {
+          selectedAccount = accounts[0];
           const web3 = new Web3(provider);
           ContractInstance = new web3.eth.Contract(
             CONTACT_ABI,
@@ -44,6 +46,15 @@ const ViewAdmins = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  //to remove admin
+  const removeAdmin = async (R_address) => {
+    console.log(ContractInstance);
+    await ContractInstance.methods
+      .removeAdminAuthFailed(R_address)
+      .send({ from: selectedAccount });
+    alert("Admin Removed Sucessfully");
   };
 
   return (
@@ -77,6 +88,10 @@ const ViewAdmins = () => {
                         <button
                           className="g-btn"
                           style={{ padding: "0px 20px 5px 20px" }}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            removeAdmin(item);
+                          }}
                         >
                           Remove
                         </button>

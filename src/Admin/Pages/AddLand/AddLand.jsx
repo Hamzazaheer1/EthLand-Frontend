@@ -256,7 +256,7 @@ const AddLand = () => {
                       setStateCount(2);
                       setSeletedDivision(item);
                     }}
-                    className="linkEffect"
+                    className="linkEffect cursor-pointer"
                   >
                     {item}
                   </p>
@@ -277,7 +277,7 @@ const AddLand = () => {
                     setStateCount(3);
                     setSeletedDistrict(item);
                   }}
-                  className="linkEffect"
+                  className="linkEffect cursor-pointer"
                 >
                   {item}
                 </p>
@@ -298,7 +298,7 @@ const AddLand = () => {
                     setStateCount(4);
                     setSeletedTehsil(item);
                   }}
-                  className="linkEffect"
+                  className="linkEffect cursor-pointer"
                 >
                   {item}
                 </p>

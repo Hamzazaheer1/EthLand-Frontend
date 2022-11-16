@@ -52,7 +52,7 @@ const ManageUsers = () => {
     await ContractInstance.methods
       .removeUser(R_address)
       .send({ from: selectedAccount });
-    alert("User Verified Sucessfully");
+    alert("User Removed Sucessfully");
   };
 
   return (
