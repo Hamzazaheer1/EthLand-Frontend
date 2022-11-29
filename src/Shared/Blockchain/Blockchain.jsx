@@ -101,8 +101,8 @@ const Blockchain = () => {
                   }
                   return null; // Remove if error in blockchain table or search
                 })
-                .map((item) => (
-                  <tbody>
+                .map((item, index) => (
+                  <tbody key={index + 1}>
                     <tr
                       className="itemClickable"
                       onClick={() => {

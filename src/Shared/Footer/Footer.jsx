@@ -23,14 +23,14 @@ const Footer = () => {
             <div className="f-icons">
               <i
                 style={{ fontSize: "2.5rem" }}
-                class="bi bi-facebook cursor-pointer"
+                className="bi bi-facebook cursor-pointer"
                 onClick={() => {
                   window.open("https://www.facebook.com/", "_blank");
                 }}
               ></i>
               <i
                 style={{ fontSize: "2.5rem" }}
-                class="bi bi-instagram cursor-pointer"
+                className="bi bi-instagram cursor-pointer"
                 onClick={() => {
                   window.open("https://www.instagram.com/", "_blank");
                 }}

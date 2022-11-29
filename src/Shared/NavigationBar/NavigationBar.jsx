@@ -1,10 +1,9 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../Utils/auth-context";
 import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import React from "react";
-import { Container } from "react-bootstrap";
 import Toggle from "../Toggle/Toggle";
 import TopBar from "../TopBar/TopBar";
 import GreenLogo from "../img/newlogogreen.png";

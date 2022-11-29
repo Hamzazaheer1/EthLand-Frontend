@@ -83,8 +83,8 @@ const TxData = () => {
                 </Alert>
 
                 <h5>Transaction List</h5>
-                {blockData.transactions.map((item) => (
-                  <div>
+                {blockData.transactions.map((item, index) => (
+                  <div key={index + 1}>
                     <Alert key={"secondary"} variant={"secondary"}>
                       <h6>
                         Transaction <span className="blackData">{item}</span>

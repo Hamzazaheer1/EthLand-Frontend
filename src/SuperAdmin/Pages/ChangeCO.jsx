@@ -43,46 +43,44 @@ const ChangeCO = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <Container>
-        <Row>
-          <Col sm={3}></Col>
-          <Col sm={6}>
-            <br />
-            <h2>Transfer</h2>
-            <h2>Contract Ownership</h2>
-            <br />
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Public Key of New Owner</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="0x0000000000000000000000000000000000000000"
-                  onChange={(e) => setnewSuperAdmin(e.target.value)}
-                />
-                <Form.Text className="text-muted">
-                  Please enter all 42 characters carefully. the process cannot
-                  be Re done.
-                </Form.Text>
-              </Form.Group>
-              <button
-                className="g-btn"
-                onClick={(event) => {
-                  event.preventDefault();
-                  {
-                    init();
-                  }
-                }}
-                type="submit"
-              >
-                Transfer
-              </button>
-            </Form>
-          </Col>
-          <Col sm={3}></Col>
-        </Row>
-      </Container>
-    </div>
+    <Container className="mt-5" style={{ minHeight: "100vh" }}>
+      <Row>
+        <Col sm={3}></Col>
+        <Col sm={6}>
+          <br />
+          <h2>Transfer</h2>
+          <h2>Contract Ownership</h2>
+          <br />
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Public Key of New Owner</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="0x0000000000000000000000000000000000000000"
+                onChange={(e) => setnewSuperAdmin(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                Please enter all 42 characters carefully. the process cannot be
+                Re done.
+              </Form.Text>
+            </Form.Group>
+            <button
+              className="g-btn"
+              onClick={(event) => {
+                event.preventDefault();
+                {
+                  init();
+                }
+              }}
+              type="submit"
+            >
+              Transfer
+            </button>
+          </Form>
+        </Col>
+        <Col sm={3}></Col>
+      </Row>
+    </Container>
   );
 };
 

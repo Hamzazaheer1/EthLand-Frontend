@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../Utils/auth-context";
@@ -25,8 +24,6 @@ const Login = () => {
     setIsLoading(false);
     let provider = window.ethereum;
     if (typeof provider !== "undefined") {
-      //metamask is installed
-
       provider
         .request({ method: "eth_requestAccounts" })
         .then((accounts) => {
@@ -68,7 +65,6 @@ const Login = () => {
           auth.login("admin");
           navigate("/adminpanel", { replace: "true" });
         } else if (setOwnerC == 5) {
-          console.log("i am 5");
           ContractInstance.methods
             .removeAdminAuthFailed(selectedAccount)
             .send({ from: selectedAccount });
@@ -126,7 +122,7 @@ const Login = () => {
                 }}
               >
                 {isLoading ? (
-                  <div class="spinner-border text-dark" role="status"></div>
+                  <div className="spinner-border text-dark" role="status"></div>
                 ) : (
                   <p>Login</p>
                 )}
