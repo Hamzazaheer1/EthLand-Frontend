@@ -16,12 +16,11 @@ import TxData from "./Shared/Blockchain/Pages/TxData";
 import NavigationBar from "./Shared/NavigationBar/NavigationBar";
 import Footer from "./Shared/Footer/Footer";
 import LandDetailedInfo from "./User/UserPanel/Pages/LandDetailedInfo/LandDetailedInfo";
-import Protected from "./Utils/Protected";
+import LandDetailedInfoByAdmin from "./Admin/Pages/LandDetailedInfo/LandDetailedInfoByAdmin";
 import Logout from "./Shared/Logout/Logout";
 import { AuthContext } from "./Utils/auth-context";
 import { useCallback, useState } from "react";
 import "./App.css";
-import LandDetailedInfoByAdmin from "./Admin/Pages/LandDetailedInfo/LandDetailedInfoByAdmin";
 
 function App() {
   const theme = useContext(themeContext);

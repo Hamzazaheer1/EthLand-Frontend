@@ -12,7 +12,7 @@ const ContactUs = () => {
     <div style={{ minHeight: "100vh", marginBottom: "-20rem" }}>
       <Container className="mt-5">
         <h2 style={{ color: "var(--yellow)", display: "flex" }}>
-          Contact Us{" "}
+          Contact Us
           <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
             &nbsp;&nbsp;feel free to contactus 24/7
           </p>

@@ -34,7 +34,7 @@ const NavigationBar = () => {
         expand="lg"
         bg="dark"
         variant="dark"
-        style={{ height: "5rem" }}
+        style={{ height: "6rem" }}
       >
         <Container>
           <Navbar.Brand

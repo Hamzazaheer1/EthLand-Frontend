@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-## Project is also deployed on aws
+## Project is also deployed on Amazon Web Services(aws)
 
 Deployed EthLand on => [https://main.d2mop7uj0nlbxo.amplifyapp.com/](https://main.d2mop7uj0nlbxo.amplifyapp.com/)
 

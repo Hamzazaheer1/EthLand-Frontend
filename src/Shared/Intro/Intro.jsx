@@ -1,14 +1,10 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Map from "../img/map.png";
 import Carousel from "react-bootstrap/Carousel";
 import land1 from "../img/land1.jpg";
 import land2 from "../img/land2.jpg";
-import Vector1 from "../img/Vector1.png";
-import Vector2 from "../img/Vector2.png";
-import boy from "../img/boy.png";
 import Home from "../img/home.png";
-import item1 from "../img/item1.png";
 import thumbup from "../img/thumbup.png";
 import crown from "../img/crown.png";
 
@@ -93,7 +89,12 @@ const Intro = () => {
           </Col>
           <Col sm={3}></Col>
           <Col sm={5}>
-            <img className="img-fluid" style={{ height: "30rem" }} src={Map} />
+            <img
+              className="img-fluid"
+              style={{ height: "30rem" }}
+              src={Map}
+              alt={"img not found"}
+            />
             {/* animations */}
             <motion.div
               animate={{ x: 100 }}

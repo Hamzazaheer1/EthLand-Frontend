@@ -45,8 +45,19 @@ const Blockchain = () => {
 
   return (
     <div>
-      <Container>
-        <h2>Blockchain</h2>
+      <Container className="mt-5">
+        <h2 style={{ color: "var(--yellow)", display: "flex" }}>
+          Blockchain
+          <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
+            &nbsp;&nbsp;A complete public ledger
+          </p>
+        </h2>
+        <hr
+          style={{
+            color: darkMode ? "var(--yellow)" : "var(--black)",
+            border: "2px solid",
+          }}
+        />
 
         <div>
           <br />
@@ -81,13 +92,14 @@ const Blockchain = () => {
                 .sort((a, b) => (a.number < b.number ? -1 : 1))
                 .reverse()
                 .filter((item) => {
-                  if (searchTerm == "") {
+                  if (searchTerm === "") {
                     return item;
-                  } else if (item.number == searchTerm * 1) {
+                  } else if (item.number === searchTerm * 1) {
                     return item;
                   } else if (item.hash.includes(searchTerm)) {
                     return item;
                   }
+                  return null; // Remove if error in blockchain table or search
                 })
                 .map((item) => (
                   <tbody>

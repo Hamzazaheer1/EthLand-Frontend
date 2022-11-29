@@ -10,6 +10,7 @@ import UWelcome from "./Pages/UWelcome";
 import MyLand from "./Pages/MyLand";
 import SendRequests from "./Pages/SendRequests";
 import ReceiveRequests from "./Pages/ReceiveRequests";
+import PurchaseableLands from "./Pages/PurchaseableLands";
 
 const UserPanel = () => {
   const theme = useContext(themeContext);
@@ -95,12 +96,27 @@ const UserPanel = () => {
               Receive Requests
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                setSelectedTab(4);
+              }}
+              eventKey="link-6"
+              href=""
+              style={{
+                color: darkMode ? "var(--yellow)" : "var(--dark)",
+              }}
+            >
+              Purchaseable Lands
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
 
         {selectedTab === 0 && <UWelcome />}
         {selectedTab === 1 && <MyLand />}
         {selectedTab === 2 && <SendRequests />}
         {selectedTab === 3 && <ReceiveRequests />}
+        {selectedTab === 4 && <PurchaseableLands />}
       </Container>
       {/* <Footer /> */}
     </div>

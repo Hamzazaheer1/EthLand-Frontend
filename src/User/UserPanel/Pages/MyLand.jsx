@@ -32,7 +32,7 @@ const MyLand = () => {
         .then((accounts) => {
           setPkView(accounts[0]);
           selectedAccount = accounts[0];
-          console.log("pk inside ", selectedAccount);
+          // console.log("pk inside ", selectedAccount);
           const web3 = new Web3(provider);
           ContractInstance = new web3.eth.Contract(
             CONTACT_ABI,
@@ -69,13 +69,13 @@ const MyLand = () => {
   };
 
   const getLandsByPK = async (x) => {
-    console.log("key ", x);
+    // console.log("key ", x);
     setIsLoading(true);
     try {
       const resp = await axios.get(
         `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyPK/${x}`
       );
-      console.log(resp.data.data);
+      // console.log(resp.data.data);
       setResponse(resp.data.data);
       setIsLoading(false);
     } catch (err) {
@@ -97,7 +97,6 @@ const MyLand = () => {
           </button>
         </Col>
       </Row>
-      {console.log("ssss ", pkView)}
       <br />
       <Table
         responsive="sm"

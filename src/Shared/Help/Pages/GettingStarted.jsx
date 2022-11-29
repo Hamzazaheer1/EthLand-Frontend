@@ -12,20 +12,29 @@ import meta10 from "../img/7.png";
 import meta11 from "../img/8.png";
 import meta12 from "../img/9.png";
 import meta13 from "../img/10.png";
+import { useContext } from "react";
+import { themeContext } from "../../../Context";
 
 const GettingStarted = () => {
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
+
   return (
-    <div className="home ">
-      <br />
-      <br />
-      <h1
-        style={{ fontSize: "2rem", marginBottom: "0.5rem", fontWeight: "bold" }}
-      >
+    <div className="mt-5">
+      <h2 style={{ color: "var(--yellow)", display: "flex" }}>
         MetaMask
-      </h1>
-      <p style={{ marginBottom: "3rem" }}>
-        EthLand is natively integrated with Metamask.
-      </p>
+        <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
+          &nbsp;&nbsp;EthLand is natively integrated with Metamask.
+        </p>
+      </h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
+      <br />
+      <br />
 
       <h3 style={{ marginBottom: "1rem" }}>
         1. Go to -

@@ -3,22 +3,30 @@ import meta11 from "../img/11.png";
 import meta12 from "../img/12.png";
 import meta17 from "../img/17.jpeg";
 import meta13 from "../img/13.png";
+import { useContext } from "react";
+import { themeContext } from "../../../Context";
 
 const LoginHelp = () => {
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
+
   return (
-    <div className="home ">
-      <br />
-      <br />
-      <h1
-        style={{ fontSize: "2rem", marginBottom: "0.5rem", fontWeight: "bold" }}
-      >
+    <div className="mt-5">
+      <h2 style={{ color: "var(--yellow)", display: "flex" }}>
         User Login
-      </h1>
-      <p style={{ marginBottom: "3rem" }}>
-        <b>
-          Follow this guide if you have completed the registration guide before.
-        </b>
-      </p>
+        <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
+          &nbsp;&nbsp;Follow this guide if you have completed the registration
+          guide before.
+        </p>
+      </h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
+      <br />
+      <br />
 
       <h3 style={{ marginBottom: "1rem" }}>
         1. On the navigation bar click <b>Login</b> "a login form will be

@@ -3,20 +3,30 @@ import meta18 from "../img/18.png";
 import meta14 from "../img/14.png";
 import meta15 from "../img/15.png";
 import meta16 from "../img/16.png";
+import { useContext } from "react";
+import { themeContext } from "../../../Context";
 
 const RegisterHelp = () => {
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
+
   return (
-    <div className="home ">
-      <br />
-      <br />
-      <h1
-        style={{ fontSize: "2rem", marginBottom: "0.5rem", fontWeight: "bold" }}
-      >
+    <div className="mt-5">
+      <h2 style={{ color: "var(--yellow)", display: "flex" }}>
         User Registration
-      </h1>
-      <p style={{ marginBottom: "3rem" }}>
-        All the users have to registered and verified to use the EthLand.
-      </p>
+        <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
+          &nbsp;&nbsp;All the users have to registered and verified to use the
+          EthLand.
+        </p>
+      </h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
+      <br />
+      <br />
 
       <h3 style={{ marginBottom: "1rem" }}>
         1. On the navigation bar click <b>Register</b> "a registeration form
