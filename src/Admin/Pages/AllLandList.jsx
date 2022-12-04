@@ -19,9 +19,8 @@ const AllLandList = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "https://ethland-backend.herokuapp.com/api/v1/lands/getalllands"
+          "https://638cbcfabb6c0b28ed273854--velvety-mochi-90818e.netlify.app/api/v1/lands/getalllands"
         );
-        console.log(resp.data.data);
         setResponse(resp.data.data);
         setIsLoading(false);
       } catch (err) {
@@ -33,10 +32,14 @@ const AllLandList = () => {
   }, []);
 
   return (
-    <Container>
-      <br />
-      <h2>List of Registered Lands</h2>
-      <br />
+    <Container className="mt-5" style={{ minHeight: "100vh" }}>
+      <h2 style={{ color: "var(--yellow)" }}>List of Registered Lands</h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
       <Table
         responsive="sm"
         bordered

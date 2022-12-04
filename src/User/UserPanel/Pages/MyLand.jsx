@@ -9,6 +9,8 @@ import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
+import { BsInfoCircleFill } from "react-icons/bs";
+import { useEffect } from "react";
 
 const MyLand = () => {
   const Navigate = useNavigate();
@@ -16,6 +18,7 @@ const MyLand = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState();
   const [pkView, setPkView] = useState("");
+  const [showKey, setShowKey] = useState(false);
 
   let selectedAccount;
   let ContractInstance;
@@ -24,28 +27,31 @@ const MyLand = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
-  const init = () => {
-    let provider = window.ethereum;
-    if (typeof provider !== "undefined") {
-      provider
-        .request({ method: "eth_requestAccounts" })
-        .then((accounts) => {
-          setPkView(accounts[0]);
-          selectedAccount = accounts[0];
-          // console.log("pk inside ", selectedAccount);
-          const web3 = new Web3(provider);
-          ContractInstance = new web3.eth.Contract(
-            CONTACT_ABI,
-            CONTACT_ADDRESS
-          );
-          getLandsByPK(selectedAccount);
-        })
-        .catch((err) => {
-          console.log(err);
-          return;
-        });
-    }
-  };
+  useEffect(() => {
+    const init = () => {
+      let provider = window.ethereum;
+      if (typeof provider !== "undefined") {
+        provider
+          .request({ method: "eth_requestAccounts" })
+          .then((accounts) => {
+            setPkView(accounts[0]);
+            selectedAccount = accounts[0];
+            const web3 = new Web3(provider);
+            ContractInstance = new web3.eth.Contract(
+              CONTACT_ABI,
+              CONTACT_ADDRESS
+            );
+            getLandsByPK(selectedAccount);
+          })
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
+      }
+    };
+
+    init();
+  }, []);
 
   const getLandsId = async () => {
     setIsLoading(true);
@@ -69,13 +75,11 @@ const MyLand = () => {
   };
 
   const getLandsByPK = async (x) => {
-    // console.log("key ", x);
     setIsLoading(true);
     try {
       const resp = await axios.get(
         `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyPK/${x}`
       );
-      // console.log(resp.data.data);
       setResponse(resp.data.data);
       setIsLoading(false);
     } catch (err) {
@@ -84,20 +88,36 @@ const MyLand = () => {
   };
 
   return (
-    <Container>
-      <br />
-      <Row>
-        <Col sm={8} className="mt-3">
-          <h2>My Lands</h2>
-          <p>{pkView}</p>
-        </Col>
-        <Col sm={4} className="mt-2">
-          <button className="g-btn" onClick={init}>
-            Reveal My Lands
-          </button>
-        </Col>
-      </Row>
-      <br />
+    <Container className="mt-5" style={{ minHeight: "100vh" }}>
+      <h2 style={{ color: "var(--yellow)", display: "flex" }}>
+        My Lands
+        <BsInfoCircleFill
+          style={{
+            height: "1rem",
+            marginTop: "8px",
+            color: "black",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            setShowKey(!showKey);
+          }}
+        />
+      </h2>
+      <p style={{ color: "gray", fontSize: "1rem", marginLeft: "1rem" }}>
+        {showKey && (
+          <p>
+            Your Public Key:{" "}
+            <span style={{ marginLeft: "5px", color: "black" }}>{pkView}</span>
+          </p>
+        )}
+      </p>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
+
       <Table
         responsive="sm"
         bordered
@@ -122,7 +142,7 @@ const MyLand = () => {
           <tbody>
             {response &&
               response.map((item, index) => (
-                <tr>
+                <tr key={index + 1}>
                   <td>{index + 1}</td>
                   <td>{item.location}</td>
                   <td>{item.khaiwatNo}</td>

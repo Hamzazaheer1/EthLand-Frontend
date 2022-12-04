@@ -186,9 +186,9 @@ const AddLand = () => {
   // };
 
   return (
-    <div>
+    <div className="mt-5" style={{ minHeight: "100vh" }}>
       <Alert variant="dark">
-        <b>
+        <b style={{ cursor: "pointer" }}>
           <span
             onClick={() => {
               setStateCount(0);
@@ -249,9 +249,8 @@ const AddLand = () => {
           <Row>
             {DivisionList &&
               DivisionList.map((item, index) => (
-                <Col sm={3}>
+                <Col sm={3} key={index + 1}>
                   <p
-                    key={index + 1}
                     onClick={() => {
                       setStateCount(2);
                       setSeletedDivision(item);

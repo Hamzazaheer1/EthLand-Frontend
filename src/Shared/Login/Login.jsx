@@ -72,6 +72,7 @@ const Login = () => {
           setIsLoading(false);
         } else if (setOwnerC == 6) {
           alert("You are not yet verified");
+          setIsLoading(false);
         } else if (setOwnerC == 7) {
           localStorage.setItem("user", "user");
           auth.login("user");

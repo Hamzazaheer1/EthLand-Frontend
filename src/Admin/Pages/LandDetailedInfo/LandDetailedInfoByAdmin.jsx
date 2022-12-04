@@ -6,11 +6,14 @@ import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import "./LandDetailedInfoByAdmin.css";
+import { themeContext } from "../../../Context";
 
 const LandDetailedInfoByAdmin = () => {
   let { landid } = useParams();
   const [response, setResponse] = useState();
   const Navigate = useNavigate();
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
 
   useEffect(() => {
     const apiHandler = async () => {
@@ -18,7 +21,6 @@ const LandDetailedInfoByAdmin = () => {
         const resp = await axios.get(
           `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyid/${landid}`
         );
-        console.log(resp.data.data);
         setResponse(resp.data.data);
       } catch (err) {
         console.log(err);
@@ -29,9 +31,24 @@ const LandDetailedInfoByAdmin = () => {
   }, []);
 
   return (
-    <Container>
+    <Container className="mt-5">
+      <h2 style={{ color: "var(--yellow)", display: "flex" }}>
+        <i
+          onClick={() => {
+            Navigate("/adminpanel");
+          }}
+          className="bi bi-arrow-left-circle-fill cursor-pointer"
+          style={{ marginRight: "1rem" }}
+        ></i>
+        Land Detailed Info
+      </h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
       <Row className="mt-5">
-        <h2>Land Detailed Info</h2>
         {response && (
           <div>
             <Alert key={"secondary"} variant={"secondary"}>
@@ -118,8 +135,13 @@ const LandDetailedInfoByAdmin = () => {
                 </div>
               ))}
             </Alert>
-            <h1>Old Fard Photo</h1>
-            <img src={response.photo} alt={"not provided"} />
+            <hr />
+            <h2>Old Fard Photo</h2>
+            <img
+              className="img-fluid"
+              src={response.photo}
+              alt={"not provided"}
+            />
           </div>
         )}
       </Row>

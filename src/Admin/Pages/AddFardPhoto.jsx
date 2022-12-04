@@ -1,9 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { Container } from "react-bootstrap";
+import { themeContext } from "../../Context";
 
 const AddFardPhoto = () => {
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
   const [landId, setLandId] = useState(0);
   const [photo, setPhoto] = useState("");
 
@@ -26,8 +30,16 @@ const AddFardPhoto = () => {
   };
 
   return (
-    <div>
-      <h1>Upload Fard Photos for existing record.</h1>
+    <Container className="mt-5" style={{ minHeight: "100vh" }}>
+      <h2 style={{ color: "var(--yellow)" }}>
+        Upload Fard Photos for existing record.
+      </h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
       <Form.Label htmlFor="landID">Land Id</Form.Label>
       <Form.Control
         type="text"
@@ -52,7 +64,7 @@ const AddFardPhoto = () => {
       >
         Submit
       </button>
-    </div>
+    </Container>
   );
 };
 

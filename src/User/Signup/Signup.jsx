@@ -17,6 +17,7 @@ const Signup = () => {
   const [phoneNo, setPhoneNo] = useState(null);
   const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -29,6 +30,7 @@ const Signup = () => {
   };
 
   const init = () => {
+    setIsLoading(true);
     let provider = window.ethereum;
     if (typeof provider !== "undefined") {
       provider
@@ -54,6 +56,8 @@ const Signup = () => {
     await ContractInstance.methods
       .registerUser(name, age, city, cnic, phoneNo)
       .send({ from: selectedAccount });
+
+    setIsLoading(false);
     navigate("/login", { replace: "true" });
   };
 
@@ -136,7 +140,11 @@ const Signup = () => {
                   init();
                 }}
               >
-                Signup
+                {isLoading ? (
+                  <div className="spinner-border text-dark" role="status"></div>
+                ) : (
+                  <p>Register</p>
+                )}
               </button>
             </Form>
           </Col>

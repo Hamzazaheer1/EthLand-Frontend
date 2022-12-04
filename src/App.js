@@ -21,6 +21,7 @@ import Logout from "./Shared/Logout/Logout";
 import { AuthContext } from "./Utils/auth-context";
 import { useCallback, useState } from "react";
 import "./App.css";
+import UsersDetailedInfo from "./Admin/Pages/ManageUsers/UsersDetailedInfo";
 
 function App() {
   const theme = useContext(themeContext);
@@ -69,6 +70,10 @@ function App() {
           <Route path="/userpanel" element={<UserPanel />} />
           <Route path="/txdata/:blockid" element={<TxData />} />
           <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
+          <Route
+            path="/detailed-user-info/:addr"
+            element={<UsersDetailedInfo />}
+          />
           <Route
             path="/detailedlandinfobyadmin/:landid"
             element={<LandDetailedInfoByAdmin />}
