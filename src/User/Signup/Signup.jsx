@@ -10,12 +10,12 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   let selectedAccount;
   let ContractInstance;
+  const navigate = useNavigate();
   const [name, setName] = useState(null);
   const [age, setAge] = useState(0);
   const [cnic, setCnic] = useState(null);
   const [city, setCity] = useState(null);
   const [phoneNo, setPhoneNo] = useState(null);
-  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,7 +51,6 @@ const Signup = () => {
     }
   };
 
-  //to check if super admin is contract owner or not
   const RegisterUser = async () => {
     await ContractInstance.methods
       .registerUser(name, age, city, cnic, phoneNo)

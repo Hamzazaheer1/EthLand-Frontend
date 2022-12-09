@@ -6,12 +6,13 @@ import { themeContext } from "../../Context";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
 import LoadingSpinner from "../../Utils/LoadingSpinner/LoadingSpinner";
 import Web3 from "web3";
+import { useNavigate } from "react-router-dom";
 
 const ViewAdmins = () => {
   let ContractInstance;
   let removeAContractInstance;
   let selectedAccount;
-
+  const Navigate = useNavigate();
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
@@ -107,6 +108,7 @@ const ViewAdmins = () => {
               <tr style={{ color: darkMode ? "white" : "black" }}>
                 <th>#</th>
                 <th>Admin Address</th>
+                <th>Admin Detail</th>
                 <th>Operation</th>
               </tr>
             </thead>
@@ -124,6 +126,20 @@ const ViewAdmins = () => {
                       >
                         <td>{index + 1}</td>
                         <td>{item}</td>
+                        <td>
+                          <button
+                            className="g-btn itemClickable"
+                            style={{
+                              padding: "0px 20px 5px 20px",
+                              width: "7rem",
+                            }}
+                            onClick={() => {
+                              Navigate(`/detailed-admin-info/${item}`);
+                            }}
+                          >
+                            View
+                          </button>
+                        </td>
                         <td>
                           <button
                             className="g-btn"

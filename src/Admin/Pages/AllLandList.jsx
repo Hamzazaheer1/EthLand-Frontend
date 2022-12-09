@@ -19,7 +19,7 @@ const AllLandList = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "https://638cbcfabb6c0b28ed273854--velvety-mochi-90818e.netlify.app/api/v1/lands/getalllands"
+          "https://land-backend.herokuapp.com/api/v1/lands/getalllands"
         );
         setResponse(resp.data.data);
         setIsLoading(false);

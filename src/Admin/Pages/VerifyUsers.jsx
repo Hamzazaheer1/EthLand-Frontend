@@ -7,6 +7,7 @@ import Table from "react-bootstrap/Table";
 import Web3 from "web3";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../Utils/LoadingSpinner/LoadingSpinner";
 
 const VerifyUsers = () => {
   let selectedAccount;
@@ -77,72 +78,78 @@ const VerifyUsers = () => {
           border: "2px solid",
         }}
       />
-      <Row>
-        <Col sm={3}></Col>
-        <Col sm={6}>
-          <Table striped bordered hover>
-            <thead>
-              <tr style={{ color: darkMode ? "white" : "black" }}>
-                <th>#</th>
-                <th>Users Address</th>
-                <th>User Detail</th>
-                <th>Operation</th>
-              </tr>
-            </thead>
-            {adminCount.length == 0 ? (
-              <tbody>
-                <tr>
-                  <td>
-                    <h5>No user to be verified yet</h5>
-                  </td>
+      {isLoading ? (
+        <LoadingSpinner asOverlay />
+      ) : (
+        <Row>
+          <Col sm={3}></Col>
+          <Col sm={6}>
+            <Table striped bordered hover>
+              <thead>
+                <tr style={{ color: darkMode ? "white" : "black" }}>
+                  <th>#</th>
+                  <th>Users Address</th>
+                  <th>User Detail</th>
+                  <th>Operation</th>
                 </tr>
-              </tbody>
-            ) : (
-              adminCount.map((item, index) => (
-                <tbody key={index + 1}>
-                  <tr style={{ backgroundColor: darkMode ? "white" : "white" }}>
-                    <td>{index + 1}</td>
-                    <td>{item}</td>
+              </thead>
+              {adminCount.length == 0 ? (
+                <tbody>
+                  <tr>
                     <td>
-                      <button
-                        className="g-btn itemClickable"
-                        style={{ padding: "0px 20px 5px 20px", width: "7rem" }}
-                        onClick={() => {
-                          Navigate(`/detailed-user-info/${item}`);
-                        }}
-                      >
-                        View
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="g-btn"
-                        style={{ padding: "0px 20px 5px 20px" }}
-                        onClick={(event) => {
-                          event.preventDefault();
-                          {
-                            VerifyUser(item);
-                          }
-                        }}
-                      >
-                        {isLoading ? (
-                          <div
-                            className="spinner-border text-dark"
-                            role="status"
-                          ></div>
-                        ) : (
-                          <p>Verify</p>
-                        )}
-                      </button>
+                      <h5>No user to be verified yet</h5>
                     </td>
                   </tr>
                 </tbody>
-              ))
-            )}
-          </Table>
-        </Col>
-        <Col sm={3}></Col>
-      </Row>
+              ) : (
+                adminCount.map((item, index) => (
+                  <tbody key={index + 1}>
+                    <tr
+                      style={{ backgroundColor: darkMode ? "white" : "white" }}
+                    >
+                      <td>{index + 1}</td>
+                      <td>{item}</td>
+                      <td>
+                        <button
+                          className="g-btn itemClickable"
+                          style={{
+                            padding: "0px 20px 5px 20px",
+                            width: "7rem",
+                          }}
+                          onClick={() => {
+                            Navigate(`/detailed-user-info/${item}`);
+                          }}
+                        >
+                          View
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="g-btn"
+                          style={{
+                            padding: "0px 20px 5px 20px",
+                            width: "7rem",
+                            height: "2rem",
+                          }}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            {
+                              VerifyUser(item);
+                            }
+                          }}
+                        >
+                          Verify
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))
+              )}
+            </Table>
+          </Col>
+          <Col sm={3}></Col>
+        </Row>
+      )}
     </Container>
   );
 };

@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
 import { themeContext } from "../../Context";
 import Table from "react-bootstrap/Table";
 import Web3 from "web3";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ManageUsers = () => {
   const Navigate = useNavigate();
@@ -82,7 +81,7 @@ const ManageUsers = () => {
             </thead>
 
             {adminCount.length == 0 ? (
-              <h5>No data to be found</h5>
+              <h5>No User to be found</h5>
             ) : (
               adminCount.map((item, index) => (
                 <tbody key={index + 1}>

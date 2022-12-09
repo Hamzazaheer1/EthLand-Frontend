@@ -22,7 +22,7 @@ const AddLand = () => {
   const [totalArea, setTotalArea] = useState("");
   const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
 
   // owner state
   const [ownersInput, setOwnersInput] = useState([
@@ -109,34 +109,7 @@ const AddLand = () => {
     selectedTehsil
   );
 
-  // console.log("Locaion", result);
-  // console.log("khaiwatNo", khaiwatNo);
-  // console.log("Owner's Input ", ownersInput);
-  //  console.log("khasraNumber", khasraNumber);
-  //console.log(JSON.stringify(jamabandiInput));
-  //console.log("totalArea ", totalArea);
-  //console.log("price ", price);
-  // console.log("photo ", image);
-  // console.log("jamabandi old ", JSON.stringify(jamabandiInput));
-  // const jamabandiData = JSON.stringify(jamabandiInput);
-  // console.log("jamabandi new ", jamabandiData);
-
   const registerLandHandler = async () => {
-    // const formData = new FormData();
-    // formData.append("location", result);
-    // formData.append("khaiwatNo", khaiwatNo);
-    // formData.append("OwnerData", JSON.stringify(ownersInput));
-    // formData.append("khasraNumber", khasraNumber);
-    // formData.append("area", totalArea);
-    // formData.append("jamabandi", JSON.stringify(jamabandiInput));
-    // // jamabandiInput.forEach((item) => {
-    // //   formData.append(`jamabandi`, JSON.stringify(item));
-    // // });
-    // formData.append("price", price);
-    // formData.append("photo", image);
-
-    // console.log("formData ", [...formData]);
-
     try {
       const resp = await axios.post(
         "https://ethland-backend.herokuapp.com/api/v1/lands/create",
@@ -157,33 +130,6 @@ const AddLand = () => {
       alert(err);
     }
   };
-
-  // const registerLandHandler = async () => {
-  //   const formData = new FormData();
-  //   formData.append("location", result);
-  //   formData.append("khaiwatNo", khaiwatNo);
-  //   formData.append("OwnerData", JSON.stringify(ownersInput));
-  //   formData.append("khasraNumber", khasraNumber);
-  //   formData.append("area", totalArea);
-  //   formData.append("jamabandi", JSON.stringify(jamabandiInput));
-  //   formData.append("price", price);
-  //   formData.append("photo", image);
-
-  //   try {
-  //     const response = await fetch(
-  //       "https://ethland-backend.herokuapp.com/api/v1/lands/create",
-  //       {
-  //         method: "POST",
-  //         body: formData,
-  //       }
-  //     );
-  //     const responseData = await response.json();
-  //     alert("Land Registered Sucessfully!!!!");
-  //     console.log(responseData);
-  //   } catch (err) {
-  //     alert("Error occured during registration of a land");
-  //   }
-  // };
 
   return (
     <div className="mt-5" style={{ minHeight: "100vh" }}>
@@ -308,7 +254,6 @@ const AddLand = () => {
       ) : stateCount == 4 ? (
         // Form
         <Container>
-          {/* {init()} */}
           <h2>Fill the following form below</h2>
           <br />
           <br />
@@ -603,18 +548,6 @@ const AddLand = () => {
                   <Col sm={3}></Col>
                 </Row>
                 <br />
-                {/* Photo */}
-                <Row>
-                  <Col sm={3}></Col>
-                  <Col sm={6}>
-                    <Form.Control
-                      type="file"
-                      // placeholder="Land Price"
-                      onChange={(e) => setImage(e.target.files[0])}
-                    />
-                  </Col>
-                  <Col sm={3}></Col>
-                </Row>
                 <br />
               </>
             )}

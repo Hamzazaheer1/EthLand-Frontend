@@ -1,16 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import { themeContext } from "../../../Context";
 import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import { BsInfoCircleFill } from "react-icons/bs";
-import { useEffect } from "react";
 
 const MyLand = () => {
   const Navigate = useNavigate();
@@ -78,7 +75,7 @@ const MyLand = () => {
     setIsLoading(true);
     try {
       const resp = await axios.get(
-        `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyPK/${x}`
+        `https://land-backend.herokuapp.com/api/v1/lands/getlandbyPK/${x}`
       );
       setResponse(resp.data.data);
       setIsLoading(false);

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import { Container, Row, Col } from "react-bootstrap";
-import Web3 from "web3";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
+import { Container, Row, Col } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Web3 from "web3";
 
 const AddAdmin = () => {
   let selectedAccount;
   let ContractInstance;
+
   const [publicAddress, setPublicAddress] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
@@ -15,7 +16,6 @@ const AddAdmin = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  //metamask integration
   const init = () => {
     setIsLoading(true);
     let provider = window.ethereum;
@@ -137,6 +137,7 @@ const AddAdmin = () => {
               style={{ height: "3rem" }}
               onClick={(event) => {
                 event.preventDefault();
+                // eslint-disable-next-line
                 {
                   init();
                 }

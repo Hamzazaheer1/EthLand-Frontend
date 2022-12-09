@@ -7,6 +7,8 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import "./LandDetailedInfoByAdmin.css";
 import { themeContext } from "../../../Context";
+import Web3 from "web3";
+import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 
 const LandDetailedInfoByAdmin = () => {
   let { landid } = useParams();
@@ -14,12 +16,41 @@ const LandDetailedInfoByAdmin = () => {
   const Navigate = useNavigate();
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
+  const [isLoading, setIsLoading] = useState(false);
+  const [newInstance, setNewInstance] = useState();
+  const [newSelectedAccount, setNewSelectedAccounte] = useState();
+
+  useEffect(() => {
+    const init = () => {
+      let provider = window.ethereum;
+      if (typeof provider !== "undefined") {
+        provider
+          .request({ method: "eth_requestAccounts" })
+          .then((accounts) => {
+            let selectedAccount = accounts[0];
+            setNewSelectedAccounte(selectedAccount);
+            const web3 = new Web3(provider);
+            let ContractInstance = new web3.eth.Contract(
+              CONTACT_ABI,
+              CONTACT_ADDRESS
+            );
+            setNewInstance(ContractInstance);
+          })
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
+      }
+    };
+
+    init();
+  }, []);
 
   useEffect(() => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          `https://ethland-backend.herokuapp.com/api/v1/lands/getlandbyid/${landid}`
+          `https://land-backend.herokuapp.com/api/v1/lands/getlandbyid/${landid}`
         );
         setResponse(resp.data.data);
       } catch (err) {
@@ -29,6 +60,19 @@ const LandDetailedInfoByAdmin = () => {
 
     apiHandler();
   }, []);
+
+  console.log(response);
+
+  const pushToBlockchain = async (landId, landPrice, ownerPK, isForSale) => {
+    setIsLoading(true);
+
+    await newInstance.methods
+      .addLand(landId, landPrice, ownerPK, isForSale)
+      .send({ from: newSelectedAccount });
+
+    setIsLoading(false);
+    alert("Land is now Availible for Purchase to all users");
+  };
 
   return (
     <Container className="mt-5">
@@ -93,6 +137,15 @@ const LandDetailedInfoByAdmin = () => {
                     Public Address:
                     <span className="blackData">{item.publicAddress}</span>
                   </h6>
+                  <hr />
+                  <butoon
+                    className="g-btn"
+                    onClick={() => {
+                      pushToBlockchain(item._id, 0, item.publicAddress, false);
+                    }}
+                  >
+                    Push to Blockchain
+                  </butoon>
                   <hr />
                 </div>
               ))}

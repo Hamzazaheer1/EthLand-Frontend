@@ -22,6 +22,7 @@ import { AuthContext } from "./Utils/auth-context";
 import { useCallback, useState } from "react";
 import "./App.css";
 import UsersDetailedInfo from "./Admin/Pages/ManageUsers/UsersDetailedInfo";
+import AdminDetailedInfo from "./SuperAdmin/Pages/AdminDetailedInfo/AdminDetailedInfo";
 
 function App() {
   const theme = useContext(themeContext);
@@ -73,6 +74,10 @@ function App() {
           <Route
             path="/detailed-user-info/:addr"
             element={<UsersDetailedInfo />}
+          />
+          <Route
+            path="/detailed-admin-info/:addr"
+            element={<AdminDetailedInfo />}
           />
           <Route
             path="/detailedlandinfobyadmin/:landid"

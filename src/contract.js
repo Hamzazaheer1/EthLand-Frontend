@@ -1,4 +1,4 @@
-export const CONTACT_ADDRESS = "0x2f941953f63dA00C8b2DA4B53E2FaA1b90d30566";
+export const CONTACT_ADDRESS = "0xbECDb0D8358A67D5761D51205602A9629c3915f4";
 
 export const CONTACT_ABI = [
   {
@@ -52,20 +52,6 @@ export const CONTACT_ABI = [
     constant: true,
   },
   {
-    inputs: [],
-    name: "KhatuniCultivatorNo",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-    constant: true,
-  },
-  {
     inputs: [
       {
         internalType: "uint256",
@@ -96,44 +82,14 @@ export const CONTACT_ABI = [
     name: "LandR",
     outputs: [
       {
-        internalType: "uint256",
-        name: "khaiwatNumber",
-        type: "uint256",
-      },
-      {
         internalType: "string",
-        name: "CoShares",
+        name: "landId",
         type: "string",
       },
       {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "location",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "natureOfProperty",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "specificShareinJointAccount",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "specificAreainaccordancewiththeShare",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "khasraNo",
-        type: "string",
+        internalType: "bool",
+        name: "isLandVerified",
+        type: "bool",
       },
       {
         internalType: "uint256",
@@ -146,8 +102,53 @@ export const CONTACT_ABI = [
         type: "bool",
       },
       {
+        internalType: "address",
+        name: "ownerAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "LandRequestMapping",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "reqId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "sellerId",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "buyerId",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "landId",
+        type: "uint256",
+      },
+      {
+        internalType: "enum Land.reqStatus",
+        name: "requestStatus",
+        type: "uint8",
+      },
+      {
         internalType: "bool",
-        name: "isLandVerified",
+        name: "isPaymentDone",
         type: "bool",
       },
     ],
@@ -199,20 +200,6 @@ export const CONTACT_ABI = [
         internalType: "bool",
         name: "isUserVerified",
         type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-    constant: true,
-  },
-  {
-    inputs: [],
-    name: "khaiwatNumber",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -528,37 +515,7 @@ export const CONTACT_ABI = [
     inputs: [
       {
         internalType: "string",
-        name: "_name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_coShare",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_location",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_natureofproperty",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_specificShareinJointAccount",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_specificAreainaccordancewiththeShare",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_khasranumber",
+        name: "_landId",
         type: "string",
       },
       {
@@ -568,8 +525,13 @@ export const CONTACT_ABI = [
       },
       {
         internalType: "address",
-        name: "ownerPK",
+        name: "_ownerPK",
         type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "_isForSale",
+        type: "bool",
       },
     ],
     name: "addLand",
@@ -585,39 +547,6 @@ export const CONTACT_ABI = [
         internalType: "uint256[]",
         name: "",
         type: "uint256[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-    constant: true,
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
-      },
-    ],
-    name: "verifyLand",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
-      },
-    ],
-    name: "isLandVerified",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -651,8 +580,33 @@ export const CONTACT_ABI = [
         name: "id",
         type: "uint256",
       },
+      {
+        internalType: "bool",
+        name: "isForSale",
+        type: "bool",
+      },
     ],
-    name: "allUnverifiedLands",
+    name: "makeItforSell",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_landId",
+        type: "uint256",
+      },
+    ],
+    name: "requestforBuy",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "myReceivedLandRequests",
     outputs: [
       {
         internalType: "uint256[]",
@@ -663,6 +617,147 @@ export const CONTACT_ABI = [
     stateMutability: "view",
     type: "function",
     constant: true,
+  },
+  {
+    inputs: [],
+    name: "mySentLandRequests",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_requestId",
+        type: "uint256",
+      },
+    ],
+    name: "acceptRequest",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_requestId",
+        type: "uint256",
+      },
+    ],
+    name: "rejectRequest",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+    ],
+    name: "requesteStatus",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+    ],
+    name: "landPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_requestId",
+        type: "uint256",
+      },
+    ],
+    name: "makePayment",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+    payable: true,
+  },
+  {
+    inputs: [],
+    name: "returnPaymentDoneList",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "address payable",
+        name: "_reveiver",
+        type: "address",
+      },
+    ],
+    name: "makePaymentTestFun",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+    payable: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_requestId",
+        type: "uint256",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
   },
 ];
 
