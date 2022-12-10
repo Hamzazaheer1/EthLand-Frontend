@@ -63,15 +63,21 @@ const LandDetailedInfoByAdmin = () => {
 
   console.log(response);
 
-  const pushToBlockchain = async (landId, landPrice, ownerPK, isForSale) => {
+  const pushToBlockchain = async (
+    landPrice,
+    ownerPK,
+    isForSale,
+    location,
+    area
+  ) => {
     setIsLoading(true);
 
     await newInstance.methods
-      .addLand(landId, landPrice, ownerPK, isForSale)
+      .addLand(landid, landPrice, ownerPK, isForSale, location, area)
       .send({ from: newSelectedAccount });
 
     setIsLoading(false);
-    alert("Land is now Availible for Purchase to all users");
+    alert("Land Verified Sucessfully... User can now sell this land");
   };
 
   return (
@@ -141,10 +147,16 @@ const LandDetailedInfoByAdmin = () => {
                   <butoon
                     className="g-btn"
                     onClick={() => {
-                      pushToBlockchain(item._id, 0, item.publicAddress, false);
+                      pushToBlockchain(
+                        0,
+                        item.publicAddress,
+                        false,
+                        response.location,
+                        response.area
+                      );
                     }}
                   >
-                    Push to Blockchain
+                    Verify Land
                   </butoon>
                   <hr />
                 </div>

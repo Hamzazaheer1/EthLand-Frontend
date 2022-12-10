@@ -1,4 +1,4 @@
-export const CONTACT_ADDRESS = "0xbECDb0D8358A67D5761D51205602A9629c3915f4";
+export const CONTACT_ADDRESS = "0xBaaF8E0ea976Ed0F90DA076383B87eB0826fEA72";
 
 export const CONTACT_ABI = [
   {
@@ -82,6 +82,11 @@ export const CONTACT_ABI = [
     name: "LandR",
     outputs: [
       {
+        internalType: "uint256",
+        name: "Id",
+        type: "uint256",
+      },
+      {
         internalType: "string",
         name: "landId",
         type: "string",
@@ -105,6 +110,16 @@ export const CONTACT_ABI = [
         internalType: "address",
         name: "ownerAddress",
         type: "address",
+      },
+      {
+        internalType: "string",
+        name: "location",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "area",
+        type: "string",
       },
     ],
     stateMutability: "view",
@@ -533,6 +548,16 @@ export const CONTACT_ABI = [
         name: "_isForSale",
         type: "bool",
       },
+      {
+        internalType: "string",
+        name: "_location",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_area",
+        type: "string",
+      },
     ],
     name: "addLand",
     outputs: [],
@@ -584,6 +609,11 @@ export const CONTACT_ABI = [
         internalType: "bool",
         name: "isForSale",
         type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
       },
     ],
     name: "makeItforSell",

@@ -1,34 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import { themeContext } from "../../../Context";
+import { Row, Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
-import { Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
 import Web3 from "web3";
 
 const LandForSale = () => {
   let selectedAccount;
   let ContractInstance;
 
+  const theme = useContext(themeContext);
+  const darkMode = theme.state.darkMode;
+
   const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState();
   const [updateInfoSpinner, setUpdateInfoSpinner] = useState(false);
-
+  const [newSelected, setNewSlected] = useState();
   const [adminCount, setAdminCount] = useState([]);
-  const [LandsInfo, setLandsInfo] = useState();
-
+  const [LandsInfo, setLandsInfo] = useState([]);
   const [id, setId] = useState("");
   const [price, setPrice] = useState(0);
-  const [khasraNo, setKhasraNo] = useState("");
+  const [idNumber, setIdNumber] = useState(0);
   const [isForSale, setIsForSale] = useState(false);
 
   const [newInstance, setNewInstance] = useState();
-
-  const theme = useContext(themeContext);
-  const darkMode = theme.state.darkMode;
 
   useEffect(() => {
     const init = () => {
@@ -38,6 +35,7 @@ const LandForSale = () => {
           .request({ method: "eth_requestAccounts" })
           .then((accounts) => {
             selectedAccount = accounts[0];
+            setNewSlected(selectedAccount);
             const web3 = new Web3(provider);
             ContractInstance = new web3.eth.Contract(
               CONTACT_ABI,
@@ -69,27 +67,29 @@ const LandForSale = () => {
   };
 
   const returnAllLandInfo = async () => {
+    setIsLoading(true);
     for (let i = 0; i < adminCount.length; i++) {
       await newInstance.methods
         .LandR(adminCount[i])
         .call()
         .then((tx) => {
-          setLandsInfo(tx);
+          setLandsInfo((LandsInfo) => [...LandsInfo, tx]);
         })
         .catch((error) => {
           console.log(error);
         });
     }
+    setIsLoading(false);
   };
 
-  const pushToBlockchain = async (landId, isForSale) => {
-    setIsLoading(true);
+  const makeItForSale = async () => {
+    setUpdateInfoSpinner(true);
 
     await newInstance.methods
-      .makeItforSell(landId, isForSale)
-      .send({ from: selectedAccount });
+      .makeItforSell(idNumber, isForSale, price)
+      .send({ from: newSelected });
 
-    setIsLoading(false);
+    setUpdateInfoSpinner(false);
     alert("Land is now Availible for Purchase to all users");
   };
 
@@ -111,11 +111,21 @@ const LandForSale = () => {
 
       <Row>
         <Col sm={4}>
-          <Form.Group className="mb-3" controlId="formPrice">
+          <Form.Group className="mb-3" controlId="formNumber">
             <Form.Text className="text-muted" style={{ fontWeight: "bold" }}>
               Selected Land = {id}
             </Form.Text>
             <br />
+            <Form.Label style={{ color: "var(--yellow)", fontWeight: "bold" }}>
+              Land Identity Number
+            </Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter your land identity number"
+              onChange={(e) => setIdNumber(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formPrice">
             <Form.Label style={{ color: "var(--yellow)", fontWeight: "bold" }}>
               Land Price
             </Form.Label>
@@ -147,9 +157,9 @@ const LandForSale = () => {
               padding: "0px 10px 0px 10px",
             }}
             className="g-btn"
-            // onClick={() => {
-            //   makeItforSaleBackend();
-            // }}
+            onClick={() => {
+              makeItForSale();
+            }}
           >
             {updateInfoSpinner ? (
               <div class="spinner-border" role="status"></div>
@@ -158,13 +168,51 @@ const LandForSale = () => {
             )}
           </button>
         </Col>
-        <Col sm={4}></Col>
-        <Col sm={4}></Col>
+        <Col sm={3}></Col>
+        <Col sm={5}>
+          <span style={{ fontWeight: "bold", color: "grey" }}>
+            Follow the steps to make you land availible for sale <br />
+            1- Enter Land Identity Number from Table1 based on number. <br />
+            2- Click on Action Button of a selected Land. <br />
+            3- Enter Your desired Price and make it availible for sale.
+            <br />
+            4- Click on submit button to make it visible to all users
+            <br />
+          </span>
+        </Col>
       </Row>
+
+      <span style={{ color: "var(--yellow)", fontWeight: "bold" }}>
+        1 - Land Identity Number
+      </span>
+      <Table
+        responsive="sm"
+        bordered
+        style={{
+          color: darkMode ? "white" : "black",
+        }}
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Land Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          {adminCount &&
+            adminCount.map((item, index) => (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{adminCount[index]}</td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
 
       <button
         style={{
           marginBottom: "2rem",
+          marginTop: "2rem",
           height: "2rem",
           padding: "0px 10px 0px 10px",
         }}
@@ -175,6 +223,10 @@ const LandForSale = () => {
       >
         Reveal Lands
       </button>
+      <br />
+      <span style={{ color: "var(--yellow)", fontWeight: "bold" }}>
+        2 - Land Info
+      </span>
       <Table
         responsive="sm"
         bordered
@@ -195,25 +247,26 @@ const LandForSale = () => {
           <LoadingSpinner asOverlay />
         ) : (
           <tbody>
-            {LandsInfo && (
-              <tr>
-                <td>1</td>
-                <td>{LandsInfo.landId}</td>
-                <td>{LandsInfo.landPrice}</td>
-                <td>{LandsInfo.isforSell ? <td>True</td> : <td>False</td>}</td>
-                <td>
-                  <button
-                    className="g-btn"
-                    style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
-                    onClick={() => {
-                      setAllStates(LandsInfo.landId);
-                    }}
-                  >
-                    Action
-                  </button>
-                </td>
-              </tr>
-            )}
+            {LandsInfo &&
+              LandsInfo.map((item, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item.landId}</td>
+                  <td>{item.landPrice}</td>
+                  <td>{item.isforSell ? <td>True</td> : <td>False</td>}</td>
+                  <td>
+                    <button
+                      className="g-btn"
+                      style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
+                      onClick={() => {
+                        setAllStates(item.landId);
+                      }}
+                    >
+                      Action
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         )}
       </Table>

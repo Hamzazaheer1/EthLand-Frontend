@@ -23,6 +23,7 @@ import { useCallback, useState } from "react";
 import "./App.css";
 import UsersDetailedInfo from "./Admin/Pages/ManageUsers/UsersDetailedInfo";
 import AdminDetailedInfo from "./SuperAdmin/Pages/AdminDetailedInfo/AdminDetailedInfo";
+import PurchaseableLandInfo from "./User/UserPanel/Pages/PurchaseAbleLand/PurchaseableLandInfo";
 
 function App() {
   const theme = useContext(themeContext);
@@ -71,6 +72,10 @@ function App() {
           <Route path="/userpanel" element={<UserPanel />} />
           <Route path="/txdata/:blockid" element={<TxData />} />
           <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
+          <Route
+            path="/purchaseableland-info/:landid"
+            element={<PurchaseableLandInfo />}
+          />
           <Route
             path="/detailed-user-info/:addr"
             element={<UsersDetailedInfo />}
