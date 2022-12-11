@@ -58,7 +58,7 @@ const PurchaseableLands = () => {
 
   const returnAllLandIds = async () => {
     await ContractInstance.methods
-      .myAllLands(selectedAccount)
+      .ReturnAllLandList()
       .call()
       .then((tx) => {
         setAdminCount(tx);
@@ -87,8 +87,10 @@ const PurchaseableLands = () => {
 
   console.log(LandsInfo);
 
-  const sendBuyRequest = async () => {
-    await newInstance.methods.requestforBuy(reqId).send({ from: newSelected });
+  const sendBuyRequest = async (s_id) => {
+    let newId = s_id * 1;
+    console.log(newId);
+    await newInstance.methods.requestforBuy(newId).send({ from: newSelected });
 
     alert("Land Buy Request has been sent to owner");
   };
@@ -114,7 +116,7 @@ const PurchaseableLands = () => {
       </button>
       <Row>
         {LandsInfo &&
-          LandsInfo.filter((land) => land.isforSell === false).map(
+          LandsInfo.filter((land) => land.isforSell === true).map(
             (item, index) => (
               <Card
                 key={index + 1}
@@ -146,7 +148,7 @@ const PurchaseableLands = () => {
                   <Card.Link
                     className="cursor-pointer"
                     onClick={() => {
-                      Navigate("/");
+                      sendBuyRequest(item.Id);
                     }}
                   >
                     Request to Buy
