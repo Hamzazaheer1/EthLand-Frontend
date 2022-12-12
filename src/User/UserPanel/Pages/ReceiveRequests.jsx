@@ -132,6 +132,8 @@ const ReceiveRequests = () => {
                   <br />
                   Buyer Info:
                   <br />
+                  Request Status:
+                  <br />
                   Is Payment Done:
                   <br />
                   <hr />
@@ -162,7 +164,21 @@ const ReceiveRequests = () => {
                 </Col>
                 <Col sm={1}></Col>
                 <Col sm={9}>
-                  {item.reqId} <br /> {item.landId} <br /> {item.buyerId} <br />{" "}
+                  {item.reqId} <br /> {item.landId} <br /> {item.buyerId} <br />
+                  {item.requestStatus * 1 === 0 ? (
+                    <span>requested</span>
+                  ) : item.requestStatus * 1 === 1 ? (
+                    <span>accepted</span>
+                  ) : item.requestStatus * 1 === 2 ? (
+                    <span>rejected</span>
+                  ) : item.requestStatus * 1 === 3 ? (
+                    <span>paymentdone</span>
+                  ) : item.requestStatus * 1 === 4 ? (
+                    <span>commpleted</span>
+                  ) : (
+                    <span>some problem has occured in getting data</span>
+                  )}
+                  <br />
                   {item.isPaymentDone === true ? (
                     <span>Payment Done</span>
                   ) : (
