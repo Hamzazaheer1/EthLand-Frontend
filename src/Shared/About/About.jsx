@@ -3,9 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useContext } from "react";
 import { themeContext } from "../../Context";
 // import { motion } from "framer-motion";
-import i1 from "../img/0.PNG";
-import i2 from "../img/1.PNG";
-import i3 from "../img/2.PNG";
+// import i1 from "../img/0.PNG";
+// import i2 from "../img/1.PNG";
+// import i3 from "../img/2.PNG";
 import Card from "react-bootstrap/Card";
 import "./About.css";
 
@@ -78,7 +78,7 @@ const About = () => {
               }}
               bg="dark"
             >
-              <Card.Img variant="top" src={i1} height={"250rem"} />
+              <Card.Img variant="top" src={"/images/0.PNG"} height={"250rem"} />
               <Card.Body>
                 <Card.Title>Web2</Card.Title>
                 <Card.Text>
@@ -107,7 +107,7 @@ const About = () => {
               }}
               bg="dark"
             >
-              <Card.Img variant="top" src={i2} height={"250rem"} />
+              <Card.Img variant="top" src={"/images/1.PNG"} height={"250rem"} />
               <Card.Body>
                 <Card.Title>BlockChain</Card.Title>
                 <Card.Text>
@@ -130,7 +130,7 @@ const About = () => {
               style={{ width: "18rem", color: "white", marginTop: "1rem" }}
               bg="dark"
             >
-              <Card.Img variant="top" src={i3} height={"250rem"} />
+              <Card.Img variant="top" src={"/images/2.PNG"} height={"250rem"} />
               <Card.Body>
                 <Card.Title>Web3</Card.Title>
                 <Card.Text>
