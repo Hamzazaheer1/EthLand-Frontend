@@ -3,32 +3,20 @@ import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
 import { themeContext } from "../../Context";
 import { Row, Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import Table from "react-bootstrap/Table";
-import LoadingSpinner from "../../Utils/LoadingSpinner/LoadingSpinner";
-import Form from "react-bootstrap/Form";
-import Web3 from "web3";
-import Card from "react-bootstrap/Card";
-import { useNavigate } from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
+import Web3 from "web3";
 
 const TransferOwnership = () => {
   let selectedAccount;
   let ContractInstance;
 
-  const Navigate = useNavigate();
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [updateInfoSpinner, setUpdateInfoSpinner] = useState(false);
   const [newSelected, setNewSlected] = useState();
   const [requestCount, setRequestCount] = useState([]);
   const [requestInfo, setRequestInfo] = useState([]);
-  const [id, setId] = useState("");
-  const [price, setPrice] = useState(0);
-  const [idNumber, setIdNumber] = useState(0);
-  const [isForSale, setIsForSale] = useState(false);
   const [newInstance, setNewInstance] = useState();
 
   useEffect(() => {
@@ -69,7 +57,6 @@ const TransferOwnership = () => {
         console.log(error);
       });
   };
-  console.log("TO count", requestCount);
 
   const returnAllRequestInfo = async () => {
     setIsLoading(true);
@@ -86,7 +73,6 @@ const TransferOwnership = () => {
     }
     setIsLoading(false);
   };
-  console.log("req info ", requestInfo);
 
   const transferLandOwnership = async (s_id) => {
     await newInstance.methods
@@ -149,15 +135,15 @@ const TransferOwnership = () => {
                 <Col sm={9}>
                   {item.reqId} <br /> {item.landId} <br /> {item.buyerId} <br />
                   {item.requestStatus * 1 === 0 ? (
-                    <span>requested</span>
+                    <span>Requested</span>
                   ) : item.requestStatus * 1 === 1 ? (
-                    <span>accepted</span>
+                    <span>Accepted</span>
                   ) : item.requestStatus * 1 === 2 ? (
-                    <span>rejected</span>
+                    <span>Rejected</span>
                   ) : item.requestStatus * 1 === 3 ? (
-                    <span>paymentdone</span>
+                    <span>Payment Done</span>
                   ) : item.requestStatus * 1 === 4 ? (
-                    <span>commpleted</span>
+                    <span>Completed</span>
                   ) : (
                     <span>some problem has occured in getting data</span>
                   )}

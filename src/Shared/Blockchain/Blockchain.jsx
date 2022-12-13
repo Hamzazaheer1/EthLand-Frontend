@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import Web3 from "web3";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { themeContext } from "../../Context";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+import { Container } from "react-bootstrap";
 import LoadingSpinner from "../../Utils/LoadingSpinner/LoadingSpinner";
+import InputGroup from "react-bootstrap/InputGroup";
+import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
+import Web3 from "web3";
 import "./Blockchain.css";
 
 const Blockchain = () => {
@@ -44,91 +43,89 @@ const Blockchain = () => {
   }, []);
 
   return (
-    <div>
-      <Container className="mt-5">
-        <h2 style={{ color: "var(--yellow)", display: "flex" }}>
-          Blockchain
-          <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
-            &nbsp;&nbsp;A complete public ledger
-          </p>
-        </h2>
-        <hr
-          style={{
-            color: darkMode ? "var(--yellow)" : "var(--black)",
-            border: "2px solid",
-          }}
-        />
+    <Container className="mt-5">
+      <h2 style={{ color: "var(--yellow)", display: "flex" }}>
+        Blockchain
+        <p style={{ color: "gray", fontSize: "1rem", marginTop: "1rem" }}>
+          &nbsp;&nbsp;A complete public ledger
+        </p>
+      </h2>
+      <hr
+        style={{
+          color: darkMode ? "var(--yellow)" : "var(--black)",
+          border: "2px solid",
+        }}
+      />
 
-        <div>
-          <br />
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="Enter Block Height or Hash to Search"
-              aria-label="Block Height"
-              aria-describedby="basic-addon2"
-              onChange={(event) => {
-                setSearchTerm(event.target.value);
+      <div>
+        <br />
+        <InputGroup className="mb-3">
+          <Form.Control
+            type="text"
+            placeholder="Enter Block Height or Hash to Search"
+            aria-label="Block Height"
+            aria-describedby="basic-addon2"
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
+          />
+        </InputGroup>
+        <Table responsive="sm" bordered striped>
+          <thead>
+            <tr
+              style={{
+                color: darkMode ? "white" : "black",
               }}
-            />
-          </InputGroup>
-          <Table responsive="sm" bordered striped>
-            <thead>
-              <tr
-                style={{
-                  color: darkMode ? "white" : "black",
-                }}
-              >
-                <th>Height</th>
-                <th>TX #</th>
-                <th>STATE HASH</th>
-              </tr>
-            </thead>
-            {isLoading ? (
-              <LoadingSpinner asOverlay />
-            ) : (
-              totalBlock.length > 0 &&
-              totalBlock
-                .sort((a, b) => (a.number < b.number ? -1 : 1))
-                .reverse()
-                .filter((item) => {
-                  if (searchTerm === "") {
-                    return item;
-                  } else if (item.number === searchTerm * 1) {
-                    return item;
-                  } else if (item.hash.includes(searchTerm)) {
-                    return item;
-                  }
-                  return null; // Remove if error in blockchain table or search
-                })
-                .map((item, index) => (
-                  <tbody key={index + 1}>
-                    <tr
-                      className="itemClickable"
-                      onClick={() => {
-                        Navigate(`/txdata/${item.number}`);
-                      }}
+            >
+              <th>Height</th>
+              <th>TX #</th>
+              <th>STATE HASH</th>
+            </tr>
+          </thead>
+          {isLoading ? (
+            <LoadingSpinner asOverlay />
+          ) : (
+            totalBlock.length > 0 &&
+            totalBlock
+              .sort((a, b) => (a.number < b.number ? -1 : 1))
+              .reverse()
+              .filter((item) => {
+                if (searchTerm === "") {
+                  return item;
+                } else if (item.number === searchTerm * 1) {
+                  return item;
+                } else if (item.hash.includes(searchTerm)) {
+                  return item;
+                }
+                return null; // Remove if error in blockchain table or search
+              })
+              .map((item, index) => (
+                <tbody key={index + 1}>
+                  <tr
+                    className="itemClickable"
+                    onClick={() => {
+                      Navigate(`/txdata/${item.number}`);
+                    }}
+                  >
+                    <td style={{ color: darkMode ? "white" : "black" }}>
+                      {item.number}
+                    </td>
+                    <td style={{ color: darkMode ? "white" : "black" }}>
+                      {item.transactions.length}
+                    </td>
+                    <td
+                      style={{ color: darkMode ? "white" : "black" }}
+                      className="d-inline-block text-truncate truncate"
                     >
-                      <td style={{ color: darkMode ? "white" : "black" }}>
-                        {item.number}
-                      </td>
-                      <td style={{ color: darkMode ? "white" : "black" }}>
-                        {item.transactions.length}
-                      </td>
-                      <td
-                        style={{ color: darkMode ? "white" : "black" }}
-                        className="d-inline-block text-truncate truncate"
-                      >
-                        {item.hash}
-                      </td>
-                    </tr>
-                  </tbody>
-                ))
-            )}
-          </Table>
-        </div>
-      </Container>
-    </div>
+                      {item.hash}
+                    </td>
+                  </tr>
+                </tbody>
+              ))
+          )}
+        </Table>
+      </div>
+    </Container>
   );
 };
 

@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useCallback, useState } from "react";
+import { AuthContext } from "./Utils/auth-context";
 import { themeContext } from "./Context";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./Shared/Homepage/Homepage";
@@ -18,12 +19,10 @@ import Footer from "./Shared/Footer/Footer";
 import LandDetailedInfo from "./User/UserPanel/Pages/LandDetailedInfo/LandDetailedInfo";
 import LandDetailedInfoByAdmin from "./Admin/Pages/LandDetailedInfo/LandDetailedInfoByAdmin";
 import Logout from "./Shared/Logout/Logout";
-import { AuthContext } from "./Utils/auth-context";
-import { useCallback, useState } from "react";
-import "./App.css";
 import UsersDetailedInfo from "./Admin/Pages/ManageUsers/UsersDetailedInfo";
 import AdminDetailedInfo from "./SuperAdmin/Pages/AdminDetailedInfo/AdminDetailedInfo";
 import PurchaseableLandInfo from "./User/UserPanel/Pages/PurchaseAbleLand/PurchaseableLandInfo";
+import "./App.css";
 
 function App() {
   const theme = useContext(themeContext);

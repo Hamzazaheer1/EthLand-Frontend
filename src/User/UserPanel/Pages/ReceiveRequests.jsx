@@ -3,32 +3,20 @@ import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import { themeContext } from "../../../Context";
 import { Row, Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import Table from "react-bootstrap/Table";
-import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
-import Form from "react-bootstrap/Form";
 import Web3 from "web3";
-import Card from "react-bootstrap/Card";
-import { useNavigate } from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
 
 const ReceiveRequests = () => {
   let selectedAccount;
   let ContractInstance;
 
-  const Navigate = useNavigate();
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [updateInfoSpinner, setUpdateInfoSpinner] = useState(false);
   const [newSelected, setNewSlected] = useState();
   const [requestCount, setRequestCount] = useState([]);
   const [requestInfo, setRequestInfo] = useState([]);
-  const [id, setId] = useState("");
-  const [price, setPrice] = useState(0);
-  const [idNumber, setIdNumber] = useState(0);
-  const [isForSale, setIsForSale] = useState(false);
   const [newInstance, setNewInstance] = useState();
 
   useEffect(() => {
@@ -69,7 +57,6 @@ const ReceiveRequests = () => {
         console.log(error);
       });
   };
-  console.log("count", requestCount);
 
   const returnAllRequestInfo = async () => {
     setIsLoading(true);
@@ -86,8 +73,6 @@ const ReceiveRequests = () => {
     }
     setIsLoading(false);
   };
-
-  console.log("req info ", requestInfo);
 
   const acceptBuyRequest = async (s_id) => {
     await newInstance.methods.acceptRequest(s_id).send({ from: newSelected });

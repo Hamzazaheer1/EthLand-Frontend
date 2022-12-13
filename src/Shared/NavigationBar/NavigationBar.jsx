@@ -24,7 +24,6 @@ const NavigationBar = () => {
     auth.login(userState);
   }
 
-  console.log(userState);
   return (
     <>
       <TopBar />

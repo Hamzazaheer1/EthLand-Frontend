@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
+import { motion } from "framer-motion";
+import { themeContext } from "../../Context";
 import Map from "../img/map.png";
 import Carousel from "react-bootstrap/Carousel";
 import land1 from "../img/land1.jpg";
@@ -7,18 +9,13 @@ import land2 from "../img/land2.jpg";
 import Home from "../img/home.png";
 import thumbup from "../img/thumbup.png";
 import crown from "../img/crown.png";
-
 import FloatinDiv from "../../Utils/FloatingDiv/FloatingDiv";
-// import { motion } from "../../../node_modules/framer-motion/dist/es/index";
-import { motion } from "framer-motion";
-
-import { useContext } from "react";
-import { themeContext } from "../../Context";
 import "./Intro.css";
 
 const Intro = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
+
   return (
     <Row>
       <div

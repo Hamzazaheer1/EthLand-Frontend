@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
+import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { Container } from "react-bootstrap";
 import Web3 from "web3";
-import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
-import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   let selectedAccount;
@@ -61,96 +61,94 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col sm={3}></Col>
-          <Col sm={6}>
+    <Container>
+      <Row>
+        <Col sm={3}></Col>
+        <Col sm={6}>
+          <br />
+          <br />
+          <br />
+          <h2>Register</h2>
+          <hr />
+          <br />
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom02">
+                <Form.Label>CNIC</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="xxxxx-xxxxxxx-x"
+                  onChange={(e) => setCnic(e.target.value)}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationCustom05">
+                <Form.Label>Age</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="age"
+                  required
+                  onChange={(e) => setAge(e.target.value)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid age.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="6" controlId="validationCustom03">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="City"
+                  required
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid city.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom02">
+                <Form.Label>Phone No.</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="0xxx-xxxxxxx"
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+            </Row>
             <br />
-            <br />
-            <br />
-            <h2>Register</h2>
-            <hr />
-            <br />
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="name"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
-                  <Form.Label>CNIC</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="xxxxx-xxxxxxx-x"
-                    onChange={(e) => setCnic(e.target.value)}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="3" controlId="validationCustom05">
-                  <Form.Label>Age</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="age"
-                    required
-                    onChange={(e) => setAge(e.target.value)}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide a valid age.
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <Row className="mb-3">
-                <Form.Group as={Col} md="6" controlId="validationCustom03">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="City"
-                    required
-                    onChange={(e) => setCity(e.target.value)}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please provide a valid city.
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustom02">
-                  <Form.Label>Phone No.</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="0xxx-xxxxxxx"
-                    onChange={(e) => setPhoneNo(e.target.value)}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-              </Row>
-              <br />
-              <button
-                className="g-btn"
-                onClick={(event) => {
-                  event.preventDefault();
-                  init();
-                }}
-              >
-                {isLoading ? (
-                  <div className="spinner-border text-dark" role="status"></div>
-                ) : (
-                  <p>Register</p>
-                )}
-              </button>
-            </Form>
-          </Col>
-          <Col sm={3}></Col>
-        </Row>
-      </Container>
-    </div>
+            <button
+              className="g-btn"
+              onClick={(event) => {
+                event.preventDefault();
+                init();
+              }}
+            >
+              {isLoading ? (
+                <div className="spinner-border text-dark" role="status"></div>
+              ) : (
+                <p>Register</p>
+              )}
+            </button>
+          </Form>
+        </Col>
+        <Col sm={3}></Col>
+      </Row>
+    </Container>
   );
 };
 

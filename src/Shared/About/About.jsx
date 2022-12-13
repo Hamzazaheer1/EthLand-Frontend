@@ -1,11 +1,6 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { Row, Col } from "react-bootstrap";
 import { themeContext } from "../../Context";
-// import { motion } from "framer-motion";
-// import i1 from "../img/0.PNG";
-// import i2 from "../img/1.PNG";
-// import i3 from "../img/2.PNG";
 import Card from "react-bootstrap/Card";
 import "./About.css";
 

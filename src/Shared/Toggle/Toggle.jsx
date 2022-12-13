@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
+import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { themeContext } from "../../Context";
 import "./Toggle.css";
-import Moon from "@iconscout/react-unicons/icons/uil-moon";
-import Sun from "@iconscout/react-unicons/icons/uil-sun";
 
 const Toggle = () => {
   const theme = useContext(themeContext);
@@ -12,8 +11,8 @@ const Toggle = () => {
   };
   return (
     <div className="toggle" onClick={handleClick}>
-      <Moon />
-      <Sun />
+      <BsFillMoonFill />
+      <BsFillSunFill />
       <div
         className="t-button"
         style={darkMode ? { left: "2px" } : { right: "2px" }}
