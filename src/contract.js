@@ -1,4 +1,4 @@
-export const CONTACT_ADDRESS = "0xA16B2b9dFE5074ED8c26d563D017d01064Daf85b";
+export const CONTACT_ADDRESS = "0xD986dac2a5aA15131C3366b32A745DcEA53B6Fd2";
 
 export const CONTACT_ABI = [
   {
@@ -655,7 +655,13 @@ export const CONTACT_ABI = [
     constant: true,
   },
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "address",
+        name: "_id",
+        type: "address",
+      },
+    ],
     name: "mySentLandRequests",
     outputs: [
       {

@@ -23,7 +23,7 @@ const TransferOwnership = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [updateInfoSpinner, setUpdateInfoSpinner] = useState(false);
   const [newSelected, setNewSlected] = useState();
-  const [landsCount, setLandsCount] = useState([]);
+  const [requestCount, setRequestCount] = useState([]);
   const [requestInfo, setRequestInfo] = useState([]);
   const [id, setId] = useState("");
   const [price, setPrice] = useState(0);
@@ -46,7 +46,7 @@ const TransferOwnership = () => {
               CONTACT_ADDRESS
             );
             setNewInstance(ContractInstance);
-            returnAllLandsIds();
+            returnPaymentDoneIds();
           })
           .catch((err) => {
             console.log(err);
@@ -58,24 +58,24 @@ const TransferOwnership = () => {
     init();
   }, []);
 
-  const returnAllLandsIds = async () => {
+  const returnPaymentDoneIds = async () => {
     await ContractInstance.methods
-      .ReturnAllLandList()
+      .returnPaymentDoneList()
       .call()
       .then((tx) => {
-        setLandsCount(tx);
+        setRequestCount(tx);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  console.log("TO count", landsCount);
+  console.log("TO count", requestCount);
 
   const returnAllRequestInfo = async () => {
     setIsLoading(true);
-    for (let i = 0; i < landsCount.length; i++) {
+    for (let i = 0; i < requestCount.length; i++) {
       await newInstance.methods
-        .LandRequestMapping(landsCount[i])
+        .LandRequestMapping(requestCount[i])
         .call()
         .then((tx) => {
           setRequestInfo((requestInfo) => [...requestInfo, tx]);
@@ -86,22 +86,14 @@ const TransferOwnership = () => {
     }
     setIsLoading(false);
   };
-
   console.log("req info ", requestInfo);
 
-  const getLandPrice = async (s_id) => {
+  const transferLandOwnership = async (s_id) => {
     await newInstance.methods
-      .landPrice(s_id)
-      .call()
-      .then((tx) => {
-        setPrice(tx);
-      });
-  };
+      .transferOwnership(s_id)
+      .send({ from: newSelected });
 
-  const makeLandPayment = async (s_id) => {
-    await newInstance.methods.makePayment(s_id).send({ from: newSelected });
-
-    alert("Payment has been made Successfully");
+    alert("Land Ownership has been transfered Successfully");
   };
 
   return (
@@ -139,21 +131,7 @@ const TransferOwnership = () => {
                   <br />
                   Is Payment Done:
                   <br />
-                  Land Price:
-                  <br />
                   <hr />
-                  <p
-                    style={{
-                      textDecoration: "underline",
-                      color: "black",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      getLandPrice(item.landId);
-                    }}
-                  >
-                    Revel Land Price
-                  </p>
                   <p
                     style={{
                       textDecoration: "underline",
@@ -161,10 +139,10 @@ const TransferOwnership = () => {
                       cursor: "pointer",
                     }}
                     onClick={() => {
-                      makeLandPayment(item.reqId);
+                      transferLandOwnership(item.reqId);
                     }}
                   >
-                    Make Payment
+                    Transfer Ownership
                   </p>
                 </Col>
                 <Col sm={1}></Col>
@@ -189,8 +167,6 @@ const TransferOwnership = () => {
                   ) : (
                     <span>Payment Pending</span>
                   )}
-                  <br />
-                  {price} PKR
                 </Col>
               </Row>
             </Alert>

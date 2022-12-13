@@ -60,7 +60,7 @@ const SendRequests = () => {
 
   const returnAllRequestIds = async () => {
     await ContractInstance.methods
-      .mySentLandRequests()
+      .mySentLandRequests(selectedAccount)
       .call()
       .then((tx) => {
         setRequestCount(tx);
