@@ -61,15 +61,14 @@ const About = () => {
         <Col sm={2}></Col>
       </Row>
       <Row style={{ marginLeft: "1rem", marginTop: "8rem" }}>
-        <Col sm={1} className="mt-5"></Col>
-        <Col sm={10} style={{ marginLeft: "2rem" }}>
+        <Col sm={2}></Col>
+        <Col sm={8}>
           <Row>
             <Card
               style={{
                 width: "18rem",
                 color: "white",
-                marginRight: "5rem",
-                marginTop: "1rem",
+                marginRight: "4rem",
               }}
               bg="dark"
             >
@@ -97,8 +96,7 @@ const About = () => {
               style={{
                 width: "18rem",
                 color: "white",
-                marginRight: "5rem",
-                marginTop: "1rem",
+                marginRight: "4rem",
               }}
               bg="dark"
             >
@@ -121,10 +119,7 @@ const About = () => {
                 </button>
               </Card.Body>
             </Card>
-            <Card
-              style={{ width: "18rem", color: "white", marginTop: "1rem" }}
-              bg="dark"
-            >
+            <Card style={{ width: "18rem", color: "white" }} bg="dark">
               <Card.Img variant="top" src={"/images/2.PNG"} height={"250rem"} />
               <Card.Body>
                 <Card.Title>Web3</Card.Title>
@@ -147,7 +142,7 @@ const About = () => {
             </Card>
           </Row>
         </Col>
-        <Col sm={1}></Col>
+        <Col sm={2}></Col>
       </Row>
     </div>
   );
