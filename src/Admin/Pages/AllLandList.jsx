@@ -19,7 +19,7 @@ const AllLandList = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "https://land-backend.herokuapp.com/api/v1/lands/getalllands"
+          "https://landbackend-production.up.railway.app/api/v1/lands/getalllands"
         );
         setResponse(resp.data.data);
         setIsLoading(false);

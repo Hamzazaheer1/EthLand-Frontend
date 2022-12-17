@@ -18,7 +18,7 @@ const AddFardPhoto = () => {
 
     try {
       const resp = await axios.patch(
-        "https://ethland-backend.herokuapp.com/api/v1/lands/uploadphoto",
+        "https://landbackend-production.up.railway.app/api/v1/lands/uploadphoto",
         fd
       );
 

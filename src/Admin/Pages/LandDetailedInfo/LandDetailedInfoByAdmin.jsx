@@ -52,7 +52,7 @@ const LandDetailedInfoByAdmin = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          `https://land-backend.herokuapp.com/api/v1/lands/getlandbyid/${landid}`
+          `https://landbackend-production.up.railway.app/api/v1/lands/getlandbyid/${landid}`
         );
         setResponse(resp.data.data);
         setIsLoading(false);
@@ -107,6 +107,10 @@ const LandDetailedInfoByAdmin = () => {
                   <h6>
                     Khaiwat Number:
                     <span className="blackData">{response.khaiwatNo}</span>
+                  </h6>
+                  <h6>
+                    Location:
+                    <span className="blackData">{response.location}</span>
                   </h6>
                 </Alert>
                 <hr />

@@ -21,7 +21,7 @@ const LandDetailedInfo = () => {
       setIsLoading(true);
       try {
         const resp = await axios.get(
-          `https://land-backend.herokuapp.com/api/v1/lands/getlandbyid/${landid}`
+          `https://landbackend-production.up.railway.app/api/v1/lands/getlandbyid/${landid}`
         );
         setResponse(resp.data.data);
         setIsLoading(false);

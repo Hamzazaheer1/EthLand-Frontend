@@ -22,9 +22,7 @@ const AddLand = () => {
   const [totalArea, setTotalArea] = useState("");
   const [khasraNumber, setKhasraNumber] = useState("");
   const [price, setPrice] = useState(0);
-  // const [image, setImage] = useState("");
 
-  // owner state
   const [ownersInput, setOwnersInput] = useState([
     {
       ownerName: "",
@@ -65,7 +63,6 @@ const AddLand = () => {
     setOwnersInput(list);
   };
 
-  //jamabandi code
   const [jamabandiInput, setJamabandiInput] = useState([
     {
       oldOwnerName: "",
@@ -112,7 +109,7 @@ const AddLand = () => {
   const registerLandHandler = async () => {
     try {
       const resp = await axios.post(
-        "https://ethland-backend.herokuapp.com/api/v1/lands/create",
+        "https://landbackend-production.up.railway.app/api/v1/lands/create",
         {
           location: result,
           khaiwatNo: khaiwatNo,

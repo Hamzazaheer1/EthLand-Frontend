@@ -23,6 +23,7 @@ import UsersDetailedInfo from "./Admin/Pages/ManageUsers/UsersDetailedInfo";
 import AdminDetailedInfo from "./SuperAdmin/Pages/AdminDetailedInfo/AdminDetailedInfo";
 import PurchaseableLandInfo from "./User/UserPanel/Pages/PurchaseAbleLand/PurchaseableLandInfo";
 import "./App.css";
+import LandTransfer from "./Admin/Pages/LandTransfer/LandTransfer";
 
 function App() {
   const theme = useContext(themeContext);
@@ -87,6 +88,7 @@ function App() {
             path="/detailedlandinfobyadmin/:landid"
             element={<LandDetailedInfoByAdmin />}
           />
+          <Route path="/landtransfer/:landid" element={<LandTransfer />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer className="sticky-footer" />

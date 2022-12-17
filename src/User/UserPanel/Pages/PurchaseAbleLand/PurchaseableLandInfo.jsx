@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
@@ -16,14 +16,12 @@ const PurchaseableLandInfo = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
-  console.log(landid);
-
   useEffect(() => {
     const apiHandler = async () => {
       setIsLoading(true);
       try {
         const resp = await axios.get(
-          `https://land-backend.herokuapp.com/api/v1/lands/getlandbyid/${landid}`
+          `https://landbackend-production.up.railway.app/api/v1/lands/getlandbyid/${landid}`
         );
         setResponse(resp.data.data);
         setIsLoading(false);
@@ -34,7 +32,7 @@ const PurchaseableLandInfo = () => {
     };
 
     apiHandler();
-  }, []);
+  }, [landid]);
 
   return (
     <Container className="mt-5">

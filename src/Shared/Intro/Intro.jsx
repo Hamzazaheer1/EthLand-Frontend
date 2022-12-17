@@ -11,6 +11,7 @@ import thumbup from "../img/thumbup.png";
 import crown from "../img/crown.png";
 import FloatinDiv from "../../Utils/FloatingDiv/FloatingDiv";
 import "./Intro.css";
+import Typical from "react-typical";
 
 const Intro = () => {
   const theme = useContext(themeContext);
@@ -27,7 +28,6 @@ const Intro = () => {
             <span
               style={{
                 color: darkMode ? "white" : "var(--black)",
-                // color: "var(--black)",
                 fontWeight: "bold",
                 fontSize: "3rem",
               }}
@@ -42,7 +42,16 @@ const Intro = () => {
                 fontSize: "3rem",
               }}
             >
-              Eth Land
+              <Typical
+                loop={Infinity}
+                wrapper={"b"}
+                steps={[
+                  "Eth Land",
+                  1000,
+                  "Decentralized land record system",
+                  1000,
+                ]}
+              ></Typical>
             </span>
             <br />
             <br />

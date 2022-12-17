@@ -151,15 +151,15 @@ const ReceiveRequests = () => {
                 <Col sm={9}>
                   {item.reqId} <br /> {item.landId} <br /> {item.buyerId} <br />
                   {item.requestStatus * 1 === 0 ? (
-                    <span>requested</span>
+                    <span>Requested</span>
                   ) : item.requestStatus * 1 === 1 ? (
-                    <span>accepted</span>
+                    <span>Accepted</span>
                   ) : item.requestStatus * 1 === 2 ? (
-                    <span>rejected</span>
+                    <span>Rejected</span>
                   ) : item.requestStatus * 1 === 3 ? (
-                    <span>paymentdone</span>
+                    <span>Payment Done</span>
                   ) : item.requestStatus * 1 === 4 ? (
-                    <span>commpleted</span>
+                    <span>Completed</span>
                   ) : (
                     <span>some problem has occured in getting data</span>
                   )}
