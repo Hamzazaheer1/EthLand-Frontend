@@ -122,7 +122,7 @@ const TransferOwnership = () => {
       <Row className="mt-5">
         {requestInfo &&
           requestInfo.reverse().map((item, index) => (
-            <Alert key={"success"} variant={"success"}>
+            <Alert key={index + 1} variant={"success"}>
               <Row>
                 <Col sm={2}>
                   Request Id:

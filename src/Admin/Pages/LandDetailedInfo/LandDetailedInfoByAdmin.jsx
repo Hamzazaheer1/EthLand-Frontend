@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { themeContext } from "../../../Context";
 import { Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
@@ -150,7 +149,7 @@ const LandDetailedInfoByAdmin = () => {
                         <span className="blackData">{item.publicAddress}</span>
                       </h6>
                       <hr />
-                      <butoon
+                      <button
                         className="g-btn"
                         onClick={() => {
                           pushToBlockchain(
@@ -163,7 +162,7 @@ const LandDetailedInfoByAdmin = () => {
                         }}
                       >
                         Verify Land
-                      </butoon>
+                      </button>
                       <hr />
                     </div>
                   ))}
@@ -182,7 +181,7 @@ const LandDetailedInfoByAdmin = () => {
                 <h2>Jamabandi</h2>
                 <Alert variant={"secondary"}>
                   {response.jamabandi.map((item, index) => (
-                    <div>
+                    <div key={index + 1}>
                       <h6>
                         Owner Name:{" "}
                         <span className="blackData">{item.oldOwnerName}</span>

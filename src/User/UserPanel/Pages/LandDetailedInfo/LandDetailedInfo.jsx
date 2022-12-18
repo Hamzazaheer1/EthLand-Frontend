@@ -59,7 +59,7 @@ const LandDetailedInfo = () => {
           <Row className="mt-5">
             {response && (
               <div>
-                <Alert key={"secondary"} variant={"secondary"}>
+                <Alert variant={"secondary"}>
                   <h6>
                     Khaiwat Number:
                     <span className="blackData">{response.khaiwatNo}</span>
@@ -67,7 +67,7 @@ const LandDetailedInfo = () => {
                 </Alert>
                 <hr />
                 <h3>Owner's Data</h3>
-                <Alert key={"secondary"} variant={"secondary"}>
+                <Alert variant={"secondary"}>
                   {response.OwnersData.map((item, index) => (
                     <div key={index + 1}>
                       <h6>
@@ -105,7 +105,7 @@ const LandDetailedInfo = () => {
                     </div>
                   ))}
                 </Alert>
-                <Alert key={"secondary"} variant={"secondary"}>
+                <Alert variant={"secondary"}>
                   <h6>
                     Khasra Name:
                     <span className="blackData">{response.khasraNumber}</span>
@@ -117,9 +117,9 @@ const LandDetailedInfo = () => {
                 </Alert>
                 <hr />
                 <h2>Jamabandi</h2>
-                <Alert key={"secondary"} variant={"secondary"}>
+                <Alert variant={"secondary"}>
                   {response.jamabandi.map((item, index) => (
-                    <div>
+                    <div key={index + 1}>
                       <h6>
                         Owner Name:{" "}
                         <span className="blackData">{item.oldOwnerName}</span>

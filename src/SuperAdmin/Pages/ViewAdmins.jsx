@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import { useContext } from "react";
-import { themeContext } from "../../Context";
+import React, { useState, useEffect, useContext } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../contract";
+import { Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { themeContext } from "../../Context";
+import Table from "react-bootstrap/Table";
 import LoadingSpinner from "../../Utils/LoadingSpinner/LoadingSpinner";
 import Web3 from "web3";
-import { useNavigate } from "react-router-dom";
 
 const ViewAdmins = () => {
   let ContractInstance;
@@ -46,7 +45,6 @@ const ViewAdmins = () => {
     getAdmins();
   }, []);
 
-  //to return Admins
   const returnAllAdmins = async () => {
     await ContractInstance.methods
       .ReturnAllAdminList()
@@ -60,7 +58,6 @@ const ViewAdmins = () => {
     setIsLoading(false);
   };
 
-  //to remove admin
   const removeAdmin = async (R_address) => {
     setIsLoadingBtn(true);
     let provider = window.ethereum;
@@ -94,6 +91,10 @@ const ViewAdmins = () => {
     setIsLoadingBtn(false);
   };
 
+  if (isLoading || isLoadingbtn) {
+    return <LoadingSpinner asOverlay />;
+  }
+
   return (
     <Container className="mt-5" style={{ minHeight: "100vh" }}>
       <Row>
@@ -112,51 +113,45 @@ const ViewAdmins = () => {
                 <th>Operation</th>
               </tr>
             </thead>
-            {isLoading || isLoadingbtn ? (
-              <LoadingSpinner asOverlay />
-            ) : (
-              <>
-                {adminCount &&
-                  adminCount.map((item, index) => (
-                    <tbody key={index + 1}>
-                      <tr
+            {adminCount &&
+              adminCount.map((item, index) => (
+                <tbody key={index + 1}>
+                  <tr
+                    style={{
+                      backgroundColor: darkMode ? "white" : "white",
+                    }}
+                  >
+                    <td>{index + 1}</td>
+                    <td>{item}</td>
+                    <td>
+                      <button
+                        className="g-btn itemClickable"
                         style={{
-                          backgroundColor: darkMode ? "white" : "white",
+                          padding: "0px 20px 5px 20px",
+                          width: "7rem",
+                        }}
+                        onClick={() => {
+                          Navigate(`/detailed-admin-info/${item}`);
                         }}
                       >
-                        <td>{index + 1}</td>
-                        <td>{item}</td>
-                        <td>
-                          <button
-                            className="g-btn itemClickable"
-                            style={{
-                              padding: "0px 20px 5px 20px",
-                              width: "7rem",
-                            }}
-                            onClick={() => {
-                              Navigate(`/detailed-admin-info/${item}`);
-                            }}
-                          >
-                            View
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            className="g-btn"
-                            style={{ padding: "0px 20px 5px 20px" }}
-                            onClick={(event) => {
-                              event.preventDefault();
-                              removeAdmin(item);
-                            }}
-                          >
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
-              </>
-            )}
+                        View
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="g-btn"
+                        style={{ padding: "0px 20px 5px 20px" }}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          removeAdmin(item);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
           </Table>
         </Col>
         <Col sm={3}></Col>

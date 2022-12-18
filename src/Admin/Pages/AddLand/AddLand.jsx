@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { DivisionList, DistrictList, TehsilList } from "./LandData";
-import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
-import Web3 from "web3";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
-import "./AddLand.css";
 import axios from "axios";
+import "./AddLand.css";
 
 const AddLand = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -212,9 +210,8 @@ const AddLand = () => {
           <h2>Select District</h2>
           <Row>
             {DistrictList[selectedDivision].map((item, index) => (
-              <Col sm={3}>
+              <Col sm={3} key={index + 1}>
                 <p
-                  key={index + 1}
                   onClick={() => {
                     setStateCount(3);
                     setSeletedDistrict(item);
@@ -233,9 +230,8 @@ const AddLand = () => {
           <h2>Select Tehsil</h2>
           <Row>
             {TehsilList[selectedDistrict].map((item, index) => (
-              <Col sm={3}>
+              <Col sm={3} key={index + 1}>
                 <p
-                  key={index + 1}
                   onClick={() => {
                     setStateCount(4);
                     setSeletedTehsil(item);

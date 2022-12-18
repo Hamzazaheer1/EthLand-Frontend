@@ -42,6 +42,10 @@ const Blockchain = () => {
     getBlocks();
   }, []);
 
+  if (isLoading) {
+    return <LoadingSpinner asOverlay />;
+  }
+
   return (
     <Container className="mt-5">
       <h2 style={{ color: "var(--yellow)", display: "flex" }}>
@@ -82,10 +86,7 @@ const Blockchain = () => {
               <th>STATE HASH</th>
             </tr>
           </thead>
-          {isLoading ? (
-            <LoadingSpinner asOverlay />
-          ) : (
-            totalBlock.length > 0 &&
+          {totalBlock.length > 0 &&
             totalBlock
               .sort((a, b) => (a.number < b.number ? -1 : 1))
               .reverse()
@@ -121,8 +122,7 @@ const Blockchain = () => {
                     </td>
                   </tr>
                 </tbody>
-              ))
-          )}
+              ))}
         </Table>
       </div>
     </Container>

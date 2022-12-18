@@ -1,7 +1,8 @@
 .footer {
     display: flex;
     align-items: center;
-    position: relative;   
+    position: sticky;
+    top: 100%   
 }
 
 .f-content {

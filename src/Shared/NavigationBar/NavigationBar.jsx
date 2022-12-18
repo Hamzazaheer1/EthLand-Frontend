@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Utils/auth-context";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -11,18 +11,20 @@ import "./NavigationBar.css";
 
 const NavigationBar = () => {
   const auth = useContext(AuthContext);
+  const [userState, setUserState] = useState("");
 
-  let userState;
-  if (localStorage.getItem("superadmin")) {
-    userState = "superadmin";
-    auth.login(userState);
-  } else if (localStorage.getItem("admin")) {
-    userState = "admin";
-    auth.login(userState);
-  } else if (localStorage.getItem("user")) {
-    userState = "user";
-    auth.login(userState);
-  }
+  useEffect(() => {
+    if (localStorage.getItem("superadmin")) {
+      setUserState("superadmin");
+      auth.login(userState);
+    } else if (localStorage.getItem("admin")) {
+      setUserState("admin");
+      auth.login(userState);
+    } else if (localStorage.getItem("user")) {
+      setUserState("user");
+      auth.login(userState);
+    }
+  }, [userState]);
 
   return (
     <>

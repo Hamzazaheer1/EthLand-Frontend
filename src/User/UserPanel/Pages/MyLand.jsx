@@ -11,7 +11,6 @@ import Web3 from "web3";
 
 const MyLand = () => {
   const Navigate = useNavigate();
-  // const [landData, setLandData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState();
   const [pkView, setPkView] = useState("");
@@ -19,7 +18,6 @@ const MyLand = () => {
 
   let selectedAccount;
   let ContractInstance;
-  // let landids;
 
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
@@ -50,27 +48,6 @@ const MyLand = () => {
     init();
   }, []);
 
-  // const getLandsId = async () => {
-  //   setIsLoading(true);
-  //   await ContractInstance.methods
-  //     .myAllLands(selectedAccount)
-  //     .call()
-  //     .then((data) => {
-  //       landids = data;
-  //     });
-
-  //   for (let i = 0; i < landids.length; i++) {
-  //     ContractInstance.methods
-  //       .LandR(landids[i])
-  //       .call()
-  //       .then((data) => {
-  //         setLandData((prevlandData) => [...prevlandData, data]);
-  //       });
-  //   }
-
-  //   setIsLoading(false);
-  // };
-
   const getLandsByPK = async (x) => {
     setIsLoading(true);
     try {
@@ -83,6 +60,10 @@ const MyLand = () => {
       console.log(err);
     }
   };
+
+  if (isLoading) {
+    return <LoadingSpinner asOverlay />;
+  }
 
   return (
     <Container className="mt-5" style={{ minHeight: "100vh" }}>
@@ -133,34 +114,32 @@ const MyLand = () => {
             <th>Action</th>
           </tr>
         </thead>
-        {isLoading ? (
-          <LoadingSpinner asOverlay />
-        ) : (
-          <tbody>
-            {response &&
-              response.map((item, index) => (
-                <tr key={index + 1}>
-                  <td>{index + 1}</td>
-                  <td>{item.location}</td>
-                  <td>{item.khaiwatNo}</td>
-                  <td>{item.khasraNumber}</td>
-                  <td>{item.area}</td>
-                  <td>{item.isForSale ? <td>True</td> : <td>False</td>}</td>
-                  <td>
-                    <button
-                      className="g-btn"
-                      style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
-                      onClick={() => {
-                        Navigate(`/detailed-info/${item._id}`);
-                      }}
-                    >
-                      Detailed Info
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        )}
+        <tbody>
+          {response &&
+            response.map((item, index) => (
+              <tr key={index + 1}>
+                <td>{index + 1}</td>
+                <td>{item.location}</td>
+                <td>{item.khaiwatNo}</td>
+                <td>{item.khasraNumber}</td>
+                <td>{item.area}</td>
+                <td>
+                  {item.isForSale ? <span>True</span> : <span>False</span>}
+                </td>
+                <td>
+                  <button
+                    className="g-btn"
+                    style={{ height: "2rem", padding: "0px 10px 0px 10px" }}
+                    onClick={() => {
+                      Navigate(`/detailed-info/${item._id}`);
+                    }}
+                  >
+                    Detailed Info
+                  </button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
       </Table>
     </Container>
   );

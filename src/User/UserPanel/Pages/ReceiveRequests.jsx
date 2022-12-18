@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { CONTACT_ADDRESS, CONTACT_ABI } from "../../../contract";
 import { themeContext } from "../../../Context";
 import { Row, Col } from "react-bootstrap";
+import LoadingSpinner from "../../../Utils/LoadingSpinner/LoadingSpinner";
 import Container from "react-bootstrap/Container";
 import Web3 from "web3";
 import Alert from "react-bootstrap/Alert";
@@ -26,9 +27,11 @@ const ReceiveRequests = () => {
         provider
           .request({ method: "eth_requestAccounts" })
           .then((accounts) => {
+            // eslint-disable-next-line
             selectedAccount = accounts[0];
             setNewSlected(selectedAccount);
             const web3 = new Web3(provider);
+            // eslint-disable-next-line
             ContractInstance = new web3.eth.Contract(
               CONTACT_ABI,
               CONTACT_ADDRESS
@@ -86,6 +89,10 @@ const ReceiveRequests = () => {
     alert("Request Rejected Successfully");
   };
 
+  if (isLoading) {
+    return <LoadingSpinner asOverlay />;
+  }
+
   return (
     <Container className="mt-5" style={{ minHeight: "100vh" }}>
       <h2 style={{ color: "var(--yellow)", display: "flex" }}>
@@ -108,7 +115,7 @@ const ReceiveRequests = () => {
       <Row className="mt-5">
         {requestInfo &&
           requestInfo.map((item, index) => (
-            <Alert key={"success"} variant={"success"}>
+            <Alert key={index + 1} variant={"success"}>
               <Row>
                 <Col sm={2}>
                   Request Id:

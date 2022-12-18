@@ -79,13 +79,15 @@ const ManageUsers = () => {
                 <th>Operation</th>
               </tr>
             </thead>
-
-            {adminCount.length == 0 ? (
-              <h5>No User to be found</h5>
-            ) : (
-              adminCount.map((item, index) => (
-                <tbody key={index + 1}>
+            <tbody>
+              {adminCount.length == 0 ? (
+                <tr>
+                  <td>No User to be found</td>
+                </tr>
+              ) : (
+                adminCount.map((item, index) => (
                   <tr
+                    key={index + 1}
                     style={{
                       backgroundColor: darkMode ? "white" : "white",
                     }}
@@ -116,9 +118,9 @@ const ManageUsers = () => {
                       </button>
                     </td>
                   </tr>
-                </tbody>
-              ))
-            )}
+                ))
+              )}
+            </tbody>
           </Table>
         </Col>
         <Col sm={3}></Col>

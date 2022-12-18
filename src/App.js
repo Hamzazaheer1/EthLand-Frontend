@@ -22,8 +22,8 @@ import Logout from "./Shared/Logout/Logout";
 import UsersDetailedInfo from "./Admin/Pages/ManageUsers/UsersDetailedInfo";
 import AdminDetailedInfo from "./SuperAdmin/Pages/AdminDetailedInfo/AdminDetailedInfo";
 import PurchaseableLandInfo from "./User/UserPanel/Pages/PurchaseAbleLand/PurchaseableLandInfo";
-import "./App.css";
 import LandTransfer from "./Admin/Pages/LandTransfer/LandTransfer";
+import "./App.css";
 
 function App() {
   const theme = useContext(themeContext);
