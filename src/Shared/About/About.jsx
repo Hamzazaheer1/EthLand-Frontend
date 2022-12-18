@@ -72,7 +72,7 @@ const About = () => {
               }}
               bg="dark"
             >
-              <Card.Img variant="top" src={"/images/0.PNG"} height={"250rem"} />
+              <Card.Img variant="top" src={"/images/0.png"} height={"250rem"} />
               <Card.Body>
                 <Card.Title>Web2</Card.Title>
                 <Card.Text>
@@ -100,7 +100,11 @@ const About = () => {
               }}
               bg="dark"
             >
-              <Card.Img variant="top" src={"/images/1.PNG"} height={"250rem"} />
+              <Card.Img
+                variant="top"
+                src={"/images/1.jpeg"}
+                height={"250rem"}
+              />
               <Card.Body>
                 <Card.Title>BlockChain</Card.Title>
                 <Card.Text>
@@ -120,7 +124,7 @@ const About = () => {
               </Card.Body>
             </Card>
             <Card style={{ width: "18rem", color: "white" }} bg="dark">
-              <Card.Img variant="top" src={"/images/2.PNG"} height={"250rem"} />
+              <Card.Img variant="top" src={"/images/2.png"} height={"250rem"} />
               <Card.Body>
                 <Card.Title>Web3</Card.Title>
                 <Card.Text>

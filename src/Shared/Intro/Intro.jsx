@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { themeContext } from "../../Context";
+import { Typewriter } from "react-simple-typewriter";
 import Map from "../img/map.png";
 import Carousel from "react-bootstrap/Carousel";
 import land1 from "../img/land1.jpg";
@@ -11,7 +12,6 @@ import thumbup from "../img/thumbup.png";
 import crown from "../img/crown.png";
 import FloatinDiv from "../../Utils/FloatingDiv/FloatingDiv";
 import "./Intro.css";
-import Typical from "react-typical";
 
 const Intro = () => {
   const theme = useContext(themeContext);
@@ -42,16 +42,15 @@ const Intro = () => {
                 fontSize: "3rem",
               }}
             >
-              <Typical
-                loop={Infinity}
-                wrapper={"b"}
-                steps={[
-                  "Eth Land",
-                  1000,
-                  "Decentralized land record system",
-                  1000,
-                ]}
-              ></Typical>
+              <Typewriter
+                words={["Eth Land", "Decentralized land record system"]}
+                loop={5}
+                cursor
+                cursorStyle="_"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
             </span>
             <br />
             <br />
@@ -101,7 +100,6 @@ const Intro = () => {
               src={Map}
               alt={"img not found"}
             />
-            {/* animations */}
             <motion.div
               animate={{ x: 100 }}
               transition={{ ease: "easeOut", duration: 2 }}
@@ -131,7 +129,6 @@ const Intro = () => {
               transition={{ ease: "easeOut", duration: 2 }}
               className="floating"
             >
-              {/* floatinDiv mein change hy dark mode ka  */}
               <FloatinDiv
                 img={thumbup}
                 text1="Durability"
