@@ -43,8 +43,17 @@
     top: 13rem;
 }
 
-@media screen and (max-width: 375px) {
+.cardAllign {
+    width: 18rem;
+    color: white;
+    margin-right: 4rem;
+  
+}
+
+@media screen and (max-width: 490px) {
     .card {
       margin-top: -10rem;
+      margin-left: 2.5rem;
+      margin-bottom: 2rem;
     }
   }

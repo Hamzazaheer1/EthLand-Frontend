@@ -94,12 +94,7 @@ const Login = () => {
       <Row>
         <Col sm={3}></Col>
         <Col sm={6}>
-          <br />
-          <br />
-          <br />
-          <h2>Login</h2>
-          <hr />
-          <br />
+          <h2 style={{ marginTop: "5rem", marginBottom: "2rem" }}>Login</h2>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Secret Key</Form.Label>

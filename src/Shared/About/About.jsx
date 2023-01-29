@@ -65,10 +65,9 @@ const About = () => {
         <Col sm={8}>
           <Row>
             <Card
+              className="cardAllign"
               style={{
                 width: "18rem",
-                color: "white",
-                marginRight: "4rem",
               }}
               bg="dark"
             >
@@ -93,10 +92,9 @@ const About = () => {
               </Card.Body>
             </Card>
             <Card
+              className="cardAllign"
               style={{
                 width: "18rem",
-                color: "white",
-                marginRight: "4rem",
               }}
               bg="dark"
             >

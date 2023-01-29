@@ -40,23 +40,24 @@ const NavigationBar = () => {
           <Navbar.Brand
             as={Link}
             to="/"
-            style={{
-              fontWeight: "bold",
-              color: "var(--yellow)",
-            }}
+            style={{ fontWeight: "bold", color: "var(--yellow)" }}
           >
             <img
               className="img-fluid"
               src={GreenLogo}
               width="50px"
-              alt="greenlogo not working"
+              alt="greenlogo"
             />
             EthLand
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            className="bg-dark p-2 rounded"
+          >
             <Nav className="me-auto">
-              <Nav.Link href="#features">
+              <Nav.Link>
                 <Toggle />
               </Nav.Link>
             </Nav>
@@ -64,18 +65,17 @@ const NavigationBar = () => {
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/about">
-                AboutUs
-              </Nav.Link>
-              <Nav.Link as={Link} to="/contactus">
-                ContactUs
+              <Nav.Link as={Link} to="/blockchain">
+                Blockchain
               </Nav.Link>
               <Nav.Link as={Link} to="/help-panel">
                 Help
               </Nav.Link>
-              <Nav.Link as={Link} to="/blockchain">
-                Blockchain
-              </Nav.Link>
+              {!auth.isLoggedIn && (
+                <Nav.Link as={Link} to="/login">
+                  Login
+                </Nav.Link>
+              )}
               {auth.userId === "superadmin" && (
                 <Nav.Link as={Link} to="/superadminpanel">
                   SuperAdminPanel
@@ -92,11 +92,6 @@ const NavigationBar = () => {
                   UserPanel
                 </Nav.Link>
               )}
-              {!auth.isLoggedIn && (
-                <Nav.Link as={Link} to="/login">
-                  Login
-                </Nav.Link>
-              )}
               {auth.isLoggedIn && (
                 <Nav.Link as={Link} to="/logout">
                   Logout
@@ -107,6 +102,12 @@ const NavigationBar = () => {
                   Register
                 </Nav.Link>
               )}
+              <Nav.Link as={Link} to="/about">
+                AboutUs
+              </Nav.Link>
+              <Nav.Link as={Link} to="/contactus">
+                ContactUs
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
