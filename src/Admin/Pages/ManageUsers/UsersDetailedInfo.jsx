@@ -134,16 +134,35 @@ const UsersDetailedInfo = () => {
                     </div>
                     <div class="col-sm-8">
                       <div class="card-block">
-                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">
+                        <h6
+                          class="m-b-20 p-b-5 b-b-default f-w-600"
+                          style={{
+                            color: darkMode ? "black" : "var(--black)",
+                          }}
+                        >
                           Information
                         </h6>
                         <div class="row">
                           <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Age</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              Age
+                            </p>
                             <h6 class="text-muted f-w-400">{adminCount.age}</h6>
                           </div>
                           <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">City</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              City
+                            </p>
                             <h6 class="text-muted f-w-400">
                               {adminCount.city}
                             </h6>
@@ -151,13 +170,27 @@ const UsersDetailedInfo = () => {
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">CNIN</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              CNIN
+                            </p>
                             <h6 class="text-muted f-w-400">
                               {adminCount.cnic}
                             </h6>
                           </div>
                           <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Phone</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              Phone
+                            </p>
                             <h6 class="text-muted f-w-400">
                               {adminCount.mobile}
                             </h6>
@@ -165,11 +198,23 @@ const UsersDetailedInfo = () => {
                         </div>
                         <div class="row">
                           <div class="col-sm-12">
-                            <p class="m-b-10 f-w-600">Public Address</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              Public Address
+                            </p>
                             <h6 class="text-muted f-w-400">{adminCount.id}</h6>
                           </div>
                         </div>
-                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">
+                        <h6
+                          class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"
+                          style={{
+                            color: darkMode ? "black" : "var(--black)",
+                          }}
+                        >
                           Verification Status
                         </h6>
                         <div class="row">

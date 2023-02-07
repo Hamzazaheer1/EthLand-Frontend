@@ -123,24 +123,50 @@ const UsersDetailedInfo = () => {
                     </div>
                     <div class="col-sm-8">
                       <div class="card-block">
-                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">
+                        <h6
+                          class="m-b-20 p-b-5 b-b-default f-w-600"
+                          style={{
+                            color: darkMode ? "black" : "var(--black)",
+                          }}
+                        >
                           Information
                         </h6>
                         <div class="row">
                           <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Designation</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              Designation
+                            </p>
                             <h6 class="text-muted f-w-400">
                               {adminCount.designation}
                             </h6>
                           </div>
                           <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Age</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              Age
+                            </p>
                             <h6 class="text-muted f-w-400">{adminCount.age}</h6>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12">
-                            <p class="m-b-10 f-w-600">City</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              City
+                            </p>
                             <h6 class="text-muted f-w-400">
                               {adminCount.city}
                             </h6>
@@ -148,7 +174,14 @@ const UsersDetailedInfo = () => {
                         </div>
                         <div class="row">
                           <div class="col-sm-12">
-                            <p class="m-b-10 f-w-600">Public Address</p>
+                            <p
+                              class="m-b-10 f-w-600"
+                              style={{
+                                color: darkMode ? "black" : "var(--black)",
+                              }}
+                            >
+                              Public Address
+                            </p>
                             <h6 class="text-muted f-w-400">
                               {adminCount._addr}
                             </h6>
