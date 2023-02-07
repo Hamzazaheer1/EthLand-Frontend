@@ -18,7 +18,7 @@ const AllLandList = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          "https://landbackend-production.up.railway.app/api/v1/lands/getalllands"
+          "https://landbackend-production-b5f6.up.railway.app/api/v1/lands/getalllands"
         );
         setResponse(resp.data.data);
         setIsLoading(false);

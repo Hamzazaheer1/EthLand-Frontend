@@ -52,7 +52,7 @@ const MyLand = () => {
     setIsLoading(true);
     try {
       const resp = await axios.get(
-        `https://landbackend-production.up.railway.app/api/v1/lands/getlandbyPK/${x}`
+        `https://landbackend-production-b5f6.up.railway.app/api/v1/lands/getlandbyPK/${x}`
       );
       setResponse(resp.data.data);
       setIsLoading(false);

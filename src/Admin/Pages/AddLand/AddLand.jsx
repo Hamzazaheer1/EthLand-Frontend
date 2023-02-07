@@ -107,7 +107,7 @@ const AddLand = () => {
   const registerLandHandler = async () => {
     try {
       const resp = await axios.post(
-        "https://landbackend-production.up.railway.app/api/v1/lands/create",
+        "https://landbackend-production-b5f6.up.railway.app/api/v1/lands/create",
         {
           location: result,
           khaiwatNo: khaiwatNo,
@@ -122,7 +122,7 @@ const AddLand = () => {
       alert("Land registered Sucessfully");
     } catch (err) {
       console.log("error", err);
-      alert(err);
+      alert(err.response.data.error);
     }
   };
 

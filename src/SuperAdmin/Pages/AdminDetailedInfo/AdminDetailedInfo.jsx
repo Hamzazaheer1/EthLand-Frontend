@@ -83,24 +83,85 @@ const UsersDetailedInfo = () => {
       {isLoading ? (
         <LoadingSpinner asOverlay />
       ) : (
-        <Alert key={"secondary"} variant={"secondary"}>
-          <Row className="mt-4">
-            <Col sm={2} style={{ color: "grey" }}>
-              <h6>Name:</h6>
-              <h6>Designation:</h6>
-              <h6>Age:</h6>
-              <h6>City: </h6>
-              <h6>Public Address:</h6>
-            </Col>
-            <Col sm={6}>
-              <h6 style={{ color: "black" }}>{adminCount.name}</h6>
-              <h6 style={{ color: "black" }}>{adminCount.designation}</h6>
-              <h6 style={{ color: "black" }}>{adminCount.age}</h6>
-              <h6 style={{ color: "black" }}>{adminCount.city}</h6>
-              <h6 style={{ color: "black" }}>{adminCount._addr}</h6>
-            </Col>
-          </Row>
-        </Alert>
+        // <Alert key={"secondary"} variant={"secondary"}>
+        //   <Row className="mt-4">
+        //     <Col sm={2} style={{ color: "grey" }}>
+        //       <h6>Name:</h6>
+        //       <h6>Designation:</h6>
+        //       <h6>Age:</h6>
+        //       <h6>City: </h6>
+        //       <h6>Public Address:</h6>
+        //     </Col>
+        //     <Col sm={6}>
+        //       <h6 style={{ color: "black" }}>{adminCount.name}</h6>
+        //       <h6 style={{ color: "black" }}>{adminCount.designation}</h6>
+        //       <h6 style={{ color: "black" }}>{adminCount.age}</h6>
+        //       <h6 style={{ color: "black" }}>{adminCount.city}</h6>
+        //       <h6 style={{ color: "black" }}>{adminCount._addr}</h6>
+        //     </Col>
+        //   </Row>
+        // </Alert>
+        <div class="page-content page-container mob" id="page-content">
+          <div class="padding">
+            <div class="row container d-flex justify-content-center">
+              <div class="col-xl-6 col-md-12">
+                <div class="card user-card-full">
+                  <div class="row m-l-0 m-r-0">
+                    <div class="col-sm-4 bg-c-lite-green user-profile">
+                      <div class="card-block text-center text-white">
+                        <div class="m-b-25">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"
+                            style={{ width: "80px", height: "80px" }}
+                            class="img-radius"
+                            alt="User-Profile-Image"
+                          />
+                        </div>
+                        <h6 class="f-w-600">{adminCount.name}</h6>
+                        <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="card-block">
+                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">
+                          Information
+                        </h6>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Designation</p>
+                            <h6 class="text-muted f-w-400">
+                              {adminCount.designation}
+                            </h6>
+                          </div>
+                          <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Age</p>
+                            <h6 class="text-muted f-w-400">{adminCount.age}</h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p class="m-b-10 f-w-600">City</p>
+                            <h6 class="text-muted f-w-400">
+                              {adminCount.city}
+                            </h6>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p class="m-b-10 f-w-600">Public Address</p>
+                            <h6 class="text-muted f-w-400">
+                              {adminCount._addr}
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </Container>
   );

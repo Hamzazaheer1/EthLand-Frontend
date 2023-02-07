@@ -36,7 +36,7 @@ const LandTransfer = () => {
     const apiHandler = async () => {
       try {
         const resp = await axios.get(
-          `https://landbackend-production.up.railway.app/api/v1/lands/getlandbyid/${landid}`
+          `https://landbackend-production-b5f6.up.railway.app/api/v1/lands/getlandbyid/${landid}`
         );
         setResponse(resp.data.data);
         setIsLoading(false);
@@ -53,7 +53,7 @@ const LandTransfer = () => {
     try {
       await axios({
         method: "PATCH",
-        url: `https://landbackend-production.up.railway.app/api/v1/lands/addOldOwnerToJamabandi/${landid}`,
+        url: `https://landbackend-production-b5f6.up.railway.app/api/v1/lands/addOldOwnerToJamabandi/${landid}`,
         data: {
           oldOwnerName,
           NumberDarName: numberdarName,
@@ -74,7 +74,7 @@ const LandTransfer = () => {
     try {
       await axios({
         method: "PATCH",
-        url: `https://landbackend-production.up.railway.app/api/v1/lands/transferOwnership/${userId}`,
+        url: `https://landbackend-production-b5f6.up.railway.app/api/v1/lands/transferOwnership/${userId}`,
         data: {
           ownerName: newOwnerName,
           fatherName: fatherName,
