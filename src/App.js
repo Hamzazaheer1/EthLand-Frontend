@@ -24,6 +24,7 @@ import AdminDetailedInfo from "./SuperAdmin/Pages/AdminDetailedInfo/AdminDetaile
 import PurchaseableLandInfo from "./User/UserPanel/Pages/PurchaseAbleLand/PurchaseableLandInfo";
 import LandTransfer from "./Admin/Pages/LandTransfer/LandTransfer";
 import "./App.css";
+import SingleTx from "./Shared/Blockchain/Pages/SingleTx";
 
 function App() {
   const theme = useContext(themeContext);
@@ -72,6 +73,7 @@ function App() {
           <Route path="/userpanel" element={<UserPanel />} />
           <Route path="/txdata/:blockid" element={<TxData />} />
           <Route path="/detailed-info/:landid" element={<LandDetailedInfo />} />
+          <Route path="/singletx/:txid/:bid" element={<SingleTx />} />
           <Route
             path="/purchaseableland-info/:landid"
             element={<PurchaseableLandInfo />}

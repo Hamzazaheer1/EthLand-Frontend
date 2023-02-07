@@ -84,7 +84,13 @@ const TxData = () => {
 
                 <h5>Transaction List</h5>
                 {blockData.transactions.map((item, index) => (
-                  <div key={index + 1}>
+                  <div
+                    key={index + 1}
+                    onClick={() => {
+                      Navigate(`/singletx/${item}/${blockid}`);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
                     <Alert key={"secondary"} variant={"secondary"}>
                       <h6>
                         Transaction <span className="blackData">{item}</span>
